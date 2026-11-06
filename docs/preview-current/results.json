@@ -1,0 +1,98 @@
+[
+  {
+    "name": "s24-preview",
+    "pixels": {
+      "luminanceStd": 52.31890589827583,
+      "colors": 105
+    },
+    "graphics": {
+      "initialized": true,
+      "frames": 9,
+      "hdr": true,
+      "contextLost": false,
+      "width": 384,
+      "height": 832
+    }
+  },
+  {
+    "name": "s24-worker-blocked",
+    "pixels": {
+      "luminanceStd": 50.05261919992066,
+      "colors": 80
+    },
+    "graphics": {
+      "initialized": true,
+      "frames": 9,
+      "hdr": true,
+      "contextLost": false,
+      "width": 384,
+      "height": 832
+    }
+  },
+  {
+    "name": "s24-warm-reload",
+    "pixels": {
+      "luminanceStd": 52.4218408909091,
+      "colors": 103
+    },
+    "graphics": {
+      "initialized": true,
+      "frames": 15,
+      "hdr": true,
+      "contextLost": false,
+      "width": 384,
+      "height": 832
+    }
+  },
+  {
+    "name": "s24-no-float",
+    "pixels": {
+      "luminanceStd": 21.779957007480014,
+      "colors": 155
+    },
+    "graphics": {
+      "initialized": true,
+      "frames": 9,
+      "hdr": false,
+      "contextLost": false,
+      "width": 384,
+      "height": 832
+    },
+    "oldBlackFrame": {
+      "luminanceStd": 5.566650263929276,
+      "colors": 44
+    }
+  },
+  {
+    "name": "s24-cache-recovery",
+    "pixels": {
+      "luminanceStd": 52.42271395999337,
+      "colors": 103
+    },
+    "graphics": {
+      "initialized": true,
+      "frames": 15,
+      "hdr": true,
+      "contextLost": false,
+      "width": 384,
+      "height": 832
+    }
+  },
+  {
+    "name": "s24-map-error",
+    "menuVisible": true,
+    "replacementWorld": false
+  },
+  {
+    "name": "s24-webgl-error",
+    "menuVisible": true
+  },
+  {
+    "name": "s24-late-js-error",
+    "menuVisible": true
+  },
+  {
+    "name": "s24-silent-black-frame",
+    "menuVisible": true
+  }
+]

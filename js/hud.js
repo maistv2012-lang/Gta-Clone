@@ -1,3 +1,4 @@
+import { drawRoads } from './christchurch-city.js';
 import { CITY, HALF } from './city.js';
 import { keys } from './input.js';
 
@@ -202,8 +203,11 @@ function drawMinimap(world) {
   const c = els.minimap;
   const g = mapCtx;
   const size = c.width;
-  const sc = size / (CITY + 30);
-  const toMap = (x, z) => [(x + HALF + 15) * sc, (z + HALF + 15) * sc];
+  const focus = world.player.inCar?.pos || world.player.inHeli?.pos || world.player.pos;
+  const extent = world.city.osm ? 500 : CITY + 30;
+  const view = world.city.osm ? { minX: focus.x - extent / 2, minZ: focus.z - extent / 2, extent } : null;
+  const sc = size / extent;
+  const toMap = (x, z) => [(x - (view?.minX ?? -HALF - 15)) * sc, (z - (view?.minZ ?? -HALF - 15)) * sc];
 
   g.fillStyle = '#17202b';
   g.fillRect(0, 0, size, size);
@@ -214,17 +218,19 @@ function drawMinimap(world) {
   for (const rx of world.city.roadXs) {
     const [mx] = toMap(rx, 0);
     g.beginPath();
-    g.moveTo(mx, 0);
-    g.lineTo(mx, size);
+    g.moveTo(mx, toMap(0, world.city.legacyBounds.min)[1]);
+    g.lineTo(mx, toMap(0, world.city.legacyBounds.max)[1]);
     g.stroke();
   }
   for (const rz of world.city.roadZs) {
     const [, mz] = toMap(0, rz);
     g.beginPath();
-    g.moveTo(0, mz);
-    g.lineTo(size, mz);
+    g.moveTo(toMap(world.city.legacyBounds.min, 0)[0], mz);
+    g.lineTo(toMap(world.city.legacyBounds.max, 0)[0], mz);
     g.stroke();
   }
+
+  drawRoads(g, world.city, toMap, sc, view);
 
   // empire district tints: green = yours, red = rival, flashing = under attack
   if (world.empire) {

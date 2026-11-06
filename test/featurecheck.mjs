@@ -1,3 +1,4 @@
+import { waitForGame } from './game-time.mjs';
 // Full feature audit: verify every shipped feature live, one by one.
 import { chromium } from 'playwright-core';
 
@@ -14,7 +15,7 @@ page.on('pageerror', (e) => { errors++; console.log('PAGE ERROR:', e.message); }
 await page.goto(`http://localhost:${process.env.PORT || 8080}`, { waitUntil: 'networkidle' });
 await page.waitForFunction(() => window.__debug, null, { timeout: 15000 });
 await page.click('#playbtn');
-await page.waitForTimeout(500);
+await waitForGame(page, 500);
 
 const ev = (fn, arg) => page.evaluate(fn, arg);
 const results = [];
@@ -38,7 +39,7 @@ async function resetPlayer() {
     d.world.wanted = 0;
     d.world.style = 0;
   });
-  await page.waitForTimeout(150);
+  await waitForGame(page, 150);
 }
 
 // ---- 1. web swing ----
@@ -51,14 +52,14 @@ async function resetPlayer() {
     d.setCamYaw(0);
     return true;
   });
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   await page.mouse.down({ button: 'right' });
   await ev(() => window.__debug.startSwing());
-  await page.waitForTimeout(800);
+  await waitForGame(page, 800);
   const s = await ev(() => ({ att: window.__debug.web.attached, y: window.__debug.player.pos.y }));
   check('Web swinging', ok && s.att && s.y > 1, `airborne at ${s.y.toFixed(1)}m`);
   await page.mouse.up({ button: 'right' });
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
 }
 
 // ---- 2. glide hang-time after release ----
@@ -72,7 +73,7 @@ async function resetPlayer() {
     return d.player.glide === true;
   });
   check('Release glide (hang-time)', glide);
-  await page.waitForTimeout(1200);
+  await waitForGame(page, 1200);
 }
 
 // ---- 3. zip-to-point (tap) ----
@@ -84,15 +85,15 @@ async function resetPlayer() {
     d.player.pos.set((c.x0 + c.x1) / 2, 0, c.z0 - 12);
     d.setCamYaw(0);
   });
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   await page.mouse.down({ button: 'right' });
   await ev(() => window.__debug.startSwing());
-  await page.waitForTimeout(80); // quick tap
+  await page.waitForTimeout(80); // physical tap duration; must stay below the zip threshold
   await page.mouse.up({ button: 'right' });
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   const zip = await ev(() => window.__debug.web.zip || window.__debug.player.pos.y > 3);
   check('Zip-to-point (tap right click)', zip);
-  await page.waitForTimeout(2500); // let it finish + land
+  await waitForGame(page, 2500); // let it finish + land
 }
 
 // ---- 4. wall-run ----
@@ -110,11 +111,11 @@ async function resetPlayer() {
     return true;
   });
   await page.keyboard.down('KeyW');
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   const y = await ev(() => window.__debug.player.pos.y);
   await page.keyboard.up('KeyW');
   check('Wall-run', setup && y > 2.5, `climbed to ${y.toFixed(1)}m`);
-  await page.waitForTimeout(1200);
+  await waitForGame(page, 1200);
 }
 
 // ---- 5. style meter ----
@@ -127,7 +128,7 @@ async function resetPlayer() {
     d.player.pos.set((c.x0 + c.x1) / 2, 0, c.z0 - 12);
     d.setCamYaw(0); // face the wall before firing
   });
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   const style = await ev(() => {
     const d = window.__debug;
     // a mid-air web catch awards style
@@ -138,7 +139,7 @@ async function resetPlayer() {
   });
   await ev(() => window.__debug.stopSwing());
   check('Style meter', style > 0, `+${style} for mid-air catch`);
-  await page.waitForTimeout(800);
+  await waitForGame(page, 800);
 }
 
 // ---- 6. web attack ----
@@ -146,15 +147,19 @@ async function resetPlayer() {
   await resetPlayer();
   await ev(() => {
     const d = window.__debug;
-    const p = d.world.peds[0];
-    p.dead = false;
-    p.webT = 0;
-    p.pos.set(d.player.pos.x, 0, d.player.pos.z + 8);
+    // A clear sidewalk corner keeps a random traffic car from becoming the
+    // closer target. Let the chase camera settle after the prior teleport.
+    d.player.pos.copy(d.world.city.spawn).add({ x: 8, y: 0, z: 8 });
     d.setCamYaw(0);
     d.setCamPitch(-0.1);
   });
-  await page.waitForTimeout(500);
-  await ev(() => window.__debug.webAttack());
+  await waitForGame(page, 2000);
+  await ev(() => {
+    const d = window.__debug, p = d.world.peds[0];
+    p.dead = false; p.webT = 0;
+    p.pos.set(d.player.pos.x, 0, d.player.pos.z + 8);
+    d.webAttack();
+  });
   const webbed = await ev(() => window.__debug.world.peds.some((p) => p.webT > 0));
   check('Web attack (Q) pins peds', webbed);
 }
@@ -167,11 +172,14 @@ async function resetPlayer() {
     const s = d.shops.shops[0];
     s.cd = 0;
     d.player.pos.set(s.pos.x, 0, s.pos.z + 1);
+    // A two-star robbery requires a witness under the existing crime rules.
+    d.world.peds[0].dead = false;
+    d.world.peds[0].pos.copy(d.player.pos);
     return d.world.money;
   });
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await page.keyboard.down('KeyE');
-  await page.waitForTimeout(2200);
+  await waitForGame(page, 2200);
   await page.keyboard.up('KeyE');
   const gain = (await ev(() => window.__debug.world.money)) - before;
   const heat = await ev(() => window.__debug.world.wanted);
@@ -188,10 +196,10 @@ async function resetPlayer() {
     d.world.upgrades.range = false;
     d.player.pos.copy(d.shops.denPos);
   });
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   const near = await ev(() => window.__debug.world.nearDen);
   await page.keyboard.press('Digit1');
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   const bought = await ev(() => window.__debug.world.upgrades.range);
   check('WEB DEN upgrades', near && bought, 'bought LONG WEBS at the den');
 }
@@ -234,27 +242,27 @@ async function resetPlayer() {
     d.player.pos.set(bike.pos.x + 2, 0, bike.pos.z);
     return true;
   });
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await page.keyboard.press('KeyE');
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   const onBike = await ev(() => !!window.__debug.player.inCar?.bike);
   check('Motorbike', found && onBike, 'found one parked and mounted it');
 
   // ---- 11. car radio ----
   const st0 = await ev(() => window.__debug.world.radioSt);
   await page.keyboard.press('KeyR');
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   const st1 = await ev(() => window.__debug.world.radioSt);
   check('Car radio (R)', st1 === (st0 + 1) % 4, `station ${st0} -> ${st1}`);
   await page.keyboard.press('KeyE'); // dismount
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
 }
 
 // ---- 12. tank at 5 stars + stealable ----
 {
   await resetPlayer();
   await ev(() => { window.__debug.world.wanted = 5; window.__debug.world.wantedTimer = 0; });
-  await page.waitForTimeout(1500);
+  await waitForGame(page, 1500);
   const n = await ev(() => window.__debug.world.tanks.filter((t) => !t.dead).length);
   check('Army tank at 5 stars', n >= 1, `${n} tank hunting`);
   const stole = await ev(() => {
@@ -266,9 +274,9 @@ async function resetPlayer() {
     d.player.vel.set(0, 0, 0);
     return true;
   });
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await page.keyboard.press('KeyE');
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   const inTank = await ev(() => !!window.__debug.player.inCar?.tank);
   check('Tank is stealable', stole && inTank);
   await page.keyboard.press('KeyE');
@@ -298,7 +306,7 @@ async function resetPlayer() {
     types.push(got);
     // end it cleanly
     await ev(() => { window.__debug.mission.timeLeft = 0.01; });
-    await page.waitForTimeout(300);
+    await waitForGame(page, 300);
   }
   check('Missions: all eleven types', JSON.stringify(types) === JSON.stringify(['delivery', 'race', 'air', 'taxi', 'fire', 'hit', 'roofhit', 'escort', 'boss', 'rival', 'mech']), types.join(', '));
   // boss chopper should now be leaving after the fail
@@ -329,12 +337,12 @@ async function resetPlayer() {
 {
   await resetPlayer();
   await ev(() => { window.__debug.player.health = 0; });
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   const over = await ev(() => ({
     state: window.__debug.getState(),
     fell: Math.abs(window.__debug.player.mesh.rotation.z - Math.PI / 2) < 0.1,
   }));
-  await page.waitForFunction(() => window.__debug.getState() === 'play', null, { timeout: 8000 });
+  await page.waitForFunction(() => window.__debug.getState() === 'play', null, { timeout: 90000 });
   // idle animation sways rotation.z by ~0.01, so "upright" is a tolerance check
   const back = await ev(() => window.__debug.player.health > 0 && Math.abs(window.__debug.player.mesh.rotation.z) < 0.1);
   check('WASTED topple + respawn', over.state === 'over' && over.fell && back);
@@ -354,12 +362,12 @@ async function resetPlayer() {
 {
   await resetPlayer();
   await page.keyboard.down('KeyC');
-  await page.waitForTimeout(900);
+  await waitForGame(page, 900);
   await page.keyboard.up('KeyC');
-  await page.waitForTimeout(250);
+  await waitForGame(page, 250);
   const y = await ev(() => window.__debug.player.pos.y);
   check('Point-launch (hold C)', y > 2, `launched to ${y.toFixed(1)}m`);
-  await page.waitForTimeout(2500);
+  await waitForGame(page, 2500);
 }
 
 // ---- 19. web parachute ----
@@ -373,20 +381,20 @@ async function resetPlayer() {
     d.player.glide = false;
   });
   await page.keyboard.down('Space');
-  await page.waitForTimeout(600);
+  await waitForGame(page, 600);
   const vy = await ev(() => window.__debug.player.vy);
   await page.keyboard.up('Space');
   check('Web parachute (Space while falling)', vy >= -5, `fall speed capped at ${vy.toFixed(1)}`);
-  await page.waitForTimeout(2500);
+  await waitForGame(page, 2500);
 }
 
 // ---- 20. web trampoline (T) ----
 {
   await resetPlayer();
   await ev(() => { window.__debug.setCamPitch(0.3); }); // look down-ish ahead
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   await page.keyboard.press('KeyT');
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   const n = await ev(() => window.__debug.world.tramps.length);
   check('Web trampoline (T)', n >= 1);
   await ev(() => { window.__debug.setCamPitch(0.12); });
@@ -401,9 +409,9 @@ async function resetPlayer() {
     d.player.pos.copy(d.shops.casinoPos);
     return d.world.money;
   });
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   await page.keyboard.press('Digit1');
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   const after = await ev(() => window.__debug.world.money);
   check('Casino bets', after !== before, `$${before} -> $${after}`);
 }
@@ -416,9 +424,9 @@ async function resetPlayer() {
     d.world.money += 2500;
     d.player.pos.copy(d.shops.dealerPos);
   });
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   await page.keyboard.press('Digit1');
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   const bought = await ev(() => window.__debug.world.parked.some((v) => v.accel === 26 && !v.bike));
   check('Dealership supercar', bought);
 }
@@ -433,9 +441,9 @@ async function resetPlayer() {
     d.player.pos.set(car.pos.x + 2, 0, car.pos.z);
     return !!car;
   });
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await page.keyboard.press('KeyE'); // in
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await ev(() => {
     const d = window.__debug;
     if (d.player.inCar) {
@@ -443,9 +451,9 @@ async function resetPlayer() {
       d.player.inCar.vel.set(0, 0, 0);
     }
   });
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await page.keyboard.press('KeyE'); // out, on the pad
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   const kind = await ev(() => window.__debug.world.garageKind);
   check('Garage pad stores your ride', ok && kind === 'car');
 }
@@ -454,7 +462,7 @@ async function resetPlayer() {
 {
   await resetPlayer();
   await ev(() => { window.__debug.world.wanted = 3; window.__debug.world.wantedTimer = 0; });
-  await page.waitForTimeout(1200);
+  await waitForGame(page, 1200);
   const n = await ev(() => window.__debug.world.drones.length);
   check('Attack drones (2+ stars)', n >= 1, `${n} drones overhead`);
 }
@@ -462,11 +470,11 @@ async function resetPlayer() {
 // ---- 25. SWAT van at 4 stars ----
 {
   await ev(() => { window.__debug.world.wanted = 4; window.__debug.world.wantedTimer = 0; });
-  await page.waitForTimeout(1200);
+  await waitForGame(page, 1200);
   const van = await ev(() => window.__debug.world.cops.some((c) => c.van && !c.dead));
   check('SWAT van (4 stars)', van);
   await ev(() => { window.__debug.world.wanted = 0; });
-  await page.waitForTimeout(600);
+  await waitForGame(page, 600);
 }
 
 // ---- 26. gang drive-by ----
@@ -516,10 +524,10 @@ async function resetPlayer() {
     d.player.pos.set(d.stunts.skulls[0].pos.x, 0, d.stunts.skulls[0].pos.z);
     d.player.vel.set(0, 0, 0);
   });
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   // now clear the cooldown and hold position so the pickup registers
   await ev(() => { window.__debug.stunts.skulls[0].cd = 0; });
-  await page.waitForTimeout(500);
+  await waitForGame(page, 500);
   const rt = await ev(() => window.__debug.world.rampageT);
   check('Rampage skull pickup', rt > 30, `${rt.toFixed(0)}s of mayhem`);
   await ev(() => { window.__debug.world.rampageT = 0.01; });
@@ -551,12 +559,12 @@ async function resetPlayer() {
 {
   await resetPlayer();
   await page.keyboard.press('KeyW');
-  await page.waitForTimeout(90);
+  await waitForGame(page, 90);
   await page.keyboard.press('KeyW');
-  await page.waitForTimeout(120);
+  await waitForGame(page, 120);
   const d = await ev(() => window.__debug.player.dodgeT);
   check('Dodge roll (double-tap W)', d > 0, `i-frames ${d.toFixed(2)}s`);
-  await page.waitForTimeout(600);
+  await waitForGame(page, 600);
 }
 
 // ---- 32. XP levels ----
@@ -577,9 +585,9 @@ async function resetPlayer() {
     d.world.money += 600;
     d.player.pos.copy(d.shops.wardrobePos);
   });
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   await page.keyboard.press('Digit2');
-  await page.waitForTimeout(250);
+  await waitForGame(page, 250);
   const suit = await ev(() => window.__debug.getSuit());
   check('Wardrobe suit + perk', suit === 'classic', suit);
 }
@@ -588,13 +596,13 @@ async function resetPlayer() {
 {
   await resetPlayer();
   await ev(() => window.__debug.pauseGame());
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   const paused = await ev(() => ({
     state: window.__debug.getState(),
     menu: document.getElementById('pausemenu').style.display !== 'none',
   }));
   await page.click('#pausemenu button'); // RESUME
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   const resumed = await ev(() => window.__debug.getState());
   check('Pause menu + settings', paused.state === 'pause' && paused.menu && resumed === 'play');
 }
@@ -602,12 +610,12 @@ async function resetPlayer() {
 // ---- 35. photo mode ----
 {
   await ev(() => window.__debug.pauseGame());
-  await page.waitForTimeout(150);
+  await waitForGame(page, 150);
   await page.click('#pausemenu button:nth-of-type(2)'); // PHOTO MODE
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   const inPhoto = await ev(() => window.__debug.getState());
   await page.keyboard.press('KeyP');
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   const back = await ev(() => window.__debug.getState());
   check('Photo mode', inPhoto === 'photo' && back === 'play');
 }
@@ -615,10 +623,10 @@ async function resetPlayer() {
 // ---- 36. big map + waypoint ----
 {
   await ev(() => window.__debug.openBigMap());
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   const mapOpen = await ev(() => window.__debug.getState() === 'map');
   await page.click('#bigmap canvas', { position: { x: 200, y: 200 } });
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   const wp = await ev(() => ({ w: !!window.__debug.world.waypoint, state: window.__debug.getState() }));
   check('City map + waypoint', mapOpen && wp.w && wp.state === 'play');
   await ev(() => { window.__debug.world.waypoint = null; });
@@ -648,12 +656,9 @@ async function resetPlayer() {
 
 // ---- 39. achievements engine ----
 {
-  const got = await ev(async () => {
-    const d = window.__debug;
-    d.world.stats.jackpots = 1;
-    await new Promise((r) => setTimeout(r, 3200));
-    return !!d.world.ach.jackpot;
-  });
+  await ev(() => { window.__debug.world.stats.jackpots = 1; });
+  await waitForGame(page, 3200);
+  const got = await ev(() => !!window.__debug.world.ach.jackpot);
   check('Achievements unlock', got);
 }
 
@@ -668,7 +673,7 @@ async function resetPlayer() {
     d.player.pos.copy(tk.pos);
     return { before, total: d.stunts.tokens.length };
   });
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   const after = await ev(() => window.__debug.world.stats.tokens);
   check('Hidden packages (20 rooftop tokens)', got.total === 20 && after === got.before + 1, `${after}/20 collected`);
 }
@@ -681,9 +686,9 @@ async function resetPlayer() {
     const car = d.world.parked.find((v) => !v.bike && !v.dead && v.accel === undefined);
     d.player.pos.set(car.pos.x + 2, 0, car.pos.z);
   });
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await page.keyboard.press('KeyE');
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await ev(() => {
     const d = window.__debug;
     const b = d.player.inCar;
@@ -695,7 +700,7 @@ async function resetPlayer() {
   });
   await page.keyboard.down('KeyW');
   await page.keyboard.down('ShiftLeft');
-  await page.waitForTimeout(3200);
+  await waitForGame(page, 3200);
   const boosted = await ev(() => ({
     sp: window.__debug.player.inCar?.vel.length() ?? 0,
     n: window.__debug.player.nitro,
@@ -704,7 +709,7 @@ async function resetPlayer() {
   await page.keyboard.up('KeyW');
   check('Nitro boost (Shift in car)', boosted.sp > 24 && boosted.n < 90, `${boosted.sp.toFixed(1)} m/s, tank ${boosted.n.toFixed(0)}%`);
   await page.keyboard.press('KeyE');
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
 }
 
 // ---- 42. AI street racers ----
@@ -720,7 +725,7 @@ async function resetPlayer() {
   });
   check('AI street racers', rivals.type === 'race' && rivals.n === 2 && rivals.cps === 5, `${rivals.n} rivals, ${rivals.cps} checkpoints`);
   await ev(() => { window.__debug.mission.timeLeft = 0.01; });
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
 }
 
 // ---- 43. the rival web-swinger ----
@@ -777,7 +782,7 @@ async function resetPlayer() {
   // desktop headless may not report a camera; accept either present-or-hidden as long as it doesn't error
   check('Camera booth wiring', typeof hasBtn === 'boolean');
   await ev(() => window.__debug.getState() === 'pause' && document.querySelector('#pausemenu button').click());
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
 }
 
 // ---- 46. haptics call is guarded ----
@@ -791,7 +796,7 @@ async function resetPlayer() {
     } catch { threw = true; }
     return !threw;
   });
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await ev(() => { window.__debug.player.health = 100; });
   check('Haptics guarded (no crash on desktop)', ok);
 }
@@ -838,9 +843,9 @@ async function resetPlayer() {
     d.player.pos.copy(d.shops.dealerPos);
     return true;
   });
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   await page.keyboard.press('Digit3');
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   const truck = await ev(() => window.__debug.world.parked.some((v) => v.monster));
   check('Monster truck (dealership)', bought && truck);
 }

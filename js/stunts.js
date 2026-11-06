@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { roadCenter, N, HALF } from './city.js';
+import { roadCenter, N, HALF, resolveCircle } from './city.js';
 import { showToast, showNews } from './hud.js';
 import { sfxPickup as pickupSfx } from './sound.js';
 import { sfxPickup, sfxMissionPass } from './sound.js';
@@ -39,7 +39,12 @@ export function initStunts(scene, world) {
       skullGeo,
       new THREE.MeshLambertMaterial({ color: 0xd03030, emissive: 0x801515, emissiveIntensity: 0.8 })
     );
-    mesh.position.set(sx, 1.2, sz);
+    // Procedural buildings can cover the old fixed corner coordinates. Keep
+    // the pickup outside walls so collision resolution cannot push the player
+    // out of pickup range. This also applies in the preserved arcade district.
+    const position = new THREE.Vector3(sx, 0, sz);
+    resolveCircle(position, 2, world.city.colliders);
+    mesh.position.set(position.x, 1.2, position.z);
     scene.add(mesh);
     skulls.push({ pos: mesh.position, mesh, cd: 0 });
   }

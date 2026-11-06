@@ -1,0 +1,26 @@
+[
+  {
+    "type": "navigation",
+    "url": "http://localhost:8080/",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "type": "navigation",
+    "url": "http://localhost:8080/",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "type": "result",
+    "state": {
+      "body": "",
+      "menu": false,
+      "play": false
+    }
+  },
+  {
+    "type": "error",
+    "text": "Failed to load resource: net::ERR_FAILED"
+  }
+]

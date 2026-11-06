@@ -1,0 +1,68 @@
+[
+  {
+    "name": "s24-preview",
+    "pixels": {
+      "luminanceStd": 50.01048893667824,
+      "colors": 81
+    },
+    "graphics": {
+      "initialized": true,
+      "frames": 9,
+      "hdr": true,
+      "contextLost": false,
+      "width": 384,
+      "height": 832
+    }
+  },
+  {
+    "name": "s24-no-float",
+    "pixels": {
+      "luminanceStd": 21.819682458157978,
+      "colors": 159
+    },
+    "graphics": {
+      "initialized": true,
+      "frames": 9,
+      "hdr": false,
+      "contextLost": false,
+      "width": 384,
+      "height": 832
+    },
+    "oldBlackFrame": {
+      "luminanceStd": 5.566650263929276,
+      "colors": 44
+    }
+  },
+  {
+    "name": "s24-cache-recovery",
+    "pixels": {
+      "luminanceStd": 52.43404314183849,
+      "colors": 102
+    },
+    "graphics": {
+      "initialized": true,
+      "frames": 15,
+      "hdr": true,
+      "contextLost": false,
+      "width": 384,
+      "height": 832
+    }
+  },
+  {
+    "name": "s24-map-error",
+    "menuVisible": true,
+    "replacementWorld": false
+  },
+  {
+    "name": "s24-webgl-error",
+    "menuVisible": true
+  },
+  {
+    "name": "s24-late-js-error",
+    "menuVisible": true
+  },
+  {
+    "name": "s24-silent-black-frame",
+    "menuVisible": true
+  }
+]

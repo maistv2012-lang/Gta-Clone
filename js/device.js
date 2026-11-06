@@ -15,10 +15,12 @@ export function vibrate(pattern) {
 export function goFullscreen() {
   const el = document.documentElement;
   const req = el.requestFullscreen || el.webkitRequestFullscreen;
-  if (req) req.call(el).catch(() => {});
+  if (req && (document.fullscreenEnabled || document.webkitFullscreenEnabled)) {
+    try { Promise.resolve(req.call(el)).catch(() => {}); } catch {}
+  }
   // lock to landscape on phones once we're fullscreen
   if (screen.orientation && screen.orientation.lock) {
-    screen.orientation.lock('landscape').catch(() => {});
+    try { Promise.resolve(screen.orientation.lock('landscape')).catch(() => {}); } catch {}
   }
 }
 
@@ -29,9 +31,10 @@ let wakeLock = null;
 export function keepAwake() {
   if (!('wakeLock' in navigator)) return;
   const acquire = () => {
-    navigator.wakeLock.request('screen')
-      .then((l) => { wakeLock = l; })
-      .catch(() => {});
+    try {
+      Promise.resolve(navigator.wakeLock.request('screen'))
+        .then((l) => { wakeLock = l; }).catch(() => {});
+    } catch {}
   };
   acquire();
   document.addEventListener('visibilitychange', () => {
@@ -55,7 +58,7 @@ export async function saveOrShare(blob, name = 'open-city.png') {
   const file = new File([blob], name, { type: 'image/png' });
   if (navigator.canShare && navigator.canShare({ files: [file] })) {
     try {
-      await navigator.share({ files: [file], title: 'OPEN CITY' });
+      await navigator.share({ files: [file], title: 'CHRISTCHURCH' });
       return true;
     } catch { /* user cancelled — fall through to download */ }
   }
@@ -110,7 +113,7 @@ function buildBooth() {
   root.appendChild(video);
 
   const label = document.createElement('div');
-  label.textContent = 'OPEN CITY';
+  label.textContent = 'CHRISTCHURCH';
   label.style.cssText =
     'position:absolute;top:16px;left:0;right:0;text-align:center;pointer-events:none;' +
     'font:900 italic 26px Arial;letter-spacing:3px;color:#ffd24a;text-shadow:2px 2px 0 #000;';
@@ -146,7 +149,7 @@ function buildBooth() {
     g.textAlign = 'center';
     g.shadowColor = '#000';
     g.shadowBlur = 8;
-    g.fillText('OPEN CITY', w / 2, h * 0.1);
+    g.fillText('CHRISTCHURCH', w / 2, h * 0.1);
     c.toBlob((b) => saveOrShare(b, 'open-city-selfie.png'), 'image/png');
   };
   flip.onclick = async () => {

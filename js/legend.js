@@ -89,7 +89,7 @@ function crownRegalia(world) {
   g.fillStyle = '#3a3e46'; g.fillRect(0, 0, 256, 96);
   g.fillStyle = '#ffd24a'; g.textAlign = 'center';
   g.font = 'bold 22px Georgia'; g.fillText('THE KING', 128, 34);
-  g.font = 'bold 15px Georgia'; g.fillText('of OPEN CITY', 128, 58);
+  g.font = 'bold 15px Georgia'; g.fillText('of CHRISTCHURCH', 128, 58);
   g.font = 'italic 12px Georgia'; g.fillText('who left nothing undone · 2026', 128, 80);
   const tex = new THREE.CanvasTexture(c);
   tex.colorSpace = THREE.SRGBColorSpace;

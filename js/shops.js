@@ -69,22 +69,27 @@ export function initShops(scene, world, savedUpgrades, savedMods) {
 
   // upgrade den near spawn — purple neon
   const denPos = world.city.spawn.clone().add(new THREE.Vector3(14, 0, -10));
+  if (world.city.safePoint) denPos.copy(world.city.safePoint(denPos, true));
   const den = kiosk(scene, denPos, '#241a30', '#c95aff', 'WEB DEN');
 
   // wardrobe — pink, beside the den
   const wardrobePos = world.city.spawn.clone().add(new THREE.Vector3(14, 0, 12));
+  if (world.city.safePoint) wardrobePos.copy(world.city.safePoint(wardrobePos, true));
   kiosk(scene, wardrobePos, '#301a2a', '#ff6ab0', 'WARDROBE');
 
   // casino — gold, a block over
   const casinoPos = world.city.spawn.clone().add(new THREE.Vector3(-16, 0, 12));
+  if (world.city.safePoint) casinoPos.copy(world.city.safePoint(casinoPos, true));
   kiosk(scene, casinoPos, '#2e2410', '#ffd24a', 'LUCKY 7 CASINO');
 
   // dealership — cyan
   const dealerPos = world.city.spawn.clone().add(new THREE.Vector3(-16, 0, -12));
+  if (world.city.safePoint) dealerPos.copy(world.city.safePoint(dealerPos, true));
   kiosk(scene, dealerPos, '#102a2e', '#3dd2ff', 'AUTO PALACE');
 
   // garage pad — park any vehicle here and it's yours forever
   const garagePos = world.city.spawn.clone().add(new THREE.Vector3(16, 0, 14));
+  if (world.city.safePoint) garagePos.copy(world.city.safePoint(garagePos, true));
   const pad = new THREE.Mesh(
     new THREE.CylinderGeometry(4.2, 4.2, 0.22, 24),
     new THREE.MeshLambertMaterial({ color: 0x1a2a45 })

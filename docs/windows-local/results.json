@@ -1,0 +1,30 @@
+[
+  {
+    "name": "direct-desktop",
+    "menu": true,
+    "play": true,
+    "osm": true,
+    "graphics": {
+      "initialized": true,
+      "frames": 18,
+      "hdr": true,
+      "contextLost": false,
+      "width": 1100,
+      "height": 740
+    }
+  },
+  {
+    "name": "direct-mobile",
+    "menu": true,
+    "play": true,
+    "osm": true,
+    "graphics": {
+      "initialized": true,
+      "frames": 18,
+      "hdr": true,
+      "contextLost": false,
+      "width": 384,
+      "height": 832
+    }
+  }
+]

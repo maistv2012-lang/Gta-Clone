@@ -1,3 +1,4 @@
+import { LEGACY_OFFSET, LEGACY_CITY } from './map-config.js';
 import * as THREE from 'three';
 import { makeVehicle, physStep, separateCars, darkenCar } from './car.js';
 import { roadCenter, HALF, N } from './city.js';
@@ -51,10 +52,13 @@ export function updateArmy(world, dt, hooks) {
     let z = 0;
     for (let tries = 0; tries < 12; tries++) {
       const road = roadCenter((Math.random() * (N + 1)) | 0);
-      const along = (Math.random() * 2 - 1) * (HALF - 14);
+      const along = LEGACY_OFFSET + (Math.random() * 2 - 1) * (LEGACY_CITY / 2 - 14);
       if (Math.random() < 0.5) { x = road; z = along; } else { x = along; z = road; }
       const d = Math.hypot(x - focus.x, z - focus.z);
       if (d > 70 && d < 150) break;
+    }
+    if (world.city.network && world.city.nearestRoad(focus).distance < 400) {
+      const point = world.city.roadPoint(focus, 70, 150); x = point.x; z = point.z;
     }
     world.tanks.push(makeTank(world.scene, x, z, Math.atan2(focus.x - x, focus.z - z)));
     showToast('THE ARMY IS HERE — TANK INBOUND');

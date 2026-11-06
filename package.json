@@ -1,12 +1,24 @@
 {
   "name": "open-city",
   "version": "1.0.0",
-  "description": "GTA-style open-world game that runs in the browser",
+  "description": "Grand Theft Christchurch \u2014 browser-based 3D open world",
   "type": "module",
   "scripts": {
-    "start": "npx -y http-server -p 8080 -c-1 -s ."
+    "start": "npx -y http-server@14.1.1 -p 8080 -c-1 -s .",
+    "map:fetch": "bash scripts/fetch-christchurch.sh",
+    "test:map": "node test/map-network.test.mjs",
+    "test:map:browser": "node test/map-browser.mjs",
+    "test:map:real": "GTC_REAL_MAP=1 node test/map-browser.mjs",
+    "test:map:data": "node test/real-map-data.mjs",
+    "vendor:three": "node scripts/vendor-three.mjs",
+    "test:startup:unit": "node test/map-loader.test.mjs",
+    "test:startup": "node test/startup-browser.mjs",
+    "test:preview": "node test/preview-render.mjs"
   },
   "devDependencies": {
     "playwright-core": "^1.60.0"
+  },
+  "dependencies": {
+    "three": "0.170.0"
   }
 }

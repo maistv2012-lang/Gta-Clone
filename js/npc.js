@@ -6,6 +6,8 @@ import { addCrime } from './police.js';
 import { addSparks, addSmoke } from './effects.js';
 import { sfxCrash } from './sound.js';
 import { showNews } from './hud.js';
+import { lane, advanceTraffic } from './road-traffic.js';
+import { leftOffset } from './road-network.js';
 
 const _v = new THREE.Vector3();
 
@@ -44,6 +46,14 @@ export function spawnPeds(scene, city, count) {
 }
 
 function placePedOnBlock(p, city) {
+  if (city.walkNetwork) {
+    const nearby = city.walkNetwork.edges.filter(e => Math.hypot(e.a[0] - city.spawn.x, e.a[1] - city.spawn.z) < 600);
+    const edges = nearby.length ? nearby : city.walkNetwork.edges;
+    setPedEdge(p, edges[(Math.random() * edges.length) | 0]);
+    const t = Math.random();
+    p.pos.copy(p.corners[0]).lerp(p.corners[1], t);
+    return;
+  }
   const rect = city.pedRects[(Math.random() * city.pedRects.length) | 0];
   p.corners = rectCorners(rect);
   p.target = (Math.random() * 4) | 0;
@@ -54,6 +64,13 @@ function placePedOnBlock(p, city) {
     0,
     a.z + (b.z - a.z) * Math.random()
   );
+}
+
+function setPedEdge(p, edge) {
+  const off = leftOffset(edge.a, edge.b, edge.walking ? 0 : edge.width / 2 + 1);
+  p.walkEdge = edge;
+  p.corners = [edge.a, edge.b].map(([x, z]) => new THREE.Vector3(x + off[0], 0, z + off[1]));
+  p.target = 1;
 }
 
 export function updatePeds(world, dt) {
@@ -120,7 +137,12 @@ export function updatePeds(world, dt) {
       _v.y = 0;
       const d = _v.length();
       if (d < 0.8) {
-        p.target = (p.target + p.cw + 4) % 4;
+        if (p.walkEdge) {
+          const outgoing = city.walkNetwork.outgoing.get(p.walkEdge.to) || [];
+          const forward = outgoing.filter(e => e.to !== p.walkEdge.from);
+          const candidates = forward.length ? forward : outgoing;
+          if (candidates.length) setPedEdge(p, candidates[(Math.random() * candidates.length) | 0]);
+        } else p.target = (p.target + p.cw + 4) % 4;
       } else {
         _v.normalize();
         p.heading = Math.atan2(_v.x, _v.z);
@@ -161,13 +183,23 @@ export function killPed(world, p, byPlayer) {
 export function spawnTraffic(scene, city, count) {
   const traffic = [];
   for (let i = 0; i < count; i++) {
+    if (city.network) {
+      const nearby = city.network.edges.filter(e => Math.hypot(e.a[0] - city.spawn.x, e.a[1] - city.spawn.z) < 700);
+      const edges = nearby.length ? nearby : city.network.edges;
+      const edge = edges[(Math.random() * edges.length) | 0], t = Math.random();
+      const [x, z] = lane(edge, t);
+      const fx = (edge.b[0] - edge.a[0]) / edge.length, fz = (edge.b[1] - edge.a[1]) / edge.length;
+      const vehicle = makeVehicle(scene, x, z, Math.atan2(fx, fz), randomCarColor());
+      vehicle.ai = { edge, t, fx, fz, speed: 0, cruise: 8 + Math.random() * 5 };
+      traffic.push(vehicle); continue;
+    }
     const vertical = Math.random() < 0.5;
     const road = roadCenter((Math.random() * (N + 1)) | 0);
     const sign = Math.random() < 0.5 ? 1 : -1;
     let x, z, fx, fz;
     if (vertical) {
       fx = 0; fz = sign;
-      x = road + sign * 4; // right-hand lane
+      x = road + sign * 4; // left-hand lane in the game's X/Z coordinates
       z = (Math.random() * 2 - 1) * (HALF - 20);
     } else {
       fx = sign; fz = 0;
@@ -257,14 +289,17 @@ export function updateTraffic(world, dt) {
     ai.speed += Math.max(-14 * dt, Math.min(8 * dt, target - ai.speed));
     if (ai.speed < 0.05 && blocked) ai.speed = 0;
 
-    t.pos.x += ai.fx * ai.speed * dt;
-    t.pos.z += ai.fz * ai.speed * dt;
+    if (ai.edge) advanceTraffic(t, world.city.network, ai.speed * dt);
+    else {
+      t.pos.x += ai.fx * ai.speed * dt;
+      t.pos.z += ai.fz * ai.speed * dt;
+    }
     t.vel.set(ai.fx * ai.speed, 0, ai.fz * ai.speed);
 
     // wrap around the city
     const W = HALF - 8;
-    if (ai.fz !== 0 && Math.abs(t.pos.z) > W) t.pos.z = -Math.sign(t.pos.z) * W;
-    if (ai.fx !== 0 && Math.abs(t.pos.x) > W) t.pos.x = -Math.sign(t.pos.x) * W;
+    if (!ai.edge && ai.fz !== 0 && Math.abs(t.pos.z) > W) t.pos.z = -Math.sign(t.pos.z) * W;
+    if (!ai.edge && ai.fx !== 0 && Math.abs(t.pos.x) > W) t.pos.x = -Math.sign(t.pos.x) * W;
 
     const spin = (ai.speed * dt) / 0.36;
     for (const w of t.wheels) w.rotation.x += spin;
@@ -279,9 +314,18 @@ export function disableTraffic(t) {
 
 // ---------------- Parked cars ----------------
 
-export function spawnParked(scene, count) {
+export function spawnParked(scene, count, city) {
   const parked = [];
   for (let i = 0; i < count; i++) {
+    if (city?.network) {
+      const nearby = city.network.edges.filter(e => Math.hypot(e.a[0] - city.spawn.x, e.a[1] - city.spawn.z) < 500);
+      const edges = nearby.length ? nearby : city.network.edges;
+      const edge = edges[(Math.random() * edges.length) | 0];
+      const [x, z] = lane(edge, 0.2 + Math.random() * 0.6, true);
+      const bike = i % 4 === 3;
+      parked.push(makeVehicle(scene, x, z, Math.atan2(edge.b[0] - edge.a[0], edge.b[1] - edge.a[1]), randomCarColor(), bike ? { bike: true } : {}));
+      continue;
+    }
     const vertical = Math.random() < 0.5;
     const road = roadCenter((Math.random() * (N + 1)) | 0);
     const block = (Math.random() * N) | 0;
@@ -294,7 +338,7 @@ export function spawnParked(scene, count) {
       heading = side > 0 ? 0 : Math.PI;
     } else {
       x = along; z = off;
-      heading = side > 0 ? Math.PI / 2 : -Math.PI / 2;
+      heading = side > 0 ? -Math.PI / 2 : Math.PI / 2;
     }
     // every fourth parked vehicle is a motorbike — quick and nimble
     const bike = i % 4 === 3;

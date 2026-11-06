@@ -1,0 +1,81 @@
+
+> open-city@1.0.0 test:map:real
+> GTC_REAL_MAP=1 node test/map-browser.mjs
+
+REAL OSM EXTRACT: integration checks
+{
+  roads: 9139,
+  areas: 11353,
+  driveEdges: 27473,
+  walkEdges: 79536,
+  landmarksConnected: true,
+  landmarks: [
+    {
+      name: 'Cathedral Square',
+      osmId: 116345266,
+      point: [Array],
+      node: '4878136288',
+      routeEdges: 0,
+      routeMeters: 0
+    },
+    {
+      name: 'Colombo Street',
+      osmId: 206789267,
+      point: [Array],
+      node: '4878136284',
+      routeEdges: 7,
+      routeMeters: 31
+    },
+    {
+      name: 'Hagley Park South',
+      osmId: 41654585,
+      point: [Array],
+      node: '7371187304',
+      routeEdges: 112,
+      routeMeters: 2113
+    },
+    {
+      name: 'Hagley Park',
+      osmId: 'relation/19140268/0',
+      point: [Array],
+      node: '7371187304',
+      routeEdges: 112,
+      routeMeters: 2113
+    },
+    {
+      name: 'Hagley Park',
+      osmId: 'relation/19140268/1',
+      point: [Array],
+      node: '4943916545',
+      routeEdges: 77,
+      routeMeters: 1377
+    },
+    {
+      name: 'Hagley Park North',
+      osmId: 27167078,
+      point: [Array],
+      node: '4943916545',
+      routeEdges: 77,
+      routeMeters: 1377
+    }
+  ]
+}
+PASS map loaded and named
+PASS roads and pedestrians have a connected network
+PASS traffic uses left lanes and only directed driving edges
+PASS service kiosks are separated
+PASS Cathedral Square, Colombo Street and Hagley Park access points are unobstructed
+PASS walking moves the player
+PASS polygon collision and existing vehicle physics
+PASS driving accelerates the existing vehicle
+PASS original activities remain accessible in the fictional district
+PASS district travel returns to Christchurch
+PASS police pursuit spawns live police near the player
+PASS wanted-star display matches police heat
+PASS missions still start in the new map
+PASS no desktop page errors
+PASS mobile map, joystick and buttons load
+PASS mobile joystick moves the player
+PASS mobile combat fires through the touch button
+PASS no mobile page errors
+18/18 checks passed (real OSM data)

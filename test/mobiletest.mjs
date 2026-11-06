@@ -1,3 +1,4 @@
+import { waitForGame } from './game-time.mjs';
 // Mobile playability test: emulate a phone (touch, no pointer lock) and drive
 // the game through the virtual joystick and buttons.
 import { chromium, devices } from 'playwright-core';
@@ -16,7 +17,7 @@ page.on('pageerror', (e) => { errors++; console.log('PAGE ERROR:', e.message); }
 await page.goto(`http://localhost:${process.env.PORT || 8080}`, { waitUntil: 'networkidle' });
 await page.waitForFunction(() => window.__debug, null, { timeout: 20000 });
 await page.tap('#playbtn');
-await page.waitForTimeout(700);
+await waitForGame(page, 700);
 
 const ev = (fn, arg) => page.evaluate(fn, arg);
 
@@ -54,7 +55,7 @@ await ev(() => {
     return { x: d.player.pos.x, z: d.player.pos.z };
   });
   await ev(() => { window.__touch('joypad', 'touchstart'); window.__touch('joypad', 'touchmove', 0, -40); });
-  await page.waitForTimeout(700);
+  await waitForGame(page, 700);
   await ev(() => window.__touch('joypad', 'touchend'));
   const b = await ev(() => ({ x: window.__debug.player.pos.x, z: window.__debug.player.pos.z }));
   const moved = Math.hypot(b.x - a.x, b.z - a.z);
@@ -64,11 +65,11 @@ await ev(() => {
 // jump button
 {
   await ev(() => window.__touch('btn-jump', 'touchstart'));
-  await page.waitForTimeout(150);
+  await waitForGame(page, 150);
   const vy = await ev(() => window.__debug.player.vy);
   await ev(() => window.__touch('btn-jump', 'touchend'));
   console.log(`jump button: vy=${vy.toFixed(1)} ${vy > 2 ? 'PASS' : 'FAIL'}`);
-  await page.waitForTimeout(800);
+  await waitForGame(page, 800);
 }
 
 // web button swings without pointer lock
@@ -81,13 +82,13 @@ await ev(() => {
     d.player.vy = 0;
     d.setCamYaw(0);
   });
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   await ev(() => window.__touch('btn-web', 'touchstart'));
-  await page.waitForTimeout(700);
+  await waitForGame(page, 700);
   const s = await ev(() => ({ att: window.__debug.web.attached, y: window.__debug.player.pos.y }));
   await ev(() => window.__touch('btn-web', 'touchend'));
   console.log(`web button swings: airborne ${s.y.toFixed(1)}m ${s.att && s.y > 0.3 ? 'PASS' : 'FAIL'}`);
-  await page.waitForTimeout(1500);
+  await waitForGame(page, 1500);
 }
 
 // fire button shoots without pointer lock
@@ -113,7 +114,7 @@ await ev(() => {
     d.player.pos.copy(d.shops.casinoPos);
     d.player.vel.set(0, 0, 0);
   });
-  await page.waitForTimeout(500);
+  await waitForGame(page, 500);
   const shown = await ev(() =>
     [...document.querySelectorAll('.kioskbtn')].some((b) => b.style.display !== 'none'));
   console.log(`kiosk digit buttons: ${shown ? 'PASS' : 'FAIL'}`);
@@ -127,19 +128,19 @@ await ev(() => {
     d.player.pos.set(d.world.arena.pos.x + 3, 0, d.world.arena.pos.z);
     d.player.vel.set(0, 0, 0);
   });
-  await page.waitForTimeout(500);
+  await waitForGame(page, 500);
   const visible = await ev(() => document.getElementById('btn-arena')?.style.display !== 'none');
   await ev(() => window.__touch('btn-arena', 'touchstart'));
-  await page.waitForTimeout(120);
+  await waitForGame(page, 120);
   await ev(() => window.__touch('btn-arena', 'touchend'));
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   const started = await ev(() => window.__debug.world.arena.active);
   console.log(`FIGHT button (arena): shown=${visible} started=${started} ${visible && started ? 'PASS' : 'FAIL'}`);
   await ev(() => { // walk out to end it
     const d = window.__debug;
     d.player.pos.set(d.world.arena.pos.x + 60, 0, d.world.arena.pos.z);
   });
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
 }
 
 // BUY button appears under a property beam and buys it
@@ -153,12 +154,12 @@ await ev(() => {
     d.player.pos.set(m.pos.x, 0, m.pos.z);
     d.player.vel.set(0, 0, 0);
   });
-  await page.waitForTimeout(500);
+  await waitForGame(page, 500);
   const visible = await ev(() => document.getElementById('btn-buy')?.style.display !== 'none');
   await ev(() => window.__touch('btn-buy', 'touchstart'));
-  await page.waitForTimeout(120);
+  await waitForGame(page, 120);
   await ev(() => window.__touch('btn-buy', 'touchend'));
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   const owned = await ev(() => !!window.__debug.world.props.owned.casino);
   console.log(`BUY button (property): shown=${visible} bought=${owned} ${visible && owned ? 'PASS' : 'FAIL'}`);
 }
@@ -166,9 +167,9 @@ await ev(() => {
 // boat drives with the joystick
 {
   await ev(() => window.__debug.boardBoat(0));
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await ev(() => { window.__touch('joypad', 'touchstart'); window.__touch('joypad', 'touchmove', 0, -40); });
-  await page.waitForTimeout(2000);
+  await waitForGame(page, 2000);
   const sp = await ev(() => window.__debug.player.inBoat?.vel.length() ?? 0);
   await ev(() => window.__touch('joypad', 'touchend'));
   console.log(`boat via joystick: ${sp.toFixed(1)} m/s ${sp > 6 ? 'PASS' : 'FAIL'}`);
@@ -180,6 +181,6 @@ await ev(() => {
   });
 }
 
-await page.waitForTimeout(800);
+await waitForGame(page, 800);
 console.log(`mobile runtime errors: ${errors} ${errors === 0 ? 'PASS' : 'FAIL'}`);
 await browser.close();

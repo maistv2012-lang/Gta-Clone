@@ -1,7 +1,85 @@
-# OPEN CITY
+# Grand Theft Christchurch
+
+The existing Three.js game now includes a real OpenStreetMap extract of central
+Christchurch: Cathedral Square, Colombo Street, and North/South Hagley Park.
+The bundled local data contains 9,139 road/path ways and 11,353 areas. Source
+metadata and the connected landmark routes are recorded in `data/`.
+
+Para executar fora da Prévia do ChatGPT no Windows, consulte o roteiro completo
+em [docs/WINDOWS.md](docs/WINDOWS.md), incluindo dados OSM, PowerShell e diagnóstico.
+
+## Prepare and play Christchurch
+
+Requires Node.js 18+ (validated with Node 24), npm, and HTTPS access to
+`registry.npmjs.org` for installation. Runtime assets, including Three.js r170,
+are served locally; the game no longer depends on a CDN. Refreshing the geographic extract
+also needs `overpass-api.de` and `www.openstreetmap.org`.
+Keep the environment's proxy and CA settings; do not disable TLS verification.
+
+```sh
+npm ci
+npm start
+```
+
+Open the server on port 8080 in your browser. The included extract loads by default.
+To refresh it, run `npm run map:fetch`. The importer writes
+`data/christchurch.json` only after validating the extract and the walking
+connections between Cathedral Square, Colombo Street and Hagley Park. The runtime
+loads this local asset; it does not contact Overpass. After a successful import,
+reload the game. `?map=legacy` explicitly selects the original map for regression
+checks. A failed, missing, invalid or stalled map stops startup with a visible
+error and a retry action. PLAY stays disabled until the real map and all game
+systems are ready. The game never switches to the fictional map on failure;
+`?map=legacy` is an explicit regression/development choice.
+
+Cars use directed OSM road segments and left-side lane offsets; pedestrian areas
+are excluded from ordinary traffic. Geographic buildings use OSM footprints and
+polygon collisions. Missing heights are estimated, so this is not an architectural
+reconstruction. Static geometry is batched in spatial chunks for mobile browsers.
+
+Original block-based activities remain in a separate **fictional Arcade District**,
+with all original systems still initialized. The travel button (or F8 on desktop)
+connects it to Cathedral Square while on foot/in a car, outside active missions
+and police pursuits. The district and its harbor are game areas, not real locations.
+Near-spawn services, procedural mission destinations, pedestrians, traffic,
+parked vehicles and police use the geographic map when it is loaded.
+
+## Validate
+
+```sh
+npm run test:preview             # mobile iframe captures and real scene pixels, normal graphics
+npm run test:startup:unit        # bounded JSON loading and failure handling
+npm run test:map                 # projection, one-way routing, left lanes, collisions
+npm run test:map:browser         # explicit synthetic integration fixture, desktop + touch
+npm run test:map:data            # real landmark connectivity, source and directed lanes
+npm run test:map:real            # real extract in Chromium, desktop + mobile
+node --import ./test/browser-setup.mjs test/season8btest.mjs
+```
+
+Keep the server running for browser tests. `test/browser-setup.mjs` uses system
+Chromium when available (`GTC_BROWSER_PATH` overrides it) and the inherited proxy.
+`GTC_LOW_GFX=1` selects the game's supported low-graphics setting for software
+renderers. `GTC_TEST_MAP=legacy` runs existing scripts against the original
+map; the default remains the real Christchurch map. Other existing suites remain in `test/`; some print FAIL without a
+nonzero exit, so read their results as well as their exit status. See
+[data/README.md](data/README.md) for provenance/licensing and import limits.
+
+The initial menu does not allocate WebGL resources. PLAY keeps it visible until
+a first frame passes framebuffer/pixel checks. Previews without float render
+targets use direct rendering of the same world. Invalid/empty cached HTML gives
+a recovery screen instead of a blank page. Visual before/after evidence and
+console/network logs are in [docs/BLACK-SCREEN.md](docs/BLACK-SCREEN.md).
+
+Startup failure reproduction and browser test commands are documented in
+[docs/STARTUP-FIX.md](docs/STARTUP-FIX.md). `npm run vendor:three` reproduces
+the local engine/addon files after `npm ci`; no engine version was changed.
+
+---
+
+The following documents the preserved original game and its controls/features.
 
 A GTA-style open world **crossed with Spider-Man traversal**, running entirely
-in your browser. No build step, no installs — just Three.js from a CDN and
+in your browser. No bundler is required — the pinned local Three.js engine and
 plain JavaScript ES modules. Steal cars, fly helicopters, rob stores, fight a
 gang for territory, outrun tanks at five stars... or ignore all of it and
 web-swing between the towers at 200 km/h.
@@ -203,7 +281,7 @@ feature modules, each one self-contained and imported into `js/main.js`.
   turf, tanks), live WASD key indicator.
 
 ## Tech stack
-- **[Three.js](https://threejs.org/)** r170, loaded straight from a CDN via
+- **[Three.js](https://threejs.org/)** r170, served from `vendor/three/` via
   an `importmap` in `index.html` — no bundler, no `node_modules` for the
   game itself.
 - Plain **JavaScript ES modules**, one file per system, imported directly by

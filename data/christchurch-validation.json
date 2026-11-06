@@ -1,0 +1,75 @@
+{
+  "roads": 9139,
+  "areas": 11353,
+  "driveEdges": 27473,
+  "walkEdges": 79536,
+  "landmarksConnected": true,
+  "landmarks": [
+    {
+      "name": "Cathedral Square",
+      "osmId": 116345266,
+      "point": [
+        24.56,
+        -36.32
+      ],
+      "node": "4878136288",
+      "routeEdges": 0,
+      "routeMeters": 0
+    },
+    {
+      "name": "Colombo Street",
+      "osmId": 206789267,
+      "point": [
+        4.94,
+        -57.67
+      ],
+      "node": "4878136284",
+      "routeEdges": 7,
+      "routeMeters": 31
+    },
+    {
+      "name": "Hagley Park South",
+      "osmId": 41654585,
+      "point": [
+        -1552.64,
+        405.46
+      ],
+      "node": "7371187304",
+      "routeEdges": 112,
+      "routeMeters": 2113
+    },
+    {
+      "name": "Hagley Park",
+      "osmId": "relation/19140268/0",
+      "point": [
+        -1552.64,
+        405.46
+      ],
+      "node": "7371187304",
+      "routeEdges": 112,
+      "routeMeters": 2113
+    },
+    {
+      "name": "Hagley Park",
+      "osmId": "relation/19140268/1",
+      "point": [
+        -1172.742922909959,
+        -193.9067023639919
+      ],
+      "node": "4943916545",
+      "routeEdges": 77,
+      "routeMeters": 1377
+    },
+    {
+      "name": "Hagley Park North",
+      "osmId": 27167078,
+      "point": [
+        -1172.742922909959,
+        -193.9067023639919
+      ],
+      "node": "4943916545",
+      "routeEdges": 77,
+      "routeMeters": 1377
+    }
+  ]
+}

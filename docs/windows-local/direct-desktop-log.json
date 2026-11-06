@@ -1,0 +1,1012 @@
+[
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/boot.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/main.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/district-travel.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/input.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/city.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/car.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/characters.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/npc.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/police.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/heli.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/effects.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/hud.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/sound.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/weather.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/daynight.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/missions.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/landmarks.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/touch.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/web.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/menu.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/shops.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/device.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/stunts.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/gangs.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/army.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/ambient.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/economy.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/ads.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/arena.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/water.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/heist.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/dog.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/armored.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/turfwar.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/vigilante.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/roulette.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/races.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/blackjack.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/slots.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/propraid.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/ambulance.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/export.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/bounty.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/basejump.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/hoops.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/ufo.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/lottery.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/fightclub.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/jetpack.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/cheats.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/poker.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/legend.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/finale.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/zombies.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/nemesis.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/train.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/disasters.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/prison.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/myths.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/stranger.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/casinoheist.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/derby.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/diving.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/plane.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/mayor.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/empire.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/prestige.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/paparazzi.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/gauntlet.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/swingrace.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/firefight.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/museum.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/kaiju.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/syndicate.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/skydive.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/tournament.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/crew.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/vendor/three/three.module.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/contracts.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/subway.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/busking.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/workbench.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/ferry.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/stormchaser.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/balloon.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/zipline.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/drone.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/taxi.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/carwash.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/valet.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/armsdealer.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/barber.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/druglab.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/vendors.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/atm.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/payphone.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/pigeons.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/graffiti.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/hydrants.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/speedcams.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/meters.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/emotes.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/vehiclefx.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/gym.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/bodyguard.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/wildlife.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/fortune.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/dice.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/hobo.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/wingsuit.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/webpull.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/trainjack.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/trickpark.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/boatrace.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/elevators.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/icetruck.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/repo.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/newschopper.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/pizza.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/copcareer.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/storerob.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/jewelry.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/pinkslip.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/mostwanted.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/bribe.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/lawyer.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/stocks.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/calendar.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/casinoboss.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/mall.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/sewer.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/pokertourney.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/arcade.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/golf.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/chess.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/ghosts.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/bossrush.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/perks.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/armor.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/fishing.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/explorer.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/nightclub.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/skateboard.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/graphics.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/icon.svg",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/map-config.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/christchurch-city.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/road-network.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/road-traffic.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/vendor/three/addons/environments/RoomEnvironment.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/vendor/three/addons/postprocessing/EffectComposer.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/vendor/three/addons/postprocessing/RenderPass.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/vendor/three/addons/postprocessing/UnrealBloomPass.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/vendor/three/addons/postprocessing/OutputPass.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/js/map-loader.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/vendor/three/addons/utils/BufferGeometryUtils.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/vendor/three/addons/shaders/CopyShader.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/vendor/three/addons/postprocessing/ShaderPass.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/vendor/three/addons/postprocessing/MaskPass.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/vendor/three/addons/postprocessing/Pass.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/vendor/three/addons/shaders/LuminosityHighPassShader.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/vendor/three/addons/shaders/OutputShader.js",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/data/christchurch.json",
+    "status": 200,
+    "worker": true
+  },
+  {
+    "kind": "console",
+    "level": "warning",
+    "message": "[.WebGL-0x138c01190800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+    "kind": "console",
+    "level": "warning",
+    "message": "[.WebGL-0x138c01190800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+    "kind": "console",
+    "level": "warning",
+    "message": "[.WebGL-0x138c01190800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+    "kind": "console",
+    "level": "warning",
+    "message": "[.WebGL-0x138c01190800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8082/icon.svg",
+    "status": 200,
+    "worker": true
+  }
+]

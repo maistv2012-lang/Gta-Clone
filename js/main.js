@@ -1,3 +1,4 @@
+import { initDistrictTravel } from './district-travel.js';
 import * as THREE from 'three';
 import { initInput, endFrame, pollGamepad, keys, pressed, mouse } from './input.js';
 import { buildCity, resolveCircle, pointBlocked, groundHeight, blockStart, BLOCK, HALF, N } from './city.js';
@@ -138,42 +139,16 @@ import { initArmor, updateArmor } from './armor.js';
 import { initFishing, updateFishing } from './fishing.js';
 import { initNightclub, updateNightclub } from './nightclub.js';
 import { initSkateboard, updateSkateboard } from './skateboard.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
-import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
-import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { createGraphics } from './graphics.js';
 
 // ---------- renderer / scene ----------
 
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(('ontouchstart' in window || navigator.maxTouchPoints > 0)
-  ? 1 : Math.min(window.devicePixelRatio, 2)); // phones render lighter
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-renderer.toneMapping = THREE.ACESFilmicToneMapping; // film-grade color response
-renderer.toneMappingExposure = 1.1;
-renderer.domElement.id = 'game';
-document.body.prepend(renderer.domElement);
-
+// The menu and map preparation are DOM/CPU-only. Allocate GPU resources only
+// when the player requests PLAY, keeping the menu visible until a real frame.
+let graphics = null, renderer = null, composer = null, bloom = null;
 const scene = new THREE.Scene();
 scene.fog = new THREE.Fog(0x9db8d2, 150, 520);
-
-// soft studio reflections for car paint and glass
-const pmrem = new THREE.PMREMGenerator(renderer);
-scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-
-const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1900);
-
-// post-processing: subtle bloom makes lit windows, lamps and explosions glow
-const composer = new EffectComposer(renderer);
-composer.addPass(new RenderPass(scene, camera));
-const bloom = new UnrealBloomPass(
-  new THREE.Vector2(window.innerWidth, window.innerHeight), 0.28, 0.55, 0.82
-);
-composer.addPass(bloom);
-composer.addPass(new OutputPass());
+const camera = new THREE.PerspectiveCamera(70, window.innerWidth / Math.max(1, window.innerHeight), 0.1, 1900);
 
 const hemi = new THREE.HemisphereLight(0xd5e4f2, 0x4a463c, 0.9);
 scene.add(hemi);
@@ -189,15 +164,18 @@ scene.add(sun);
 scene.add(sun.target);
 
 window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.aspect = window.innerWidth / Math.max(1, window.innerHeight);
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  composer.setSize(window.innerWidth, window.innerHeight);
+  renderer?.setSize(Math.max(1, window.innerWidth), Math.max(1, window.innerHeight));
+  composer?.setSize(Math.max(1, window.innerWidth), Math.max(1, window.innerHeight));
 });
 
 // ---------- world ----------
 
-const city = buildCity(scene);
+window.__gtcBoot?.progress('Preparando a cidade de Christchurch…');
+const city = await buildCity(scene);
+window.__gtcBoot?.progress('Inicializando personagens, veículos e missões…');
+await new Promise(resolve => setTimeout(resolve, 0));
 const sky = createSkyDome(scene);
 const weather = initWeather(scene);
 const landmarks = buildLandmarks(scene, city);
@@ -254,7 +232,7 @@ const world = {
   player,
   peds: spawnPeds(scene, city, 100),   // more life for the bigger city
   traffic: spawnTraffic(scene, city, 28),
-  parked: spawnParked(scene, 38),
+  parked: spawnParked(scene, 38, city),
   cops: [],
   helis: [],
   policeHelis: [],
@@ -504,7 +482,8 @@ function applySettings() {
   const st = world.settings;
   setMasterVolume(st.volume);
   sun.castShadow = !st.lowGfx;
-  renderer.setPixelRatio(st.lowGfx ? 1 : (isTouch ? 1 : Math.min(window.devicePixelRatio, 2)));
+  renderer?.setPixelRatio(st.lowGfx ? 1 : (isTouch ? 1 : Math.min(window.devicePixelRatio, 2)));
+  if (renderer && composer) composer.setPixelRatio(renderer.getPixelRatio());
   saveGame();
 }
 
@@ -626,6 +605,7 @@ function updatePhoto(dt) {
 function saveGame() {
   try {
     localStorage.setItem(SAVE_KEY, JSON.stringify({
+      mapVersion: city.osm ? 'christchurch-v1' : 'legacy',
       money: world.money, missions: mission.done, mg: ammo.mg, rpg: ammo.rpg,
       sg: ammo.sg, sn: ammo.sn, gren: ammo.gren,
       upg: world.upgrades, gang: { owned: gang.owned, kills: gang.kills }, radio: world.radioSt,
@@ -2480,6 +2460,7 @@ function explodeRocket(pos) {
 // ---------- death / arrest ----------
 
 let gameState = 'start'; // start | play | over
+initDistrictTravel(world, () => gameState === 'play' && !mission.active, stopSwing);
 let overTimer = 0;
 
 function triggerOver(text, color) {
@@ -2652,21 +2633,37 @@ function applySuitColors(colors) {
   set(g.rLeg.children[0], colors.pants);
 }
 
+let animationStarted = false;
 document.getElementById('playbtn').addEventListener('click', () => {
-  startEl.style.display = 'none';
-  initSound();
-  siren.start();
-  rainAmb.start();
-  cityHum.start();
-  chase.start();
-  applySettings();
-  if (gameState === 'start') gameState = 'play';
-  if (!isTouch) renderer.domElement.requestPointerLock?.();
-  else {
-    goFullscreen(); // phones: immersive landscape
-    keepAwake();    // and no screen dimming mid-chase
-  }
-  showTouchUI(true);
+  if (window.__gtcBoot?.failed) return;
+  const button = document.getElementById('playbtn');
+  button.disabled = true;
+  try {
+    if (!graphics) {
+      graphics = createGraphics(scene, camera, isTouch ? 1 : Math.min(window.devicePixelRatio, 2));
+      ({ renderer, composer, bloom } = graphics);
+    }
+    applySettings();
+    updateCamera(1);
+    graphics.render(world.settings.lowGfx);
+    graphics.verifyFirstFrame();
+    if (!renderer.domElement.isConnected) document.body.prepend(renderer.domElement);
+    initSound();
+    setMasterVolume(world.settings.volume);
+    siren.start(); rainAmb.start(); cityHum.start(); chase.start();
+    if (gameState === 'start') gameState = 'play';
+    // Hide the menu only after rendering succeeded; exceptions cannot strand
+    // the player behind an invisible menu in an embedded web preview.
+    startEl.style.display = 'none';
+    if (!isTouch) renderer.domElement.requestPointerLock?.();
+    else { goFullscreen(); keepAwake(); }
+    showTouchUI(true);
+    if (!animationStarted) { animationStarted = true; animate(); }
+  } catch (error) {
+    gameState = 'start';
+    showTouchUI(false);
+    window.__gtcBoot?.fail(error);
+  } finally { if (!window.__gtcBoot?.failed) button.disabled = false; }
 });
 document.addEventListener('pointerlockchange', () => {
   if (!document.pointerLockElement && !isTouch && gameState === 'play') pauseGame();
@@ -2739,7 +2736,7 @@ function update(dt) {
   }
 
   // bloom breathes with the night: stronger glow when the city lights are on
-  bloom.strength = world.settings.lowGfx ? 0 : 0.22 + dn.glow * 0.33;
+  if (bloom) bloom.strength = world.settings.lowGfx ? 0 : 0.22 + dn.glow * 0.33;
 
   // headlights when driving after dark
   const pcar = player.inCar;
@@ -3057,6 +3054,7 @@ const _introFrom = new THREE.Vector3(HALF * 0.55, 130, HALF * 0.55);
 const _introTo = new THREE.Vector3();
 
 function animate() {
+  if (window.__gtcBoot?.failed || !graphics) return;
   requestAnimationFrame(animate);
   pollGamepad();
   let dt = Math.min(clock.getDelta(), 0.05);
@@ -3093,7 +3091,7 @@ function animate() {
     camera.rotation.z += Math.sin(t * 0.0021) * 0.09;
     camera.rotation.x += Math.sin(t * 0.0013) * 0.04;
   }
-  composer.render();
+  graphics.render(world.settings.lowGfx);
   if (world.captureNext) {
     world.captureNext = false;
     grabCanvas(renderer.domElement).then((b) => saveOrShare(b, 'open-city-photo.png'));
@@ -3107,6 +3105,7 @@ animate();
 
 // debug handle for automated testing
 window.__debug = {
+  graphics: () => graphics?.diagnostics() || { initialized: false, frames: 0 },
   world,
   player,
   mission,

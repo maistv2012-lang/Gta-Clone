@@ -1,21 +1,30 @@
-An Autotag zone rwzafcpzc8 was created for you.
-
-Step 1: Include Adcash library
-Place the following JS script inside <head></head> of your page as high as possible.
-
-NOTE: If you already have Adcash lib included, it is unnecessary to include it again. In this case, skip step 1.
-
-<script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
-
-Step 2: Put the tag script on the page
-Copy the following JS code and paste it into the source code of your page below first library script.
-
-<script type="text/javascript">
-    aclib.runAutoTag({
-        zoneId: 'rwzafcpzc8',
-    });
-</script>
-  }
+<!doctype html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#090d13">
+<title>Grand Theft Christchurch</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #090d13; font-family: Arial, sans-serif; }
+  body > canvas { position: fixed; inset: 0; display: block; }
+  #hud { position: fixed; inset: 0; pointer-events: none; z-index: 3; color: white; }
+  #topright { position: absolute; right: 24px; top: 18px; text-align: right; text-shadow: 2px 2px #000; }
+  #money { color: #71d488; font-size: 28px; font-weight: 800; }
+  #clock { font-size: 18px; }
+  #stars { color: #626873; font-size: 26px; }
+  #stars span.lit { color: #ffd24a; }
+  #bottomleft { position: absolute; left: 20px; bottom: 20px; }
+  #minimap { display: block; border: 2px solid #8796a6; border-radius: 6px; }
+  #map-credit { position: fixed; right: 5px; bottom: 2px; z-index: 9; color: white; background: #090d13cc; font-size: 10px; padding: 3px; }
+  #playbtn:disabled { opacity: .45; cursor: wait; }
+  #loading-details { max-width: min(600px, 90vw); color: #ffb9a5; font-size: 12px; }
+  #loading-error { white-space: pre-wrap; overflow-wrap: anywhere; text-align: left; }
+  #retry-load { padding: 10px 20px; margin-bottom: 12px; cursor: pointer; }
+  #map-status { font-size: 12px; max-width: 90vw; color: #cfd8e3; }
   #healthwrap {
     width: 176px; height: 12px; margin-bottom: 8px; border: 2px solid rgba(255,255,255,.75);
     border-radius: 6px; background: rgba(0,0,0,.55); overflow: hidden;
@@ -114,7 +123,7 @@ Copy the following JS code and paste it into the source code of your page below 
   #start {
     position: fixed; inset: 0; background: radial-gradient(ellipse at 50% 30%, #1d2a3a 0%, #090d13 70%);
     display: flex; flex-direction: column; align-items: center; justify-content: safe center;
-    color: #fff; z-index: 10; text-align: center;
+    color: #fff; z-index: 100; text-align: center;
     overflow-y: auto; padding: 20px 10px; box-sizing: border-box;
   }
   /* phones: shrink the menu so PLAY always fits on screen */
@@ -124,7 +133,7 @@ Copy the following JS code and paste it into the source code of your page below 
     #playbtn { margin: 4px 0 12px; font-size: 20px; padding: 12px 44px; }
   }
   #start h1 {
-    font-size: 72px; font-weight: 900; font-style: italic; letter-spacing: 4px;
+    font-size: clamp(26px, 5vw, 64px); margin: 8px 0; max-width: 95vw; font-weight: 900; font-style: italic; letter-spacing: 4px;
     background: linear-gradient(180deg, #ffd24a, #e8732a);
     -webkit-background-clip: text; background-clip: text; color: transparent;
     text-shadow: none; filter: drop-shadow(4px 4px 0 #000);
@@ -195,8 +204,8 @@ Copy the following JS code and paste it into the source code of your page below 
 <script type="importmap">
 {
   "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    "three": "./vendor/three/three.module.js",
+    "three/addons/": "./vendor/three/addons/"
   }
 }
 </script>
@@ -236,16 +245,19 @@ Copy the following JS code and paste it into the source code of your page below 
   <div id="damage"></div>
 
   <div id="start">
-    <h1>OPEN CITY</h1>
-    <div style="font:800 12px Arial;color:#ffd24a;letter-spacing:4px;margin:-6px 0 4px">👑 FINAL EDITION</div>
-    <div class="tag">Swing · Drive · Fly — a GTA-style open world in your browser</div>
+    <h1>Grand Theft Christchurch</h1>
+    <div style="font:800 12px Arial;color:#ffd24a;letter-spacing:4px;margin:-6px 0 4px">CHRISTCHURCH · NEW ZEALAND</div>
+    <div class="tag">Swing · Drive · Fly — keep left in Aotearoa New Zealand</div>
 
+    <p id="map-status" role="status">Loading map…</p>
     <div id="charpick">
       <div class="chartitle">CHOOSE YOUR SLINGER</div>
       <div id="charrow"></div>
     </div>
 
-    <button id="playbtn">▶ PLAY</button>
+    <button id="playbtn" disabled>▶ PLAY</button>
+    <button id="retry-load" type="button" hidden onclick="location.reload()">Tentar novamente</button>
+    <details id="loading-details" hidden><summary>Detalhes do carregamento</summary><pre id="loading-error"></pre></details>
 
     <div class="tabs">
       <button class="tab active" data-p="controls">🎮 Controls</button>
@@ -299,7 +311,19 @@ Copy the following JS code and paste it into the source code of your page below 
     <a href="privacy.html" style="margin-top:14px;color:#5b6675;font-size:11px;letter-spacing:1px;pointer-events:auto;">PRIVACY POLICY</a>
   </div>
 
-  <script type="module" src="js/main.js"></script>
+  <a id="map-credit" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors · ODbL</a>
+  <script>
+    // This guard also covers a missing or stalled bootstrap script itself.
+    window.__gtcBootAssetFailure = function () {
+      if (window.__gtcBoot) return;
+      window.__gtcBootAssetFailed = true;
+      document.getElementById('map-status').textContent = 'Não foi possível carregar os arquivos do jogo. Recarregue a página e verifique a publicação.';
+      document.getElementById('map-status').setAttribute('role', 'alert');
+      document.getElementById('retry-load').hidden = false;
+    };
+    window.__gtcBootAssetTimer = setTimeout(window.__gtcBootAssetFailure, 15000);
+  </script>
+  <script src="js/boot.js" onerror="window.__gtcBootAssetFailure()"></script>
   <script>
     // start-screen tabs
     document.querySelectorAll('#start .tab').forEach((tab) => {
@@ -313,7 +337,7 @@ Copy the following JS code and paste it into the source code of your page below 
 
     // installable + offline after first visit
     if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
-      navigator.serviceWorker.register('sw.js').catch(() => {});
+      navigator.serviceWorker.register('sw.js').catch(error => console.warn('Christchurch service worker unavailable in this preview:', error.message));
     }
   </script>
 </body>

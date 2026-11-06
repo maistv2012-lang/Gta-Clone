@@ -1,0 +1,44 @@
+[
+  {
+    "path": "index.html",
+    "status": 200,
+    "bytes": 19302,
+    "sha256": "6340fa7722b2cb7dd429ace4cbcaebd8756f4ed4f592c084b7caf1ddb1cef9e2",
+    "cacheControl": "no-cache, no-store, must-revalidate"
+  },
+  {
+    "path": "js/boot.js",
+    "status": 200,
+    "bytes": 3296,
+    "sha256": "fa007dbb84427c6279023ccfcbbed64cfc418a45db55ae162a99a5f413c600bf",
+    "cacheControl": "no-cache, no-store, must-revalidate"
+  },
+  {
+    "path": "js/graphics.js",
+    "status": 200,
+    "bytes": 4126,
+    "sha256": "22e3ebd48470d6e6a643d249112bd3006685f18b74909dc5c3dd03a0e78077ef",
+    "cacheControl": "no-cache, no-store, must-revalidate"
+  },
+  {
+    "path": "js/main.js",
+    "status": 200,
+    "bytes": 117375,
+    "sha256": "69817aa10caa6e3108f21a387223b5fd72079499b1c2e562152d3d2efc134ee3",
+    "cacheControl": "no-cache, no-store, must-revalidate"
+  },
+  {
+    "path": "sw.js",
+    "status": 200,
+    "bytes": 4724,
+    "sha256": "c9027eef67b4b622d1a2850875149615ea2a5dd17cb59d5a87c67ed065ae7b84",
+    "cacheControl": "no-cache, no-store, must-revalidate"
+  },
+  {
+    "path": "data/christchurch.json",
+    "status": 200,
+    "bytes": 6529104,
+    "sha256": "8450e30bcfd21904980edd981025eb11816eed46b8acd299e1ac158694111c46",
+    "cacheControl": "no-cache, no-store, must-revalidate"
+  }
+]

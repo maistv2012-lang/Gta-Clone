@@ -1,3 +1,4 @@
+import { drawRoads } from './christchurch-city.js';
 import { CITY, HALF } from './city.js';
 
 // Pause menu (settings + stats) and the full-screen city map with waypoints.
@@ -156,10 +157,11 @@ export function drawBigMap(world) {
   g.lineWidth = 16 * sc;
   for (const rx of world.city.roadXs) {
     const [mx] = M(rx, 0);
-    g.beginPath(); g.moveTo(mx, 0); g.lineTo(mx, size); g.stroke();
+    g.beginPath(); g.moveTo(mx, M(0, world.city.legacyBounds.min)[1]); g.lineTo(mx, M(0, world.city.legacyBounds.max)[1]); g.stroke();
     const [, mz] = M(0, rx);
-    g.beginPath(); g.moveTo(0, mz); g.lineTo(size, mz); g.stroke();
+    g.beginPath(); g.moveTo(M(world.city.legacyBounds.min, 0)[0], mz); g.lineTo(M(world.city.legacyBounds.max, 0)[0], mz); g.stroke();
   }
+  drawRoads(g, world.city, M, sc);
   if (world.gang) {
     const z = world.gang.zone;
     const [x0, z0] = M(z.x0, z.z0);

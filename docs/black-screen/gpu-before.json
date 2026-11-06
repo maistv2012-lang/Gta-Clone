@@ -1,0 +1,1038 @@
+[
+  {
+    "type": "warning",
+    "text": "Service Worker registration blocked by Playwright"
+  },
+  {
+    "type": "warning",
+    "text": "THREE.WebGLRenderer: EXT_color_buffer_float extension not supported."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glClear: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawElements: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x331c00181600] GL_INVALID_FRAMEBUFFER_OPERATION: glDrawArrays: Framebuffer is incomplete: Attachment is not renderable."
+  },
+  {
+    "type": "warning",
+    "text": "WebGL: too many errors, no more errors will be reported to the console for this context."
+  }
+]

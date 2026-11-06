@@ -166,7 +166,7 @@ function rollCredits() {
   ui.style.cssText = 'position:fixed;inset:0;z-index:60;background:#05070c;color:#fff;overflow:hidden;text-align:center;';
   ui.innerHTML =
     '<div id="cr-roll" style="position:absolute;left:0;right:0;top:100%;animation:crRoll 38s linear forwards">' +
-    '<div style="font:900 italic 44px Arial;color:#ffd24a;letter-spacing:6px;margin-bottom:8px">OPEN CITY</div>' +
+    '<div style="font:900 italic 44px Arial;color:#ffd24a;letter-spacing:6px;margin-bottom:8px">CHRISTCHURCH</div>' +
     '<div style="font:700 15px Arial;color:#9fb2c8;margin-bottom:40px">the city is yours forever</div>' +
     [['CREATED BY', 'Faizan Khan'],
      ['BUILT WITH', 'Three.js · vanilla JavaScript · zero build step'],

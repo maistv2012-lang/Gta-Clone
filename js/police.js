@@ -1,3 +1,5 @@
+import { LEGACY_OFFSET, LEGACY_CITY } from './map-config.js';
+import { leftOffset } from './road-network.js';
 import * as THREE from 'three';
 import { makeVehicle, physStep, separateCars, darkenCar } from './car.js';
 import { addExplosion, addTracer, addFlash, addSparks, addSmoke } from './effects.js';
@@ -45,10 +47,13 @@ function spawnCop(world) {
   let z = 0;
   for (let tries = 0; tries < 12; tries++) {
     const road = roadCenter((Math.random() * (N + 1)) | 0);
-    const along = (Math.random() * 2 - 1) * (HALF - 14);
+    const along = LEGACY_OFFSET + (Math.random() * 2 - 1) * (LEGACY_CITY / 2 - 14);
     if (Math.random() < 0.5) { x = road; z = along; } else { x = along; z = road; }
     const d = Math.hypot(x - target.x, z - target.z);
     if (d > 55 && d < 130) break;
+  }
+  if (world.city.network && world.city.nearestRoad(target).distance < 400) {
+    const point = world.city.roadPoint(target, 55, 130); x = point.x; z = point.z;
   }
   const heading = Math.atan2(target.x - x, target.z - z);
   const cop = makeVehicle(world.scene, x, z, heading, '#f2f2f2', { police: true });
@@ -66,10 +71,13 @@ function spawnSwatVan(world) {
   let z = 0;
   for (let tries = 0; tries < 12; tries++) {
     const road = roadCenter((Math.random() * (N + 1)) | 0);
-    const along = (Math.random() * 2 - 1) * (HALF - 14);
+    const along = LEGACY_OFFSET + (Math.random() * 2 - 1) * (LEGACY_CITY / 2 - 14);
     if (Math.random() < 0.5) { x = road; z = along; } else { x = along; z = road; }
     const d = Math.hypot(x - target.x, z - target.z);
     if (d > 60 && d < 140) break;
+  }
+  if (world.city.network && world.city.nearestRoad(target).distance < 400) {
+    const point = world.city.roadPoint(target, 60, 140); x = point.x; z = point.z;
   }
   const van = makeVehicle(world.scene, x, z, Math.atan2(target.x - x, target.z - z), '#1a2438', { police: true, health: 250 });
   const top = new THREE.Mesh(
@@ -346,7 +354,17 @@ export function updatePolice(world, dt) {
     const dx = targetPos.x - cop.pos.x;
     const dz = targetPos.z - cop.pos.z;
     const dist = Math.hypot(dx, dz);
-    const err = wrapAngle(Math.atan2(dx, dz) - cop.heading);
+    let steerX = dx, steerZ = dz;
+    if (world.city.network && dist > 25 && world.city.nearestRoad(cop.pos).distance < 60) {
+      cop.routeT = (cop.routeT || 0) - dt;
+      if (cop.routeT <= 0) { cop.route = world.city.route(cop.pos, targetPos); cop.routeT = 1; }
+      const edge = cop.route?.[0];
+      if (edge) {
+        const off = leftOffset(edge.a, edge.b, Math.min(2.5, edge.width / 4));
+        steerX = edge.a[0] + off[0] - cop.pos.x; steerZ = edge.a[1] + off[1] - cop.pos.z;
+      }
+    }
+    const err = wrapAngle(Math.atan2(steerX, steerZ) - cop.heading);
 
     const ctl = {
       steer: Math.max(-1, Math.min(1, err * 2.5)),

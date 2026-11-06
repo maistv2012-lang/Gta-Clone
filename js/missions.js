@@ -1,3 +1,4 @@
+import { LEGACY_OFFSET, LEGACY_CITY } from './map-config.js';
 import * as THREE from 'three';
 import { roadCenter, N, HALF } from './city.js';
 import { showToast, showMissionMsg, showNews } from './hud.js';
@@ -61,12 +62,14 @@ function makeMarker(color, radius) {
   return group;
 }
 
+let missionCity;
 function randomRoadPoint(from, minD, maxD) {
+  if (missionCity?.network && (!from || missionCity.nearestRoad(from).distance < 400)) return missionCity.roadPoint(from, minD, maxD);
   const p = new THREE.Vector3();
   for (let i = 0; i < 60; i++) {
     const vertical = Math.random() < 0.5;
     const road = roadCenter((Math.random() * (N + 1)) | 0);
-    const along = (Math.random() * 2 - 1) * (HALF - 25);
+    const along = LEGACY_OFFSET + (Math.random() * 2 - 1) * (LEGACY_CITY / 2 - 25);
     if (vertical) p.set(road, 0, along);
     else p.set(along, 0, road);
     if (!from) return p;
@@ -80,12 +83,14 @@ function placeStartMarker(world, nearSpawn = false) {
   const p = nearSpawn
     ? world.city.spawn.clone().add(new THREE.Vector3(9, 0, 5))
     : randomRoadPoint(world.player.pos, 40, 220);
+  if (world.city.safePoint && world.city.nearestRoad(p).distance < 400) p.copy(world.city.safePoint(p));
   mission.markerPos.copy(p);
   startMarker.position.copy(p);
   startMarker.visible = true;
 }
 
 export function initMissions(scene, world, doneCount = 0) {
+  missionCity = world.city;
   mission.done = doneCount | 0;
   startMarker = makeMarker(0xffd24a, 2.4);
   scene.add(startMarker);

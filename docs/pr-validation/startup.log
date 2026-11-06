@@ -1,0 +1,16 @@
+
+> open-city@1.0.0 test:startup
+> node test/startup-browser.mjs
+
+PASS mobile boots and PLAY enters the real game with all remote hosts blocked
+PASS missing map shows HTTP 404, no fallback, and retry can enter PLAY
+PASS HTML returned as HTTP 200 at the JSON path is explained
+PASS invalid map bounds stop initialization with a clear data error
+PASS stalled map download times out instead of loading forever
+PASS missing engine module is caught before PLAY is enabled
+PASS WebGL failure is visible instead of a permanent loading label
+PASS stalled module import is bounded by the overall startup watchdog
+PASS WebGL context loss during construction stops startup with a visible error
+PASS missing bootstrap script itself gives a visible error
+PASS nested /Gta-Clone/ mobile startup and warm reload with service worker and 4x CPU slowdown
+11/11 startup scenarios passed

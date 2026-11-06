@@ -1,14 +1,17 @@
 import * as THREE from 'three';
+import { christchurch, MAP_HALF, LEGACY_CITY, LEGACY_OFFSET } from './map-config.js';
+import { addChristchurch } from './christchurch-city.js';
+import { polygonContact } from './road-network.js';
 
 // City layout: N x N blocks separated by roads, surrounded by a perimeter road.
 export const BLOCK = 60;
 export const ROAD = 16;
 export const N = 10; // 10x10 grid — a bigger metropolis (was 8x8)
-export const CITY = N * BLOCK + (N + 1) * ROAD; // 624
-export const HALF = CITY / 2;
+export const CITY = MAP_HALF * 2;
+export const HALF = MAP_HALF;
 
-export const roadCenter = (i) => -HALF + ROAD / 2 + i * (BLOCK + ROAD);
-export const blockStart = (i) => -HALF + ROAD + i * (BLOCK + ROAD);
+export const roadCenter = (i) => LEGACY_OFFSET - LEGACY_CITY / 2 + ROAD / 2 + i * (BLOCK + ROAD);
+export const blockStart = (i) => LEGACY_OFFSET - LEGACY_CITY / 2 + ROAD + i * (BLOCK + ROAD);
 
 // Building facades: a wall map + an emissive map (lit windows only, used at night).
 function windowTextures(base) {
@@ -151,7 +154,7 @@ function helipadTexture() {
   return t;
 }
 
-export function buildCity(scene) {
+export async function buildCity(scene) {
   const colliders = [];   // {x0,z0,x1,z1,h}
   const pedRects = [];
   const roadXs = [];
@@ -171,16 +174,17 @@ export function buildCity(scene) {
 
   // asphalt base slab
   const slab = new THREE.Mesh(
-    new THREE.PlaneGeometry(CITY, CITY),
+    new THREE.PlaneGeometry(LEGACY_CITY, LEGACY_CITY),
     new THREE.MeshLambertMaterial({ color: 0x303035 })
   );
   slab.rotation.x = -Math.PI / 2;
+  slab.position.set(LEGACY_OFFSET, 0, LEGACY_OFFSET);
   slab.receiveShadow = true;
   scene.add(slab);
 
   // roads
   const roadTex = roadTexture();
-  const roadGeo = new THREE.PlaneGeometry(ROAD, CITY);
+  const roadGeo = new THREE.PlaneGeometry(ROAD, LEGACY_CITY);
   roadGeo.rotateX(-Math.PI / 2);
   for (let i = 0; i <= N; i++) {
     const cx = roadCenter(i);
@@ -190,18 +194,18 @@ export function buildCity(scene) {
     const tv = roadTex.clone();
     tv.needsUpdate = true;
     tv.wrapT = THREE.RepeatWrapping;
-    tv.repeat.set(1, CITY / ROAD);
+    tv.repeat.set(1, LEGACY_CITY / ROAD);
     const v = new THREE.Mesh(roadGeo, new THREE.MeshLambertMaterial({ map: tv }));
-    v.position.set(cx, 0.04, 0);
+    v.position.set(cx, 0.04, LEGACY_OFFSET);
     v.receiveShadow = true;
     scene.add(v);
 
     const th = roadTex.clone();
     th.needsUpdate = true;
     th.wrapT = THREE.RepeatWrapping;
-    th.repeat.set(1, CITY / ROAD);
+    th.repeat.set(1, LEGACY_CITY / ROAD);
     const h = new THREE.Mesh(roadGeo, new THREE.MeshLambertMaterial({ map: th }));
-    h.position.set(0, 0.08, cx);
+    h.position.set(LEGACY_OFFSET, 0.08, cx);
     h.rotation.y = Math.PI / 2;
     h.receiveShadow = true;
     scene.add(h);
@@ -362,7 +366,9 @@ export function buildCity(scene) {
   const mid = Math.floor(N / 2);
   const spawn = new THREE.Vector3(roadCenter(mid), 0, roadCenter(mid));
 
-  return { colliders, pedRects, roadXs, roadZs, spawn, helipads, windowMats, lampGlowMat: glowMat, bulbMat };
+  const city = { legacyBounds: { min: LEGACY_OFFSET - LEGACY_CITY / 2, max: LEGACY_OFFSET + LEGACY_CITY / 2 }, colliders, pedRects, roadXs, roadZs, spawn, helipads, windowMats, lampGlowMat: glowMat, bulbMat };
+  if (christchurch) await addChristchurch(scene, city, christchurch);
+  return city;
 }
 
 // Push a circle (pos, r) out of every AABB collider it overlaps.
@@ -371,6 +377,15 @@ export function resolveCircle(pos, r, colliders, maxY = -Infinity) {
   let hit = null;
   for (const c of colliders) {
     if (maxY > (c.h ?? Infinity)) continue;
+    if (c.polygon) {
+      if (pos.x < c.x0 - r || pos.x > c.x1 + r || pos.z < c.z0 - r || pos.z > c.z1 + r) continue;
+      const contact = polygonContact(pos.x, pos.z, c.polygon, r);
+      if (contact) {
+        pos.x += contact.nx * contact.depth; pos.z += contact.nz * contact.depth;
+        hit = { nx: contact.nx, nz: contact.nz };
+      }
+      continue;
+    }
     const cx = Math.max(c.x0, Math.min(pos.x, c.x1));
     const cz = Math.max(c.z0, Math.min(pos.z, c.z1));
     let dx = pos.x - cx;
@@ -409,6 +424,7 @@ export function groundHeight(pos, colliders, pad = 0.1, probeY = pos.y) {
   let g = 0;
   for (const c of colliders) {
     if (pos.x < c.x0 - pad || pos.x > c.x1 + pad || pos.z < c.z0 - pad || pos.z > c.z1 + pad) continue;
+    if (c.polygon && !polygonContact(pos.x, pos.z, c.polygon, pad)) continue;
     const top = (c.h ?? 0) - 0.3; // collider tops sit 0.3 above the visible roof
     if (top > g && probeY >= top - 0.5) g = top;
   }
@@ -419,6 +435,10 @@ export function groundHeight(pos, colliders, pad = 0.1, probeY = pos.y) {
 export function pointBlocked(pos, colliders, pad = 0.3) {
   for (const c of colliders) {
     if (pos.y > (c.h ?? Infinity)) continue;
+    if (c.polygon) {
+      if (pos.x >= c.x0 - pad && pos.x <= c.x1 + pad && pos.z >= c.z0 - pad && pos.z <= c.z1 + pad && polygonContact(pos.x, pos.z, c.polygon, pad)) return true;
+      continue;
+    }
     if (pos.x > c.x0 - pad && pos.x < c.x1 + pad && pos.z > c.z0 - pad && pos.z < c.z1 + pad) return true;
   }
   return false;
