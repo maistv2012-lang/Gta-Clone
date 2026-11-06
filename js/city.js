@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { nearbyColliders } from './collider-query.js';
 import { christchurch, MAP_HALF, LEGACY_CITY, LEGACY_OFFSET } from './map-config.js';
 import { addChristchurch } from './christchurch-city.js';
 import { polygonContact } from './road-network.js';
@@ -375,7 +376,7 @@ export async function buildCity(scene) {
 // Pass maxY to ignore colliders shorter than the entity's altitude (helicopters).
 export function resolveCircle(pos, r, colliders, maxY = -Infinity) {
   let hit = null;
-  for (const c of colliders) {
+  for (const c of nearbyColliders(colliders, pos, r)) {
     if (maxY > (c.h ?? Infinity)) continue;
     if (c.polygon) {
       if (pos.x < c.x0 - r || pos.x > c.x1 + r || pos.z < c.z0 - r || pos.z > c.z1 + r) continue;
@@ -422,7 +423,7 @@ export function resolveCircle(pos, r, colliders, maxY = -Infinity) {
 // drop can never skip straight through a roof — buildings are solid brick.
 export function groundHeight(pos, colliders, pad = 0.1, probeY = pos.y) {
   let g = 0;
-  for (const c of colliders) {
+  for (const c of nearbyColliders(colliders, pos, pad)) {
     if (pos.x < c.x0 - pad || pos.x > c.x1 + pad || pos.z < c.z0 - pad || pos.z > c.z1 + pad) continue;
     if (c.polygon && !polygonContact(pos.x, pos.z, c.polygon, pad)) continue;
     const top = (c.h ?? 0) - 0.3; // collider tops sit 0.3 above the visible roof
@@ -433,7 +434,7 @@ export function groundHeight(pos, colliders, pad = 0.1, probeY = pos.y) {
 
 // True if a point is inside any collider that reaches above the point's height.
 export function pointBlocked(pos, colliders, pad = 0.3) {
-  for (const c of colliders) {
+  for (const c of nearbyColliders(colliders, pos, pad)) {
     if (pos.y > (c.h ?? Infinity)) continue;
     if (c.polygon) {
       if (pos.x >= c.x0 - pad && pos.x <= c.x1 + pad && pos.z >= c.z0 - pad && pos.z <= c.z1 + pad && polygonContact(pos.x, pos.z, c.polygon, pad)) return true;

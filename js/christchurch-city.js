@@ -5,6 +5,11 @@ import { worldUV } from './city-materials.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { buildNetwork, nearestEdge, leftOffset, findRoute, polygonContact } from './road-network.js';
 
+const surfaceMaterials = new Map();
+function surfaceMaterial(color) {
+  if (!surfaceMaterials.has(color)) surfaceMaterials.set(color, new THREE.MeshLambertMaterial({ color, side: THREE.DoubleSide }));
+  return surfaceMaterials.get(color);
+}
 function surface(scene, points, color, y, holes = [], material = null) {
   if (points.length < 3) return;
   const shape = new THREE.Shape(points.map(([x, z]) => new THREE.Vector2(x, -z)));
@@ -12,7 +17,7 @@ function surface(scene, points, color, y, holes = [], material = null) {
   const geometry = new THREE.ShapeGeometry(shape);
   geometry.rotateX(-Math.PI / 2);
   if (material) worldUV(geometry, material.userData.surfaceScale || 3);
-  const mesh = new THREE.Mesh(geometry, material || new THREE.MeshLambertMaterial({ color, side: THREE.DoubleSide }));
+  const mesh = new THREE.Mesh(geometry, material || surfaceMaterial(color));
   mesh.position.y = y; mesh.receiveShadow = true; scene.add(mesh);
 }
 
@@ -53,6 +58,7 @@ export async function addChristchurch(targetScene, city, data) {
   city.walkNetwork = buildNetwork(data.roads, { walking: true });
   city.realColliders = [];
   city.detailing = await createCityDetailing(targetScene, city, data);
+  const buildingMaterial = new THREE.MeshStandardMaterial({ color: 0x969384, roughness: 0.9 });
   for (const [index, area] of data.areas.entries()) {
     if (index % 128 === 0) await checkpoint(`Preparando edifícios e áreas: ${index}/${data.areas.length}…`);
     if (!area.tags.building) {
@@ -64,14 +70,14 @@ export async function addChristchurch(targetScene, city, data) {
     const height = Math.max(2, Math.min(180, area.height));
     const geometry = new THREE.ExtrudeGeometry(shape, { depth: height, bevelEnabled: false });
     geometry.rotateX(-Math.PI / 2);
-    const mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: 0x969384, roughness: 0.9 }));
+    const mesh = new THREE.Mesh(geometry, buildingMaterial);
     mesh.castShadow = true; mesh.receiveShadow = true;
     if (city.detailing.selected.has(area.id)) {
-      mesh.geometry.dispose(); mesh.material.dispose(); city.detailing.addBuilding(area);
+      mesh.geometry.dispose(); city.detailing.addBuilding(area);
     } else scene.add(mesh);
     const xs = area.points.map(p => p[0]), zs = area.points.map(p => p[1]);
     const collider = { x0: Math.min(...xs), x1: Math.max(...xs), z0: Math.min(...zs), z1: Math.max(...zs), h: height + 0.3,
-      polygon: area.points };
+      polygon: area.points, spatialStatic: true };
     city.colliders.push(collider); city.realColliders.push(collider);
   }
   for (const [index, road] of data.roads.entries()) {

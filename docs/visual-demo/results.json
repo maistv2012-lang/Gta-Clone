@@ -7,7 +7,9 @@
       "buildings": 24,
       "source": "OSM footprints + original procedural geometry",
       "props": 31,
-      "trees": 171
+      "trees": 171,
+      "visibleTrunks": 171,
+      "leafCardsPerTree": 9
     },
     "quality": "high",
     "rig": true,
@@ -17,46 +19,70 @@
         "quality": "low",
         "graphics": {
           "initialized": true,
-          "frames": 91,
+          "frames": 97,
           "hdr": true,
           "contextLost": false,
           "width": 880,
           "height": 560,
-          "calls": 691,
-          "triangles": 269514,
-          "textures": 65
+          "calls": 575,
+          "triangles": 264406,
+          "textures": 66,
+          "geometries": 448,
+          "pixelRatio": 0.8,
+          "adaptiveResolution": false,
+          "frameTimeEma": 1019.8796171128872,
+          "batches": {
+            "instances": 363,
+            "batches": 83
+          }
         }
       },
       {
         "quality": "medium",
         "graphics": {
           "initialized": true,
-          "frames": 116,
+          "frames": 122,
           "hdr": true,
           "contextLost": false,
           "width": 1100,
           "height": 700,
-          "calls": 833,
-          "triangles": 435635,
-          "textures": 65
+          "calls": 670,
+          "triangles": 410819,
+          "textures": 66,
+          "geometries": 470,
+          "pixelRatio": 1,
+          "adaptiveResolution": false,
+          "frameTimeEma": 1634.8613428673748,
+          "batches": {
+            "instances": 363,
+            "batches": 83
+          }
         }
       },
       {
         "quality": "high",
         "graphics": {
           "initialized": true,
-          "frames": 141,
+          "frames": 147,
           "hdr": true,
           "contextLost": false,
           "width": 1100,
           "height": 700,
-          "calls": 856,
-          "triangles": 498977,
-          "textures": 78
+          "calls": 703,
+          "triangles": 494377,
+          "textures": 79,
+          "geometries": 470,
+          "pixelRatio": 1,
+          "adaptiveResolution": false,
+          "frameTimeEma": 1323.2722499620884,
+          "batches": {
+            "instances": 363,
+            "batches": 83
+          }
         }
       }
     ],
-    "observedSoftwareFps": 0.6097096257907172,
+    "observedSoftwareFps": 0.600321171826919,
     "physicalS24Verified": false
   },
   {
@@ -67,7 +93,9 @@
       "buildings": 24,
       "source": "OSM footprints + original procedural geometry",
       "props": 31,
-      "trees": 171
+      "trees": 171,
+      "visibleTrunks": 171,
+      "leafCardsPerTree": 6
     },
     "quality": "medium",
     "rig": true,
@@ -77,46 +105,70 @@
         "quality": "low",
         "graphics": {
           "initialized": true,
-          "frames": 92,
+          "frames": 96,
           "hdr": true,
           "contextLost": false,
-          "width": 307,
-          "height": 665,
-          "calls": 329,
-          "triangles": 147583,
-          "textures": 46
+          "width": 268,
+          "height": 582,
+          "calls": 221,
+          "triangles": 124405,
+          "textures": 40,
+          "geometries": 237,
+          "pixelRatio": 0.7000000000000001,
+          "adaptiveResolution": true,
+          "frameTimeEma": 395.2777837334963,
+          "batches": {
+            "instances": 385,
+            "batches": 91
+          }
         }
       },
       {
         "quality": "medium",
         "graphics": {
           "initialized": true,
-          "frames": 117,
+          "frames": 121,
           "hdr": true,
           "contextLost": false,
-          "width": 384,
-          "height": 832,
-          "calls": 471,
-          "triangles": 329354,
-          "textures": 46
+          "width": 345,
+          "height": 748,
+          "calls": 301,
+          "triangles": 266246,
+          "textures": 40,
+          "geometries": 237,
+          "pixelRatio": 0.9,
+          "adaptiveResolution": true,
+          "frameTimeEma": 673.4515149133995,
+          "batches": {
+            "instances": 385,
+            "batches": 91
+          }
         }
       },
       {
         "quality": "high",
         "graphics": {
           "initialized": true,
-          "frames": 142,
+          "frames": 146,
           "hdr": true,
           "contextLost": false,
-          "width": 384,
-          "height": 832,
-          "calls": 491,
-          "triangles": 385926,
-          "textures": 59
+          "width": 345,
+          "height": 748,
+          "calls": 332,
+          "triangles": 339872,
+          "textures": 53,
+          "geometries": 272,
+          "pixelRatio": 0.9,
+          "adaptiveResolution": true,
+          "frameTimeEma": 600.1817934875942,
+          "batches": {
+            "instances": 385,
+            "batches": 91
+          }
         }
       }
     ],
-    "observedSoftwareFps": 1.0717457206723828,
+    "observedSoftwareFps": 1.3457340231466626,
     "physicalS24Verified": false
   }
 ]

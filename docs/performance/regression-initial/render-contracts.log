@@ -1,0 +1,7 @@
+PASS optional pointer capture reject does not interrupt rendered play
+PASS adaptive resolution UI resizes actual render buffers while play remains active
+PASS single-draw shared rig retains independent wardrobe, skeleton and Brick proportions
+PASS shared vehicle geometry retains independent respray and damage materials
+PASS optional pointer capture throw does not interrupt rendered play
+PASS single-draw shared rig retains independent wardrobe, skeleton and Brick proportions
+PASS shared vehicle geometry retains independent respray and damage materials

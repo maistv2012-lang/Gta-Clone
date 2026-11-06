@@ -1,3 +1,4 @@
+import { waitForGame } from './game-time.mjs';
 // Season 10 audit: THE WHOLE CITY — 34 features. Wingsuit, web-pull,
 // train hijack, jet ski circuit, trick park, elevators, pizza, repo,
 // Mr. Frosty, news stringer, cop career, store robberies, jewelry,
@@ -187,7 +188,7 @@ async function goTo(src, dx = 1.5, dz = 0) {
   await goTo('d.world.storerob.stores[0].pos');
   const before = await ev(() => window.__debug.world.money);
   await page.keyboard.down('KeyE');
-  await page.waitForFunction(() => window.__debug.world.storerob.stores[0].doneDay === window.__debug.world.dailyDay, null, { timeout: 30000 }).catch(() => {});
+  await waitForGame(page, 8500); // register requires eight simulation seconds, even under software WebGL
   await page.keyboard.up('KeyE');
   const r = await ev(() => ({
     done: window.__debug.world.storerob.stores[0].doneDay === window.__debug.world.dailyDay,

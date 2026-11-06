@@ -1,0 +1,21 @@
+✔ adaptive resolution is bounded, gradual, and opt-out (1.467055ms)
+✔ collision grid retains live moving bounds and original ordering (1.119528ms)
+✔ collision grid re-queries after pushes without revisiting earlier bounds (0.149369ms)
+✔ render proxies preserve source transforms, colours, visibility, and live changes (4.638909ms)
+✔ sloped cabin geometry and custom materials retain their original draw path (0.737185ms)
+✔ instancing grows without losing sources and retires unused cells (2.405537ms)
+✔ facades vary deterministically while honouring source glass and brick (1.085897ms)
+✔ indexed collision resolution exactly matches exhaustive narrow phase (64.307485ms)
+✔ detached vehicle groups leave no proxy ghosts and can be reattached (0.787282ms)
+✔ custom UVs and mirrored meshes stay on the source rendering path (0.523423ms)
+✔ sparse cells use original meshes instead of allocating proxy resources (0.520755ms)
+✔ custom shader and deformed-normal boxes are not normalised into proxies (0.695152ms)
+✔ stable frames reuse material signatures and live material edits invalidate them (1.983932ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 85.4832

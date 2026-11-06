@@ -2,8 +2,8 @@
   {
     "name": "s24-preview",
     "pixels": {
-      "luminanceStd": 50.01048893667824,
-      "colors": 81
+      "luminanceStd": 63.1851760309896,
+      "colors": 405
     },
     "graphics": {
       "initialized": true,
@@ -11,14 +11,77 @@
       "hdr": true,
       "contextLost": false,
       "width": 384,
-      "height": 832
+      "height": 832,
+      "calls": 302,
+      "triangles": 186940,
+      "textures": 44,
+      "geometries": 211,
+      "pixelRatio": 1,
+      "adaptiveResolution": true,
+      "frameTimeEma": 537.8153760300148,
+      "batches": {
+        "instances": 379,
+        "batches": 90
+      }
+    }
+  },
+  {
+    "name": "s24-worker-blocked",
+    "pixels": {
+      "luminanceStd": 63.22752226366012,
+      "colors": 419
+    },
+    "graphics": {
+      "initialized": true,
+      "frames": 9,
+      "hdr": true,
+      "contextLost": false,
+      "width": 384,
+      "height": 832,
+      "calls": 314,
+      "triangles": 196468,
+      "textures": 47,
+      "geometries": 218,
+      "pixelRatio": 1,
+      "adaptiveResolution": true,
+      "frameTimeEma": 473.45245530001205,
+      "batches": {
+        "instances": 372,
+        "batches": 87
+      }
+    }
+  },
+  {
+    "name": "s24-warm-reload",
+    "pixels": {
+      "luminanceStd": 63.14934185274655,
+      "colors": 402
+    },
+    "graphics": {
+      "initialized": true,
+      "frames": 15,
+      "hdr": true,
+      "contextLost": false,
+      "width": 345,
+      "height": 748,
+      "calls": 314,
+      "triangles": 203630,
+      "textures": 42,
+      "geometries": 216,
+      "pixelRatio": 0.9,
+      "adaptiveResolution": true,
+      "frameTimeEma": 688.5098539881708,
+      "batches": {
+        "instances": 376,
+        "batches": 87
+      }
     }
   },
   {
     "name": "s24-no-float",
     "pixels": {
-      "luminanceStd": 21.819682458157978,
-      "colors": 159
+      "luminanceStd": 19.48826824101508,
+      "colors": 264
     },
     "graphics": {
       "initialized": true,
@@ -26,7 +89,18 @@
       "hdr": false,
       "contextLost": false,
       "width": 384,
-      "height": 832
+      "height": 832,
+      "calls": 289,
+      "triangles": 180184,
+      "textures": 41,
+      "geometries": 211,
+      "pixelRatio": 1,
+      "adaptiveResolution": true,
+      "frameTimeEma": 474.9727647839818,
+      "batches": {
+        "instances": 380,
+        "batches": 89
+      }
     },
     "oldBlackFrame": {
       "luminanceStd": 5.566650263929276,
@@ -36,16 +110,27 @@
   {
     "name": "s24-cache-recovery",
     "pixels": {
-      "luminanceStd": 52.43404314183849,
-      "colors": 102
+      "luminanceStd": 63.21783527353344,
+      "colors": 399
     },
     "graphics": {
       "initialized": true,
       "frames": 15,
       "hdr": true,
       "contextLost": false,
-      "width": 384,
-      "height": 832
+      "width": 345,
+      "height": 748,
+      "calls": 316,
+      "triangles": 205356,
+      "textures": 42,
+      "geometries": 218,
+      "pixelRatio": 0.9,
+      "adaptiveResolution": true,
+      "frameTimeEma": 700.5984237579264,
+      "batches": {
+        "instances": 365,
+        "batches": 85
+      }
     }
   },
   {

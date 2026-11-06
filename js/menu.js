@@ -86,6 +86,8 @@ export function initMenu(h) {
   fps.value=String(s.fps || 30);fps.onchange=()=>{s.fps=Number(fps.value);hooks.onSettings();};
   qual.onchange = () => { s.lowGfx = qual.checked;if(!qual.checked&&s.quality==='low')s.quality='medium';quality.value=qual.checked?'low':s.quality||'medium';hooks.onSettings(); };
 
+  const adaptive = document.createElement('input');adaptive.type='checkbox';adaptive.id='adaptive-resolution';adaptive.checked=!!s.adaptiveResolution;
+  adaptive.onchange=()=>{s.adaptiveResolution=adaptive.checked;hooks.onSettings();};
   const box = document.createElement('div');
   box.style.cssText = 'margin-top:16px;padding:12px 20px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.15);border-radius:10px;';
   box.append(
@@ -93,6 +95,7 @@ export function initMenu(h) {
     row('SENSITIVITY', sens),
     row('INVERT Y', inv),
     row('QUALITY', quality),
+    row('ADAPTIVE RESOLUTION', adaptive),
     row('FRAME RATE', fps),
     row('LOW GRAPHICS', qual),
   );

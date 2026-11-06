@@ -62,6 +62,8 @@ export const CHARACTERS = [
 let cloth;
 let policePatch;
 let characterQuality = 'medium';
+const rigGeometry = new Map();
+let sharedPbr, sharedLow;
 export function setCharacterQuality(name, scene) {
   characterQuality = name;
   scene.traverse((object) => {
@@ -99,15 +101,12 @@ export function createCharacter({
   const group = new THREE.Group(),
     bones = [],
     joints = [];
-  const fabric = (c) =>
-    new THREE.MeshStandardMaterial({ color: c, map: clothTexture(), roughness: 0.94 });
-  const materials = {
-    shirt: fabric(shirt),
-    pants: fabric(pants),
-    skin: new THREE.MeshStandardMaterial({ color: skin, roughness: 0.67 }),
-    hair: new THREE.MeshStandardMaterial({ color: hair, roughness: 0.95 }),
-    dark: new THREE.MeshStandardMaterial({ color: 0x20252b, roughness: 0.85 }),
-  };
+  if (!sharedPbr) {
+    sharedPbr = new THREE.MeshStandardMaterial({ map: clothTexture(), vertexColors: true, roughness: .85 });
+    sharedLow = new THREE.MeshLambertMaterial({ map: clothTexture(), vertexColors: true });
+  }
+  const materials = Object.fromEntries(Object.entries({shirt,pants,skin,hair,dark:0x20252b}).map(([key,color])=>[key,{color:new THREE.Color(color)}]));
+  const prototype = rigGeometry.get(police ? 'police' : 'civilian');
   const palette = Object.values(materials),
     buckets = palette.map(() => []);
   function bone(x, y, z, parent) {
@@ -120,6 +119,7 @@ export function createCharacter({
   const root = bone(0, 0, 0),
     headBone = bone(0, 1.72, 0.015, root);
   function part(geometry, material, joint, x = 0, y = 0, z = 0, sx = 1, sy = 1, sz = 1) {
+    if (prototype) { geometry.dispose(); return; }
     geometry.scale(sx, sy, sz);
     geometry.translate(x, y, z);
     const count = geometry.attributes.position.count,
@@ -134,6 +134,7 @@ export function createCharacter({
     geometry.setAttribute('skinWeight', new THREE.Float32BufferAttribute(weights, 4));
     buckets[palette.indexOf(material)].push(geometry);
   }
+  if (!prototype) {
   const torso = new THREE.LatheGeometry(
     [
       [0.16, 0.84],
@@ -169,12 +170,14 @@ export function createCharacter({
     1
   );
   part(new THREE.CylinderGeometry(0.075, 0.085, 0.18, 8), materials.skin, root, 0, 1.53, 0);
+  }
   function limb(x, y, arm) {
     const upper = bone(x, y, 0, root),
       length = arm ? 0.31 : 0.38,
       r = arm ? 0.078 : 0.105;
     const lower = bone(0, -length, 0, upper),
       material = arm ? materials.skin : materials.pants;
+    if (!prototype) {
     part(new THREE.CapsuleGeometry(r, length - r * 2, 3, 8), material, upper, x, y - length / 2, 0);
     part(
       new THREE.CapsuleGeometry(r * 0.87, length - r * 1.74, 3, 8),
@@ -207,6 +210,7 @@ export function createCharacter({
         0.2
       );
     }
+    }
     joints.push({ lower, arm, side: x < 0 ? 1 : -1 });
     return upper;
   }
@@ -214,6 +218,7 @@ export function createCharacter({
     rArm = limb(0.31, 1.48, true),
     lLeg = limb(-0.14, 0.82, false),
     rLeg = limb(0.14, 0.82, false);
+  if (!prototype) {
   part(new THREE.SphereGeometry(0.04, 6, 4), materials.skin, headBone, 0, 1.7, 0.175, 0.65, 1, 1.1);
   for (const x of [-0.06, 0.06]) {
     part(new THREE.SphereGeometry(0.012, 6, 4), materials.dark, headBone, x, 1.75, 0.175);
@@ -246,25 +251,30 @@ export function createCharacter({
     );
     part(new THREE.BoxGeometry(0.26, 0.025, 0.16), materials.dark, headBone, 0, 1.84, 0.18);
   }
-  const combined = buckets.map((list) => {
-    const geometry = mergeGeometries(list, false);
-    list.forEach((g) => g.dispose());
-    return geometry;
-  });
-  const geometry = mergeGeometries(combined, true);
-  combined.forEach((g) => g.dispose());
-  const mesh = new THREE.SkinnedMesh(geometry, palette);
-  mesh.add(root);
-  group.add(mesh);
-  mesh.bind(new THREE.Skeleton(bones));
-  mesh.castShadow = true;
-  mesh.userData.pbrPalette = palette;
-  mesh.userData.lowPalette = palette.map((material) => {
-    const low = new THREE.MeshLambertMaterial({ map: material.map });
-    low.color = material.color;
-    return low;
-  });
-  if (characterQuality === 'low') mesh.material = mesh.userData.lowPalette;
+  }
+  let template = prototype;
+  if (!template) {
+    const combined = buckets.map(list=>{const g=mergeGeometries(list,false);list.forEach(p=>p.dispose());return g;});
+    template=mergeGeometries(combined,true);combined.forEach(g=>g.dispose());
+    rigGeometry.set(police ? 'police' : 'civilian',template);
+  }
+  // Share immutable vertex/index buffers; each actor owns only its palette colours.
+  const geometry=new THREE.BufferGeometry();
+  for(const [name,attribute] of Object.entries(template.attributes)) geometry.setAttribute(name,attribute);
+  geometry.setIndex(template.index);
+  const colors=new THREE.Float32BufferAttribute(new Float32Array(template.attributes.position.count*3),3);
+  geometry.setAttribute('color',colors);
+  const refreshColors=()=>{
+    for(let material=0;material<template.groups.length;material++){
+      const range=template.groups[material],color=palette[material].color;
+      for(let i=range.start;i<range.start+range.count;i++){const vertex=template.index.getX(i);colors.setXYZ(vertex,color.r,color.g,color.b);}
+    }
+    colors.needsUpdate=true;
+  };refreshColors();
+  geometry.addGroup(0,template.index.count,0);
+  const mesh=new THREE.SkinnedMesh(geometry,[characterQuality==='low'?sharedLow:sharedPbr]);
+  mesh.add(root);group.add(mesh);mesh.bind(new THREE.Skeleton(bones));mesh.castShadow=true;
+  mesh.userData.pbrPalette=[sharedPbr];mesh.userData.lowPalette=[sharedLow];
   mesh.boundingSphere = new THREE.Sphere(new THREE.Vector3(0, 1, 0), 2.5);
   if (police) {
     if (!policePatch) {
@@ -290,13 +300,14 @@ export function createCharacter({
     group.scale.x = value === 'heavy' ? 1.13 : 1;
   };
   setBuild(build);
-  return { group, lArm, rArm, lLeg, rLeg, joints, materials, setBuild, skin: mesh };
+  return { group, lArm, rArm, lLeg, rLeg, joints, materials, setBuild, refreshColors, skin: mesh };
 }
 
 // Wardrobe/barber and character selection retain their palette/stat interfaces.
 export function applySuit(ch, { shirt, pants, skin, hair, build }) {
   for (const [key, color] of Object.entries({ shirt, pants, skin, hair }))
     if (color) ch.materials[key].color.set(color);
+  ch.refreshColors();
   if (build) ch.setBuild(build);
 }
 

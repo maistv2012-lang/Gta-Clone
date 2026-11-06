@@ -1,0 +1,29 @@
+{
+  "kind": "CPU-only static OSM collision-query microbenchmark",
+  "colliders": 10304,
+  "queriesPerBatch": 2000,
+  "repetitions": 7,
+  "initialIndexedQueryMs": 3.3857299999999952,
+  "exhaustiveBatchMs": [
+    161.35443299999997,
+    125.12245699999994,
+    127.47273499999994,
+    127.61697599999991,
+    145.9464129999999,
+    178.0318060000002,
+    135.53233
+  ],
+  "indexedBatchMs": [
+    3.0843199999999342,
+    4.43109800000002,
+    1.6963819999999714,
+    1.5659959999999273,
+    2.8243760000000293,
+    1.6079259999999067,
+    1.678666000000021
+  ],
+  "medianExhaustiveMs": 135.53233,
+  "medianIndexedMs": 1.6963819999999714,
+  "speedup": 79.89493522095984,
+  "exactParity": true
+}

@@ -1,0 +1,21 @@
+PASS  All 8 new systems initialized — {"nemesis":true,"zombies":true,"train":true,"disasters":true,"prison":true,"myths":true,"stranger":true,"garage":true}
+PASS  Prison intake (fine + island cell) — money $500, x=570
+PASS  Jailbreak (escape raises heat) — wanted 2
+PASS  Outbreak starts, zombie bounty pays — horde 7, +$50
+PASS  Outbreak ends at dawn with payout — +$2025
+PASS  Nemesis ambush spawns (boss + crew) — crew 1, boss hp 230
+PASS  Nemesis defeated, comes back meaner — beaten 1, next level 2, +$800
+PASS  Train surfing (carried along the roof) — moved 10.5m, y=10.5
+PASS  Train heist starts with roof guards — guards 4
+PASS  Cargo cracked on the moving train — +$2500
+PASS  Earthquake fires and clears — during: quake, after: null
+PASS  Four graffiti tags found — tags 4/4
+PASS  Bunker myth (buried heart) — +$5000
+PASS  Sea monster witnessed — graffiti,bunker,seamonster
+PASS  Numbers station myth — 4/5 myths total
+PASS  Stranger gives his first task
+PASS  Stranger task completed (+$777) — stage 1, +$777
+PASS  Garage ram spikes + neon fit
+PASS  New progress persists in the save — {"nem":true,"myths":true,"stranger":true}
+
+19/19 passed, 0 page errors

@@ -1,0 +1,15 @@
+PASS  Arms dealer + drug lab initialized — {"dealer":true,"lab":true,"crates":true,"labIdle":true}
+PASS  Dealer hint shows near the van — Press <b>E</b> to talk to the ARMS DEALER — no questions, just cash
+PASS  E opens the dealer menu
+PASS  MG DRUM: +40 ammo for $900 — mg 60->100, $100000->$99100
+PASS  RPG locked at 0 rep
+PASS  RPG unlocks at 1500+ rep (+3 rounds) — rpg 3->6
+PASS  E closes the dealer menu
+PASS  Raid triggers on approach (3 cookers + blip) — {"active":true,"foes":3,"blip":true}
+PASS  Cookers down, crate phase hinted — Shoot the CRATES — 3 left
+PASS  Lab shut down: payout lands, done for the day — $96500->$98700, doneDay 0/0
+PASS  druglabDay persists in the save — saved 0
+PASS  Second raid: 3 fresh cookers + 3 restored crates — {"active":true,"foes":3,"crates":3}
+PASS  No page errors during the run — 0 errors
+
+13/13 checks passed

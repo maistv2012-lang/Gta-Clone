@@ -8,6 +8,10 @@ metadata and the connected landmark routes are recorded in `data/`.
 Para executar fora da Prévia do ChatGPT no Windows, consulte o roteiro completo
 em [docs/WINDOWS.md](docs/WINDOWS.md), incluindo dados OSM, PowerShell e diagnóstico.
 
+Current visual/performance changes, measured results and the complete file inventory are in
+[the upgrade report](docs/PERFORMANCE-UPGRADE.md). For an external browser test, follow
+[the GitHub Pages instructions](docs/GITHUB-PAGES.md). `npm test` runs the complete validation runner.
+
 ## Prepare and play Christchurch
 
 Requires Node.js 18+ (validated with Node 24), npm, and HTTPS access to

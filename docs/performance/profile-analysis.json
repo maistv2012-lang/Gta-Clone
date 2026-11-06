@@ -1,0 +1,266 @@
+{
+  "before/desktop-high": {
+    "sampledSeconds": 32.642905,
+    "nativeProgramPercent": 96.42333303362554,
+    "topSelfMs": [
+      {
+        "function": "(program)",
+        "file": "",
+        "ms": 31475.377
+      },
+      {
+        "function": "resolveCircle",
+        "file": "city.js",
+        "ms": 539.03
+      },
+      {
+        "function": "updateMatrixWorld",
+        "file": "three.module.js",
+        "ms": 78.74
+      },
+      {
+        "function": "projectObject",
+        "file": "three.module.js",
+        "ms": 41.99
+      },
+      {
+        "function": "update",
+        "file": "three.module.js",
+        "ms": 37.35
+      },
+      {
+        "function": "renderObject",
+        "file": "three.module.js",
+        "ms": 36.365
+      },
+      {
+        "function": "multiplyMatrices",
+        "file": "three.module.js",
+        "ms": 34.8
+      },
+      {
+        "function": "WebGLRenderer.renderBufferDirect",
+        "file": "three.module.js",
+        "ms": 26.909
+      },
+      {
+        "function": "setProgram",
+        "file": "three.module.js",
+        "ms": 24.197
+      },
+      {
+        "function": "setValue",
+        "file": "three.module.js",
+        "ms": 17.881
+      },
+      {
+        "function": "intersectsObject",
+        "file": "three.module.js",
+        "ms": 16.115
+      },
+      {
+        "function": "animateWalk",
+        "file": "characters.js",
+        "ms": 15.076
+      }
+    ]
+  },
+  "after/desktop-high": {
+    "sampledSeconds": 33.149925,
+    "nativeProgramPercent": 97.51518291519513,
+    "topSelfMs": [
+      {
+        "function": "(program)",
+        "file": "",
+        "ms": 32326.21
+      },
+      {
+        "function": "candidates",
+        "file": "collider-query.js",
+        "ms": 142.59
+      },
+      {
+        "function": "updateMatrixWorld",
+        "file": "three.module.js",
+        "ms": 63.032
+      },
+      {
+        "function": "nearbyColliders",
+        "file": "collider-query.js",
+        "ms": 44.093
+      },
+      {
+        "function": "",
+        "file": "render-batches.js",
+        "ms": 43.652
+      },
+      {
+        "function": "traverse",
+        "file": "three.module.js",
+        "ms": 35.691
+      },
+      {
+        "function": "projectObject",
+        "file": "three.module.js",
+        "ms": 26.946
+      },
+      {
+        "function": "renderObject",
+        "file": "three.module.js",
+        "ms": 25.49
+      },
+      {
+        "function": "(garbage collector)",
+        "file": "",
+        "ms": 21.153
+      },
+      {
+        "function": "updatePeds",
+        "file": "npc.js",
+        "ms": 20.262
+      },
+      {
+        "function": "multiplyMatrices",
+        "file": "three.module.js",
+        "ms": 20.056
+      },
+      {
+        "function": "update",
+        "file": "three.module.js",
+        "ms": 18.586
+      }
+    ]
+  },
+  "before/mobile-medium": {
+    "sampledSeconds": 32.300106,
+    "nativeProgramPercent": 96.624407362626,
+    "topSelfMs": [
+      {
+        "function": "(program)",
+        "file": "",
+        "ms": 31209.786
+      },
+      {
+        "function": "resolveCircle",
+        "file": "city.js",
+        "ms": 543.086
+      },
+      {
+        "function": "updateMatrixWorld",
+        "file": "three.module.js",
+        "ms": 101.447
+      },
+      {
+        "function": "projectObject",
+        "file": "three.module.js",
+        "ms": 47.659
+      },
+      {
+        "function": "multiplyMatrices",
+        "file": "three.module.js",
+        "ms": 25.385
+      },
+      {
+        "function": "renderObject",
+        "file": "three.module.js",
+        "ms": 24.217
+      },
+      {
+        "function": "updatePeds",
+        "file": "npc.js",
+        "ms": 18.737
+      },
+      {
+        "function": "intersectsObject",
+        "file": "three.module.js",
+        "ms": 17.367
+      },
+      {
+        "function": "bindVertexArray",
+        "file": "",
+        "ms": 16.456
+      },
+      {
+        "function": "update",
+        "file": "three.module.js",
+        "ms": 15.233
+      },
+      {
+        "function": "(garbage collector)",
+        "file": "",
+        "ms": 13.453
+      },
+      {
+        "function": "updateHUD",
+        "file": "hud.js",
+        "ms": 13.048
+      }
+    ]
+  },
+  "after/mobile-medium": {
+    "sampledSeconds": 32.660074,
+    "nativeProgramPercent": 97.43889128971355,
+    "topSelfMs": [
+      {
+        "function": "(program)",
+        "file": "",
+        "ms": 31823.614
+      },
+      {
+        "function": "candidates",
+        "file": "collider-query.js",
+        "ms": 122.159
+      },
+      {
+        "function": "updateMatrixWorld",
+        "file": "three.module.js",
+        "ms": 82.658
+      },
+      {
+        "function": "traverse",
+        "file": "three.module.js",
+        "ms": 54.367
+      },
+      {
+        "function": "nearbyColliders",
+        "file": "collider-query.js",
+        "ms": 48.227
+      },
+      {
+        "function": "",
+        "file": "render-batches.js",
+        "ms": 39.173
+      },
+      {
+        "function": "resolveCircle",
+        "file": "city.js",
+        "ms": 32.279
+      },
+      {
+        "function": "renderObject",
+        "file": "three.module.js",
+        "ms": 30.786
+      },
+      {
+        "function": "projectObject",
+        "file": "three.module.js",
+        "ms": 30.663
+      },
+      {
+        "function": "updatePeds",
+        "file": "npc.js",
+        "ms": 26.554
+      },
+      {
+        "function": "intersectsObject",
+        "file": "three.module.js",
+        "ms": 22.103
+      },
+      {
+        "function": "(garbage collector)",
+        "file": "",
+        "ms": 19.75
+      }
+    ]
+  }
+}

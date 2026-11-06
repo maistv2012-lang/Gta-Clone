@@ -1,0 +1,25 @@
+PASS  All 8 Season-3 systems initialized — {"cheist":true,"derby":true,"plane":true,"smuggle":true,"empire":true,"diving":true,"pap":true,"mayor":true,"prestige":true}
+PASS  Heist: cased the Lucky 7 (cameras up) — stage 1
+PASS  Heist: cameras blinded -> vault stage
+PASS  Heist: vault cracked, city furious — wanted 4
+PASS  Heist: heat lost, $15k banked, once per day — +$15000
+PASS  Derby: entered ($500), 7 rivals staged
+PASS  Derby: last one rolling wins the purse — +$3000
+PASS  Seaplane: throttle up on the water — 19.8 u/s
+PASS  Seaplane: package dropped through the smoke
+PASS  Seaplane: delivery pays at the dock — +$2000
+PASS  Empire: takeover starts (3 defenders)
+PASS  Empire: district taken — districts: 1
+PASS  Empire: rival raid arrives
+PASS  Empire: raid repelled, district held (+$500)
+PASS  Diving: scuba bought, submerged
+PASS  Diving: pearl collected
+PASS  Diving: sunken chest looted (+$800)
+PASS  Paparazzi: contract taken — celeb
+PASS  Paparazzi: shot lands, tabloid pays — +$665
+PASS  Mayor: elected ($20k campaign)
+PASS  Mayor: policy flips + salary paid — police stance 2, $5800
+PASS  Season 3 progress persists — {"cheist":true,"empire":true,"scuba":true,"pearls":true,"chests":true,"mayor":true}
+PASS  Prestige: NG+ reload — star kept, run wiped — {"prestige":1,"payMult":1.25,"money":0,"crowned":true}
+
+23/23 passed, 0 page errors

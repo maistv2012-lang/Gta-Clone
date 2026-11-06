@@ -1,0 +1,23 @@
+PASS  All 16 Season-9 systems initialized — all up
+PASS  Coffee grants a speed buff — speedT 59.900000000000006
+PASS  Hot dog heals +40 — health 70
+PASS  ATM: 2 deposits + 1 withdrawal nets $500 banked — {"bal":500,"money":99500}
+PASS  Answering the ringing payphone starts a courier job — {"dest":1,"t":64.9}
+PASS  Delivery pays out and builds the streak — {"money":100250,"streak":1}
+PASS  Pigeon down, counter ticks — {"dead":true,"stat":1}
+PASS  Wall tagged after holding E — {"done":true,"money":100150}
+PASS  Hydrant bursts into a geyser when shot — {"burst":true,"jet":true}
+PASS  Cracked meter spits out $20-60 — +$47
+PASS  V opens the emote menu, 3 starts the dance — id 2, t 0.0
+PASS  Bodyguard hired for $5000 and spawned — {"hired":true,"ch":true,"money":95000}
+PASS  Gym bell rings: 10s on the bag — working 9.9s
+PASS  Madame Zaza takes $50 (or blesses you +$450) — $100000->$99950
+PASS  Dice: $100 staked, pot resolves — {"money":99900,"pot":0,"open":true}
+PASS  Ten bucks to Moses = karma 1 — karma 1
+PASS  BRASSRAIN maxes all ammo — mg 999
+PASS  INVINCO grants 60s god mode — godT 60
+PASS  HUSHFUND keeps the stars at zero — wanted 0
+PASS  bank/karma/pigeons/graffiti/guard/streak all persist — {"bank":500,"karma":1,"pigeons":[0],"graffiti":[0],"guard":true,"streak":1}
+PASS  No page errors during the run — 0 errors
+
+21/21 checks passed

@@ -1,0 +1,10 @@
+{
+  "groups": 23,
+  "passedGroups": 23,
+  "nodeTests": 43,
+  "sourceModules": 158,
+  "localImports": 688,
+  "physicalGpuVerified": false,
+  "physicalS24Verified": false,
+  "note": "Consolidated full suite and affected checks rerun after material-signature caching; initial diagnostic failures retained."
+}

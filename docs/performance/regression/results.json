@@ -1,0 +1,163 @@
+[
+  {
+    "name": "build",
+    "code": 0,
+    "durationSeconds": 4.604,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "units",
+    "code": 0,
+    "durationSeconds": 1.823,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "real-map-data",
+    "code": 0,
+    "durationSeconds": 0.808,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "startup-browser",
+    "code": 0,
+    "durationSeconds": 144.337,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "map-browser",
+    "code": 0,
+    "durationSeconds": 88.183,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "spawn-browser",
+    "code": 0,
+    "durationSeconds": 237.077,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "preview-render",
+    "code": 0,
+    "durationSeconds": 156.332,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "visual-demo",
+    "code": 0,
+    "durationSeconds": 488.215,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "visual-visibility",
+    "code": 0,
+    "durationSeconds": 105.565,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "render-contracts",
+    "code": 0,
+    "durationSeconds": 38.327,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "map-synthetic",
+    "code": 0,
+    "durationSeconds": 58.281,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "featurecheck",
+    "code": 0,
+    "durationSeconds": 555.799,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "mobiletest",
+    "code": 0,
+    "durationSeconds": 38.954,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "season8btest",
+    "code": 0,
+    "durationSeconds": 18.948,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "season9test",
+    "code": 0,
+    "durationSeconds": 59.752,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "keytest",
+    "code": 0,
+    "durationSeconds": 15.67,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "newfeatures",
+    "code": 0,
+    "durationSeconds": 110.762,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "intensetest",
+    "code": 0,
+    "durationSeconds": 163.117,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "season3test",
+    "code": 0,
+    "durationSeconds": 225.83,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "season10test",
+    "code": 0,
+    "durationSeconds": 139.496,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "fulltest",
+    "code": 0,
+    "durationSeconds": 274.975,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "season4test",
+    "code": 0,
+    "durationSeconds": 81.049,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "screenshots",
+    "code": 0,
+    "durationSeconds": 26.26,
+    "failures": [],
+    "passed": true
+  }
+]

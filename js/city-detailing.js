@@ -1,3 +1,4 @@
+import { facadeStyle } from './facade-style.js';
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { cityMaterials, worldUV } from './city-materials.js';
@@ -196,7 +197,7 @@ function facade(area, mats, detailed, onlyEdge = null) {
   const b = batch(),
     height = area.height,
     library = /Tūranga/.test(area.tags.name || '');
-  const modern = library || /Novotel|Spark|Te Pae/.test(area.tags.name || '');
+  const style = facadeStyle(area), modern = style.modern;
   const frame = library ? mats.gold : mats.trim;
   const floors = facadeLevels(area);
   const pts = area.points,
@@ -219,7 +220,7 @@ function facade(area, mats, detailed, onlyEdge = null) {
       nx = (dz / length) * outward,
       nz = (-dx / length) * outward;
     const angle = Math.atan2(nx, nz),
-      count = Math.max(1, Math.floor(length / (modern ? 3.3 : 4.6))),
+      count = Math.max(1, Math.floor(length / style.bayWidth)),
       spacing = length / count;
     for (let floor = 0; floor < floors; floor++)
       for (let j = 0; j < count; j++) {
@@ -227,11 +228,13 @@ function facade(area, mats, detailed, onlyEdge = null) {
           x = a[0] + dx * t,
           z = a[1] + dz * t,
           y = 1.9 + (floor * (height - 1)) / floors;
-        const width = Math.min(spacing * 0.66, modern ? 2.6 : 1.8),
+        const width = Math.min(spacing * 0.66, style.windowWidth),
           wh = floor === 0 ? 2.5 : 1.9;
         b.box(frame, x + nx * 0.12, y, z + nz * 0.12, width + 0.28, wh + 0.28, 0.2, angle);
         b.box(mats.glass, x + nx * 0.24, y, z + nz * 0.24, width, wh, 0.065, angle);
         if (detailed) {
+          // Sills and lintels establish depth without individual draw calls.
+          if (style.recessed) b.box(mats.limestone, x + nx * .16, y + wh / 2 + .2, z + nz * .16, width + .65, .2, .4, angle);
           b.box(frame, x + nx * 0.3, y, z + nz * 0.3, 0.07, wh, 0.075, angle);
           b.box(frame, x + nx * 0.3, y - wh * 0.15, z + nz * 0.3, width, 0.065, 0.075, angle);
           b.box(
@@ -246,6 +249,8 @@ function facade(area, mats, detailed, onlyEdge = null) {
           );
         }
       }
+    if (detailed && style.pilasters)
+      for (const t of [.035, .965]) b.box(frame, a[0]+dx*t+nx*.18, height/2, a[1]+dz*t+nz*.18, .38, height, .42, angle);
     for (const y of [height - 0.2, 0.35])
       b.box(
         frame,
@@ -277,6 +282,8 @@ function facade(area, mats, detailed, onlyEdge = null) {
       b.box(mats.metal, x + nx * 0.3, 1.35, z + nz * 0.3, 1.8, 2.7, 0.2, angle);
       b.box(mats.glass, x + nx * 0.42, 1.5, z + nz * 0.42, 1.4, 2.1, 0.08, angle);
       b.box(frame, x + nx * 0.65, 3.2, z + nz * 0.65, 3.2, 0.18, 1.1, angle);
+      b.box(mats.metal, x+nx*.49, 1.5, z+nz*.49, .055, 2.1, .05, angle);
+      b.box(frame, x+nx*.52, 1.1, z+nz*.52, .45, .055, .08, angle);
     }
   }
   return b.finish();
@@ -344,7 +351,7 @@ export async function createCityDetailing(scene, city, data) {
       base = new THREE.Group();
       const mesh = new THREE.Mesh(
         geometry,
-        /Novotel/.test(area.tags.name || '') ? mats.limestone : mats.stone
+        mats[facadeStyle(area).finish]
       );
       mesh.castShadow = mesh.receiveShadow = true;
       base.add(mesh);

@@ -1,3 +1,4 @@
+import { waitForGame } from './game-time.mjs';
 // Feature audit for the "intense & curious" update: nemesis, outbreak
 // nights, the harbor train + heist, disasters, the island prison, city
 // myths, the stranger, and the new garage mods.
@@ -17,7 +18,7 @@ await page.goto(`http://localhost:${process.env.PORT || 8081}`, { waitUntil: 'ne
 await page.waitForFunction(() => window.__debug, null, { timeout: 15000 });
 await page.evaluate(() => localStorage.clear());
 await page.click('#playbtn');
-await page.waitForTimeout(500);
+await waitForGame(page, 500);
 
 const ev = (fn, arg) => page.evaluate(fn, arg);
 const results = [];
@@ -43,7 +44,7 @@ async function resetPlayer() {
     d.world.wanted = 0;
     d.world.wantedTimer = 0;
   });
-  await page.waitForTimeout(150);
+  await waitForGame(page, 150);
 }
 
 // ---- 1. all new systems initialized ----
@@ -74,11 +75,11 @@ async function resetPlayer() {
     d.imprison();
     return { inside: d.prison().inside, money: d.world.money, x: d.player.pos.x };
   });
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   check('Prison intake (fine + island cell)', r1.inside && r1.money === 500 && r1.x > 500,
     `money $${r1.money}, x=${Math.round(r1.x)}`);
   await ev(() => { window.__debug.teleport(0, 0, 0); });
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   const r2 = await ev(() => ({
     inside: window.__debug.prison().inside,
     wanted: window.__debug.world.wanted,
@@ -92,7 +93,7 @@ async function resetPlayer() {
 {
   await resetPlayer();
   await ev(() => { window.__debug.setClock(22.5); window.__debug.startOutbreak(); });
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   const r1 = await ev(() => {
     const d = window.__debug;
     const zs = d.zombies();
@@ -106,7 +107,7 @@ async function resetPlayer() {
     `horde ${r1.horde}, +$${r1.paid}`);
   const before = await ev(() => window.__debug.world.money);
   await ev(() => window.__debug.setClock(6.5));
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   const r2 = await ev(() => ({ active: window.__debug.zombies().active, money: window.__debug.world.money }));
   check('Outbreak ends at dawn with payout', !r2.active && r2.money >= before + 2000,
     `+$${r2.money - before}`);
@@ -116,7 +117,7 @@ async function resetPlayer() {
 {
   await resetPlayer();
   await ev(() => { window.__debug.setClock(12); window.__debug.forceNemesis(); });
-  await page.waitForTimeout(500);
+  await waitForGame(page, 500);
   const r1 = await ev(() => {
     const nm = window.__debug.nemesis();
     return { active: nm.active, foe: !!nm.foe, crew: nm.crew.length, hp: nm.foe?.hp };
@@ -129,7 +130,7 @@ async function resetPlayer() {
     const nm = d.nemesis();
     for (let i = 0; i < 30 && !nm.foe.dead; i++) nm.foe.target.hit(d.world);
   });
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   const r2 = await ev(() => {
     const nm = window.__debug.nemesis();
     return { active: nm.active, beaten: nm.beaten, lvl: nm.lvl, money: window.__debug.world.money };
@@ -150,7 +151,7 @@ async function resetPlayer() {
     d.teleport(x, 10.9, z);
     return { x, z };
   });
-  await page.waitForTimeout(1000);
+  await waitForGame(page, 1000);
   const r1 = await ev((ride) => {
     const d = window.__debug;
     return { dz: d.player.pos.z - ride.z, y: d.player.pos.y, x: d.player.pos.x };
@@ -166,9 +167,9 @@ async function resetPlayer() {
     tr.cooldownT = 0;
     d.teleport(tr.signPos.x, 0, tr.signPos.z);
   });
-  await page.waitForTimeout(250);
+  await waitForGame(page, 250);
   await page.keyboard.press('KeyE');
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   const r2 = await ev(() => {
     const tr = window.__debug.train();
     return { heist: tr.heist, guards: tr.guards.length };
@@ -187,9 +188,9 @@ async function resetPlayer() {
     const cargo = tr.wagons[1];
     d.teleport(cargo.mesh.position.x, 10.9, tr.t + cargo.off);
   });
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   await page.keyboard.down('KeyE');
-  await page.waitForTimeout(3200);
+  await waitForGame(page, 3200);
   await page.keyboard.up('KeyE');
   const r3 = await ev(() => ({
     heist: window.__debug.train().heist,
@@ -204,10 +205,10 @@ async function resetPlayer() {
 {
   await resetPlayer();
   await ev(() => window.__debug.forceDisaster('quake'));
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   const r1 = await ev(() => window.__debug.disasters().kind);
   await ev(() => { window.__debug.disasters().left = 0.2; });
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   const r2 = await ev(() => window.__debug.disasters().kind);
   check('Earthquake fires and clears', r1 === 'quake' && r2 === null, `during: ${r1}, after: ${r2}`);
 }
@@ -222,9 +223,9 @@ async function resetPlayer() {
       const w = d.myths().walls[i];
       d.teleport(w.pos.x + 1.5, 0, w.pos.z + 1.5);
     }, i);
-    await page.waitForTimeout(200);
+    await waitForGame(page, 200);
     await page.keyboard.press('KeyE');
-    await page.waitForTimeout(200);
+    await waitForGame(page, 200);
   }
   const g = await ev(() => ({ graf: window.__debug.myths().graf.size, done: [...window.__debug.myths().done] }));
   check('Four graffiti tags found', g.graf === 4 && g.done.includes('graffiti'), `tags ${g.graf}/4`);
@@ -236,9 +237,9 @@ async function resetPlayer() {
     d.teleport(m.hatchPos.x + 1, 0, m.hatchPos.z + 1);
     return d.world.money;
   });
-  await page.waitForTimeout(250);
+  await waitForGame(page, 250);
   await page.keyboard.down('KeyE');
-  await page.waitForTimeout(2800);
+  await waitForGame(page, 2800);
   await page.keyboard.up('KeyE');
   const b = await ev(() => ({ done: [...window.__debug.myths().done], money: window.__debug.world.money }));
   check('Bunker myth (buried heart)', b.done.includes('bunker') && b.money >= money0 + 5000,
@@ -246,13 +247,13 @@ async function resetPlayer() {
 
   // the harbor thing, at night, from the water
   await ev(() => window.__debug.setClock(23));
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   await ev(() => {
     const d = window.__debug;
     const mp = d.myths().monster.position;
     d.teleport(mp.x + 2, 0, mp.z);
   });
-  await page.waitForTimeout(600);
+  await waitForGame(page, 600);
   const sm = await ev(() => [...window.__debug.myths().done]);
   check('Sea monster witnessed', sm.includes('seamonster'), sm.join(','));
 
@@ -263,9 +264,9 @@ async function resetPlayer() {
     const mp = d.myths().mastPos;
     d.teleport(mp.x + 1, 0, mp.z + 1);
   });
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   await page.keyboard.down('KeyE');
-  await page.waitForTimeout(2800);
+  await waitForGame(page, 2800);
   await page.keyboard.up('KeyE');
   const nb = await ev(() => [...window.__debug.myths().done]);
   check('Numbers station myth', nb.includes('numbers'), `${nb.length}/5 myths total`);
@@ -279,9 +280,9 @@ async function resetPlayer() {
     const st = d.stranger();
     d.teleport(st.spot[0] + 1.5, 0, st.spot[1] + 1.5);
   });
-  await page.waitForTimeout(250);
+  await waitForGame(page, 250);
   await page.keyboard.press('KeyE');
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   const r1 = await ev(() => window.__debug.stranger().taskActive);
   check('Stranger gives his first task', r1 === true);
 
@@ -294,7 +295,7 @@ async function resetPlayer() {
     h.pos.set(st.spot[0] + 2, 1, st.spot[1] + 2);
     d.player.inHeli = h;
   });
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   const r2 = await ev(() => {
     const d = window.__debug;
     const st = d.stranger();

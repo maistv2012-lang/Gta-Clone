@@ -11,7 +11,7 @@ export const QUALITY = Object.freeze({
   medium: Object.freeze({
     name: 'medium',
     pixelRatio: 1,
-    shadowSize: 1024,
+    shadowSize: 512,
     near: 85,
     far: 220,
     post: false,

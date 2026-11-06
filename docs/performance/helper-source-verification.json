@@ -1,0 +1,18 @@
+[
+  {
+    "path": "js/render-batches.js",
+    "sha256": "57deab6e2e4b6bfed1b286963d333355a0da4fce335de0b5e7e11344d91fe9c8"
+  },
+  {
+    "path": "js/adaptive-resolution.js",
+    "sha256": "c9eeb9bd918147fe56f75477be4741a3ee00891569580d5e410a8256efe97b20"
+  },
+  {
+    "path": "js/facade-style.js",
+    "sha256": "19024bbb34f198d411d7dadef51ab9de67effae329d80974e9af25dbeeaf8869"
+  },
+  {
+    "path": "js/collider-query.js",
+    "sha256": "94560afd4c50fdf20baf7e7c050b68db7a531e7f0e780e996d86ce64f0475c94"
+  }
+]

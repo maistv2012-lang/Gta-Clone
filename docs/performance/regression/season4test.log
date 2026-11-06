@@ -1,0 +1,19 @@
+PASS  All 8 Season-4 systems initialized — {"gauntlet":true,"swing":true,"fire":true,"museum":true,"fishing":true,"club":true,"skate":true,"gadgets":true}
+PASS  Gauntlet starts (8 rings lit)
+PASS  Gauntlet: all rings threaded, WARDEN spawns
+PASS  Gauntlet: WARDEN down, summit paid — +$8000
+PASS  Swing race starts
+PASS  Swing race: gold finish, best time saved — best 0.5s, +$1500
+PASS  Fire event ignites — 6 fires
+PASS  Hose douses a blaze (+$400) — +$1200
+PASS  Museum: golden canvas lifted
+PASS  Museum: canvas fenced (+$6000, once a day) — +$6000
+PASS  Fishing: cast, bite, catch — +$80
+PASS  Club: Neon Palace bought
+PASS  Club: dance sequence dealt — KeyW,KeyW,KeyD,KeyD,KeyW
+PASS  Club: full combo pays tips — $3250
+PASS  Skateboard: deck bought, K rides it
+PASS  Gadgets: electro-web + magnet webs fitted — $2500 left
+PASS  Season 4 progress persists — {"swing":true,"museum":true,"club":true,"deck":true,"gadgets":true}
+
+17/17 passed, 0 page errors

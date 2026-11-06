@@ -1,3 +1,4 @@
+import { waitForGame } from './game-time.mjs';
 // Feature audit for the meta-systems update: economy, arena, ads,
 // races, garage customization, and the harbor (boats + swimming).
 import { chromium } from 'playwright-core';
@@ -16,7 +17,7 @@ await page.goto(`http://localhost:${process.env.PORT || 8081}`, { waitUntil: 'ne
 await page.waitForFunction(() => window.__debug, null, { timeout: 15000 });
 await page.evaluate(() => localStorage.clear());
 await page.click('#playbtn');
-await page.waitForTimeout(500);
+await waitForGame(page, 500);
 
 const ev = (fn, arg) => page.evaluate(fn, arg);
 const results = [];
@@ -41,7 +42,7 @@ async function resetPlayer() {
     d.player.glide = false;
     d.world.wanted = 0;
   });
-  await page.waitForTimeout(150);
+  await waitForGame(page, 150);
 }
 
 // ---- 1. economy objects live ----
@@ -69,9 +70,9 @@ async function resetPlayer() {
     d.player.pos.set(m.pos.x, 0, m.pos.z);
     return d.world.money;
   });
-  await page.waitForTimeout(250);
+  await waitForGame(page, 250);
   await page.keyboard.press('KeyB');
-  await page.waitForTimeout(250);
+  await waitForGame(page, 250);
   const r = await ev(() => ({
     owned: !!window.__debug.world.props.owned.casino,
     money: window.__debug.world.money,
@@ -87,7 +88,7 @@ async function resetPlayer() {
     const d = window.__debug;
     const before = d.world.money;
     d.world.incomeT = 59.9; // force the hourly payout
-    await new Promise((r) => setTimeout(r, 400));
+    await import('./test/game-time.mjs').then(m=>m.waitInGame(400));
     return d.world.money - before;
   });
   check('Property passive income', paid >= 400, `+$${paid}/hr`);
@@ -134,7 +135,7 @@ async function resetPlayer() {
     d.player.pos.set(d.world.arena.pos.x + 3, 0, d.world.arena.pos.z);
     d.player.vel.set(0, 0, 0);
     d.startArena();
-    await new Promise((r) => setTimeout(r, 400));
+    await import('./test/game-time.mjs').then(m=>m.waitInGame(400));
     return { active: d.world.arena.active, wave: d.world.arena.wave, foes: d.world.arena.foes.length };
   });
   check('Arena wave survival starts (H)', started.active && started.wave === 1 && started.foes >= 3,
@@ -143,7 +144,7 @@ async function resetPlayer() {
   const wave2 = await ev(async () => {
     const d = window.__debug;
     for (const f of d.world.arena.foes) { f.hp = 0; f.target.hit(d.world); }
-    await new Promise((r) => setTimeout(r, 2200));
+    await import('./test/game-time.mjs').then(m=>m.waitInGame(2200));
     return d.world.arena.wave;
   });
   check('Arena wave 2 spawns after clear', wave2 === 2, `now wave ${wave2}`);
@@ -151,7 +152,7 @@ async function resetPlayer() {
   const ended = await ev(async () => {
     const d = window.__debug;
     d.player.pos.set(d.world.arena.pos.x + 60, 0, d.world.arena.pos.z); // walk out
-    await new Promise((r) => setTimeout(r, 400));
+    await import('./test/game-time.mjs').then(m=>m.waitInGame(400));
     return !d.world.arena.active && d.world.arena.best >= 1;
   });
   check('Arena ends when you leave, best saved', ended);
@@ -165,7 +166,7 @@ async function resetPlayer() {
     d.player.pos.copy(d.shops.casinoPos);
     return d.world.money;
   });
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   await page.keyboard.press('Digit4');
   await page.waitForTimeout(600);
   const overlay = await ev(() => {
@@ -188,19 +189,19 @@ async function resetPlayer() {
     d.player.mesh.visible = false;
     car.pos.set(def.start[0], 0, def.start[1]);
     car.vel.set(0, 0, 0);
-    await new Promise((r) => setTimeout(r, 400));
+    await import('./test/game-time.mjs').then(m=>m.waitInGame(400));
     return { active: d.races.active?.key, countdown: d.races.countdown };
   });
   check('Race starts in the ring', started.active === 'circuit', `countdown ${started.countdown?.toFixed(1)}s`);
 
-  await page.waitForTimeout(3300); // countdown
+  await waitForGame(page, 3300); // countdown
   const gate = await ev(async () => {
     const d = window.__debug;
     const def = d.races.active;
     if (!def) return null;
     const c = def.cps[0];
     d.player.inCar.pos.set(c[0], 0, c[1]); // drive through gate 1
-    await new Promise((r) => setTimeout(r, 300));
+    await import('./test/game-time.mjs').then(m=>m.waitInGame(300));
     return { idx: d.races.idx, t: d.races.t, blip: !!d.world.raceBlip };
   });
   check('Race gates + timer + map blip', gate && gate.idx === 1 && gate.t > 0 && gate.blip,
@@ -213,7 +214,7 @@ async function resetPlayer() {
     for (let i = d.races.idx; i < def.cps.length; i++) {
       const c = def.cps[i];
       d.player.inCar.pos.set(c[0], 0, c[1]);
-      await new Promise((r) => setTimeout(r, 150));
+      await import('./test/game-time.mjs').then(m=>m.waitInGame(150));
     }
     return { done: !d.races.active, best: d.world.raceBest.circuit, gain: d.world.money - before };
   });
@@ -241,13 +242,13 @@ async function resetPlayer() {
       }).catch(() => res(false));
     });
   });
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
   await page.keyboard.press('Digit2'); // engine
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await page.keyboard.press('Digit4'); // nitro
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await page.keyboard.press('Digit1'); // respray
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   const mods = await ev(() => {
     const d = window.__debug;
     const v = d.shops.garageVeh;
@@ -264,18 +265,20 @@ async function resetPlayer() {
 
 // ---- 10. harbor: water, boats, swimming ----
 {
-  const harbor = await ev(() => {
+  const harbor = await ev(async () => {
     const d = window.__debug;
-    return { boats: d.world.boats.length, water: !!d.water.geo };
+    const {WATER_X0}=await import('./js/water.js');
+    const moored=d.world.boats.filter(b=>[[20,-19],[20,9],[14,19]].some(([x,z])=>Math.hypot(b.pos.x-WATER_X0-x,b.pos.z-z)<.1));
+    return {boats:d.world.boats.length,moored:moored.length,kinds:moored.map(b=>b.kind).sort().join(','),water:!!d.water.geo,prison:!!d.world.prison};
   });
-  check('Harbor built (water + 3 boats)', harbor.boats === 3 && harbor.water);
+  check('Harbor built (3 moored craft plus retained prison launch)', harbor.boats === 4 && harbor.moored === 3 && harbor.kinds === 'jet,speed,speed' && harbor.water && harbor.prison);
 
   await resetPlayer();
   const swim = await ev(async () => {
     const d = window.__debug;
     return import('./js/water.js').then(async (w) => {
       d.teleport(w.WATER_X0 + 40, 0.2, 0); // open water east of the seawall
-      await new Promise((r) => setTimeout(r, 600));
+      await import('./test/game-time.mjs').then(m=>m.waitInGame(600));
       return { swim: d.player.swim, y: d.player.pos.y };
     });
   });
@@ -290,7 +293,7 @@ async function resetPlayer() {
     return !!d.player.inBoat;
   });
   await page.keyboard.down('KeyW');
-  await page.waitForTimeout(2000);
+  await waitForGame(page, 2000);
   const sp = await ev(() => window.__debug.player.inBoat?.vel.length() ?? 0);
   await page.keyboard.up('KeyW');
   check('Speedboat drives', boarded && sp > 8, `${sp.toFixed(1)} m/s`);
@@ -298,9 +301,9 @@ async function resetPlayer() {
   const off = await ev(async () => {
     const d = window.__debug;
     d.player.inBoat.vel.set(0, 0, 0);
-    await new Promise((r) => setTimeout(r, 200));
+    await import('./test/game-time.mjs').then(m=>m.waitInGame(200));
     d.exitBoat();
-    await new Promise((r) => setTimeout(r, 400));
+    await import('./test/game-time.mjs').then(m=>m.waitInGame(400));
     return { out: !d.player.inBoat, swim: d.player.swim };
   });
   check('Hop off into a swim', off.out && off.swim);

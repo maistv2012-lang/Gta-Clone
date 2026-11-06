@@ -1,0 +1,22 @@
+KeyW: moved 0.66m FAIL
+KeyS: moved 0.65m FAIL
+KeyA: moved 0.66m FAIL
+KeyD: moved 0.65m FAIL
+non-QWERTY 'd': moved 0.67m FAIL
+weapon switch: MACHINE GUN · 60 PASS
+web attach: PASS
+web swing: height 5.2m speed 15.1 m/s PASS
+web release + land: y 4.3 FAIL
+web traversal: covered 43m in 3 chained swings FAIL
+enter car: PASS
+drive: speed 7.6 m/s PASS
+steer D: heading change -0.53 rad PASS (turns right)
+enter heli: PASS
+heli takeoff: altitude 1.7m FAIL
+police heli at 3 stars: 1 PASS
+web attack (Q): FAIL
+rob store: +$0 FAIL
+gang territory: PASS
+motorbike: found true, speed 6.7 m/s PASS
+army tank at 5 stars: 1 PASS
+runtime errors: 0 PASS

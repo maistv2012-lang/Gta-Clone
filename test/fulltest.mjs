@@ -1,3 +1,4 @@
+import { waitForGame } from './game-time.mjs';
 // Full gameplay smoke test: movement, driving + steering, weapons, helicopter.
 import { chromium } from 'playwright-core';
 
@@ -15,7 +16,7 @@ page.on('pageerror', (e) => { errors++; console.log('PAGE ERROR:', e.message); }
 await page.goto(`http://localhost:${process.env.PORT || 8080}`, { waitUntil: 'networkidle' });
 await page.waitForFunction(() => window.__debug, null, { timeout: 15000 });
 await page.click('#playbtn');
-await page.waitForTimeout(600);
+await waitForGame(page, 600);
 
 const ev = (fn) => page.evaluate(fn);
 
@@ -24,9 +25,9 @@ for (const key of ['KeyW', 'KeyS', 'KeyA', 'KeyD']) {
   await ev(() => window.__debug.setCamYaw(0));
   const a = await ev(() => ({ x: window.__debug.player.pos.x, z: window.__debug.player.pos.z }));
   await page.keyboard.down(key);
-  await page.waitForTimeout(450);
+  await waitForGame(page, 450);
   await page.keyboard.up(key);
-  await page.waitForTimeout(150);
+  await waitForGame(page, 150);
   const b = await ev(() => ({ x: window.__debug.player.pos.x, z: window.__debug.player.pos.z }));
   const moved = Math.hypot(b.x - a.x, b.z - a.z);
   console.log(`${key}: moved ${moved.toFixed(2)}m ${moved > 1 ? 'PASS' : 'FAIL'}`);
@@ -37,9 +38,9 @@ for (const key of ['KeyW', 'KeyS', 'KeyA', 'KeyD']) {
   await ev(() => window.__debug.setCamYaw(0));
   const a = await ev(() => ({ x: window.__debug.player.pos.x, z: window.__debug.player.pos.z }));
   await ev(() => window.dispatchEvent(new KeyboardEvent('keydown', { code: 'KeyH', key: 'd' })));
-  await page.waitForTimeout(450);
+  await waitForGame(page, 450);
   await ev(() => window.dispatchEvent(new KeyboardEvent('keyup', { code: 'KeyH', key: 'd' })));
-  await page.waitForTimeout(100);
+  await waitForGame(page, 100);
   const b = await ev(() => ({ x: window.__debug.player.pos.x, z: window.__debug.player.pos.z }));
   const moved = Math.hypot(b.x - a.x, b.z - a.z);
   console.log(`non-QWERTY 'd': moved ${moved.toFixed(2)}m ${moved > 1 ? 'PASS' : 'FAIL'}`);
@@ -48,7 +49,7 @@ for (const key of ['KeyW', 'KeyS', 'KeyA', 'KeyD']) {
 // --- 3. weapon switching ---
 {
   await page.keyboard.press('Digit2');
-  await page.waitForTimeout(120);
+  await waitForGame(page, 120);
   const w = await ev(() => window.__debug.world.weaponName);
   console.log(`weapon switch: ${w} ${w.startsWith('MACHINE GUN') ? 'PASS' : 'FAIL'}`);
   await page.keyboard.press('Digit1');
@@ -66,14 +67,14 @@ for (const key of ['KeyW', 'KeyS', 'KeyA', 'KeyD']) {
     d.setCamYaw(0);
     return true;
   });
-  await page.waitForTimeout(400); // let the camera settle behind the player
+  await waitForGame(page, 400); // let the camera settle behind the player
   await page.mouse.down({ button: 'right' }); // swinging lasts while the button is held
   // the game may have fired already from the held button if pointer lock was granted
   const attached = await ev(() => window.__debug.startSwing() || window.__debug.web.attached);
   console.log(`web attach: ${ok && attached ? 'PASS' : 'FAIL'}`);
 
   await page.keyboard.down('Space'); // reel in for height
-  await page.waitForTimeout(900);
+  await waitForGame(page, 900);
   await page.keyboard.up('Space');
   const mid = await ev(() => ({
     y: window.__debug.player.pos.y,
@@ -83,7 +84,7 @@ for (const key of ['KeyW', 'KeyS', 'KeyA', 'KeyD']) {
   console.log(`web swing: height ${mid.y.toFixed(1)}m speed ${mid.sp.toFixed(1)} m/s ${mid.att && mid.y > 1 ? 'PASS' : 'FAIL'}`);
 
   await page.mouse.up({ button: 'right' }); // let go mid-swing
-  await page.waitForTimeout(2000);
+  await waitForGame(page, 2000);
   const after = await ev(() => ({
     att: window.__debug.web.attached,
     ground: window.__debug.player.onGround,
@@ -104,20 +105,20 @@ for (const key of ['KeyW', 'KeyS', 'KeyA', 'KeyD']) {
     d.setCamYaw(0); // travel +z
     return { x: d.player.pos.x, z: d.player.pos.z };
   });
-  await page.waitForTimeout(400);
+  await waitForGame(page, 400);
   await page.keyboard.down('KeyW'); // pump the swing
   for (let i = 0; i < 3; i++) {
     await page.mouse.down({ button: 'right' });
     await ev(() => window.__debug.startSwing()); // no-op if pointer lock already fired it
-    await page.waitForTimeout(1800); // longer arcs now — ride the full swing
+    await waitForGame(page, 1800); // longer arcs now — ride the full swing
     await page.mouse.up({ button: 'right' }); // release at speed, glide, re-fire
-    await page.waitForTimeout(600);
+    await waitForGame(page, 600);
   }
   await page.keyboard.up('KeyW');
   const end = await ev(() => ({ x: window.__debug.player.pos.x, z: window.__debug.player.pos.z }));
   const dist = Math.hypot(end.x - start.x, end.z - start.z);
   console.log(`web traversal: covered ${dist.toFixed(0)}m in 3 chained swings ${dist > 50 ? 'PASS' : 'FAIL'}`);
-  await page.waitForTimeout(1500); // let the player land
+  await waitForGame(page, 1500); // let the player land
   // if a rough landing wasted the player, sit out the game-over screen
   const state = await ev(() => window.__debug.getState());
   if (state !== 'play') console.log(`(note: traversal ended ${state}, waiting for respawn)`);
@@ -142,9 +143,9 @@ for (const key of ['KeyW', 'KeyS', 'KeyA', 'KeyD']) {
     d.player.vel.set(0, 0, 0);
     d.player.vy = 0;
   });
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await page.keyboard.press('KeyE');
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   const inCar = await ev(() => !!window.__debug.player.inCar);
   console.log(`enter car: ${inCar ? 'PASS' : 'FAIL'}`);
 
@@ -160,19 +161,19 @@ for (const key of ['KeyW', 'KeyS', 'KeyA', 'KeyD']) {
     d.setCamYaw(0);
   });
   await page.keyboard.down('KeyW');
-  await page.waitForTimeout(900);
+  await waitForGame(page, 900);
   const h0 = await ev(() => window.__debug.player.inCar?.heading ?? 0);
   await page.keyboard.down('KeyD');
-  await page.waitForTimeout(700);
+  await waitForGame(page, 700);
   await page.keyboard.up('KeyD');
   await page.keyboard.up('KeyW');
   const h1 = await ev(() => window.__debug.player.inCar?.heading ?? 0);
   const speed = await ev(() => window.__debug.player.inCar?.vel.length() ?? 0);
   console.log(`drive: speed ${speed.toFixed(1)} m/s ${speed > 3 ? 'PASS' : 'FAIL'}`);
   console.log(`steer D: heading change ${(h1 - h0).toFixed(2)} rad ${h1 < h0 - 0.15 ? 'PASS (turns right)' : 'FAIL'}`);
-  await page.waitForTimeout(800);
+  await waitForGame(page, 800);
   await page.keyboard.press('KeyE'); // exit
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
 }
 
 // --- 5. helicopter: teleport to helipad, enter, take off ---
@@ -183,14 +184,14 @@ for (const key of ['KeyW', 'KeyS', 'KeyA', 'KeyD']) {
     d.player.inCar = null;
     d.player.pos.set(h.pos.x + 4, 0, h.pos.z);
   });
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await page.keyboard.press('KeyE');
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   const inHeli = await ev(() => !!window.__debug.player.inHeli);
   console.log(`enter heli: ${inHeli ? 'PASS' : 'FAIL'}`);
 
   await page.keyboard.down('Space');
-  await page.waitForTimeout(1500);
+  await waitForGame(page, 1500);
   await page.keyboard.up('Space');
   const alt = await ev(() => window.__debug.player.inHeli?.pos.y ?? 0);
   console.log(`heli takeoff: altitude ${alt.toFixed(1)}m ${alt > 5 ? 'PASS' : 'FAIL'}`);
@@ -199,7 +200,7 @@ for (const key of ['KeyW', 'KeyS', 'KeyA', 'KeyD']) {
 // --- 6. police helicopter spawn at 3 stars ---
 {
   await ev(() => { window.__debug.world.wanted = 3; window.__debug.world.wantedTimer = 0; });
-  await page.waitForTimeout(1200);
+  await waitForGame(page, 1200);
   const n = await ev(() => window.__debug.world.policeHelis.length);
   console.log(`police heli at 3 stars: ${n} ${n >= 1 ? 'PASS' : 'FAIL'}`);
   await ev(() => { window.__debug.world.wanted = 0; });
@@ -213,23 +214,22 @@ for (const key of ['KeyW', 'KeyS', 'KeyA', 'KeyD']) {
     d.player.inHeli = null;
     d.player.mesh.visible = true;
     d.world.wanted = 0;
-    d.player.pos.set(d.world.city.spawn.x + 6, 0, d.world.city.spawn.z);
+    d.player.pos.set(d.world.city.spawn.x + 8, 0, d.world.city.spawn.z + 8);
     d.player.vy = 0;
   });
-  await page.waitForTimeout(300);
+  await waitForGame(page, 300);
 
-  // 7a. web attack pins a pedestrian
+  // 7a. Let the camera settle after helicopter flight, then position and
+  // attack in one evaluation so pedestrian AI cannot walk out of the aim ray.
+  // This is the same clear-corner fixture used by the full feature audit.
+  await ev(() => { __debug.setCamYaw(0); __debug.setCamPitch(-0.1); });
+  await waitForGame(page, 2000);
   await ev(() => {
-    const d = window.__debug;
-    const p = d.world.peds[0];
-    p.dead = false;
-    p.webT = 0;
+    const d = window.__debug, p = d.world.peds[0];
+    p.dead = false; p.webT = 0;
     p.pos.set(d.player.pos.x, 0, d.player.pos.z + 8);
-    d.setCamYaw(0);
-    d.setCamPitch(-0.1); // aim flat so the ray reaches the ped, not the road
+    d.webAttack();
   });
-  await page.waitForTimeout(500);
-  await ev(() => window.__debug.webAttack());
   // any ped pinned counts — bystanders sometimes wander into the shot
   const webbed = await ev(() => window.__debug.world.peds.some((p) => p.webT > 0));
   console.log(`web attack (Q): ${webbed ? 'PASS' : 'FAIL'}`);
@@ -242,9 +242,9 @@ for (const key of ['KeyW', 'KeyS', 'KeyA', 'KeyD']) {
     d.player.pos.set(s.pos.x, 0, s.pos.z + 1);
     return d.world.money;
   });
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await page.keyboard.down('KeyE');
-  await page.waitForTimeout(2200);
+  await waitForGame(page, 2200);
   await page.keyboard.up('KeyE');
   const after = await ev(() => window.__debug.world.money);
   console.log(`rob store: +$${after - before} ${after - before >= 250 ? 'PASS' : 'FAIL'}`);
@@ -265,9 +265,9 @@ for (const key of ['KeyW', 'KeyS', 'KeyA', 'KeyD']) {
     d.player.pos.set(bike.pos.x + 2, 0, bike.pos.z);
     return true;
   });
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await page.keyboard.press('KeyE');
-  await page.waitForTimeout(200);
+  await waitForGame(page, 200);
   await ev(() => {
     const d = window.__debug;
     const b = d.player.inCar;
@@ -278,21 +278,21 @@ for (const key of ['KeyW', 'KeyS', 'KeyA', 'KeyD']) {
     d.setCamYaw(0);
   });
   await page.keyboard.down('KeyW');
-  await page.waitForTimeout(1000);
+  await waitForGame(page, 1000);
   await page.keyboard.up('KeyW');
   const bikeSpeed = await ev(() => window.__debug.player.inCar?.vel.length() ?? 0);
   console.log(`motorbike: found ${bikeFound}, speed ${bikeSpeed.toFixed(1)} m/s ${bikeFound && bikeSpeed > 4 ? 'PASS' : 'FAIL'}`);
-  await page.waitForTimeout(600);
+  await waitForGame(page, 600);
   await page.keyboard.press('KeyE'); // hop off
 
   // 7e. five stars brings the tank
   await ev(() => { window.__debug.world.wanted = 5; window.__debug.world.wantedTimer = 0; });
-  await page.waitForTimeout(1500);
+  await waitForGame(page, 1500);
   const tanks = await ev(() => window.__debug.world.tanks.filter((t) => !t.dead).length);
   console.log(`army tank at 5 stars: ${tanks} ${tanks >= 1 ? 'PASS' : 'FAIL'}`);
   await ev(() => { window.__debug.world.wanted = 0; });
 }
 
-await page.waitForTimeout(1500);
+await waitForGame(page, 1500);
 console.log(`runtime errors: ${errors} ${errors === 0 ? 'PASS' : 'FAIL'}`);
 await browser.close();

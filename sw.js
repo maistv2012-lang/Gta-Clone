@@ -1,7 +1,7 @@
 // Versioned, scope-owned cache. A successful HTTP status alone does not prove
 // a navigation is the game: preview gateways can return empty placeholder HTML.
 const FAMILY = 'christchurch:' + self.registration.scope + ':';
-const CACHE = FAMILY + 'render-v3';
+const CACHE = FAMILY + 'render-v4';
 
 async function validShell(response) {
   if (!response || !response.ok || !(response.headers.get('content-type') || '').toLowerCase().includes('text/html')) return false;

@@ -267,7 +267,7 @@ const world = {
   ach: { ...(save.ach || {}) },
   suitSaved: save.suit || 'street',
   suitsOwnedSaved: save.suits || {},
-  settings: { volume: 1, sens: 1, invertY: false, quality: isTouch ? 'medium' : 'high', fps: isTouch ? 30 : 60, lowGfx: false, ...(save.settings || {}) },
+  settings: { volume: 1, sens: 1, invertY: false, quality: isTouch ? 'medium' : 'high', fps: isTouch ? 30 : 60, adaptiveResolution: isTouch, lowGfx: false, ...(save.settings || {}) },
   perks: { style: 1, melee: 1, webDur: 6, decay: 24, busted: 1.6 },
   waypoint: null,
   barks: [],
@@ -487,12 +487,13 @@ function applySettings() {
   setMasterVolume(st.volume);
   activeQuality = qualityProfile(st, isTouch);
   sun.castShadow = activeQuality.shadowSize > 0;
+  sun.shadow.normalBias=.08;sun.shadow.bias=-.0001;
   if (activeQuality.shadowSize && sun.shadow.mapSize.x !== activeQuality.shadowSize) {
     sun.shadow.mapSize.setScalar(activeQuality.shadowSize);sun.shadow.map?.dispose();sun.shadow.map=null;
   }
   city.detailing?.setQuality(activeQuality.name);
   setCharacterQuality(activeQuality.name, scene);
-  renderer?.setPixelRatio(Math.min(devicePixelRatio || 1, activeQuality.pixelRatio));
+  graphics?.configure(activeQuality, st, isTouch);
   if (renderer) renderer.shadowMap.enabled = activeQuality.shadowSize > 0;
   if (renderer && composer) composer.setPixelRatio(renderer.getPixelRatio());
   saveGame();
@@ -520,6 +521,16 @@ initMenu({
   },
 });
 
+// Pointer lock is optional in embedded previews and can expire while shaders
+// compile. A rejected capture must never invalidate an already rendered game.
+function requestGamePointerLock() {
+  try {
+    renderer?.domElement.requestPointerLock?.()?.catch(error => {
+      console.warn('Mouse capture unavailable:', error.message);
+    });
+  } catch (error) { console.warn('Mouse capture unavailable:', error.message); }
+}
+
 function pauseGame() {
   if (gameState !== 'play') return;
   gameState = 'pause';
@@ -532,7 +543,7 @@ function resumeGame() {
   closeMenu();
   gameState = 'play';
   showTouchUI(isTouch);
-  if (!isTouch) renderer.domElement.requestPointerLock?.();
+  if (!isTouch) requestGamePointerLock();
 }
 
 function openBigMap() {
@@ -547,7 +558,7 @@ function closeBigMap() {
   closeMap();
   gameState = 'play';
   showTouchUI(isTouch);
-  if (!isTouch) renderer.domElement.requestPointerLock?.();
+  if (!isTouch) requestGamePointerLock();
 }
 
 // ---------- blackjack at the Lucky 7 ----------
@@ -562,7 +573,7 @@ function enterCards() {
 function leaveCards() {
   gameState = 'play';
   showTouchUI(isTouch);
-  if (!isTouch) renderer.domElement.requestPointerLock?.();
+  if (!isTouch) requestGamePointerLock();
 }
 
 // ---------- photo mode ----------
@@ -578,7 +589,7 @@ function enterPhotoMode() {
   document.getElementById('hud').style.display = 'none';
   showTouchUI(false);
   showToast('');
-  if (!isTouch) renderer.domElement.requestPointerLock?.();
+  if (!isTouch) requestGamePointerLock();
 }
 
 function exitPhotoMode() {
@@ -2663,7 +2674,7 @@ document.getElementById('playbtn').addEventListener('click', () => {
     // Hide the menu only after rendering succeeded; exceptions cannot strand
     // the player behind an invisible menu in an embedded web preview.
     startEl.style.display = 'none';
-    if (!isTouch) renderer.domElement.requestPointerLock?.();
+    if (!isTouch) requestGamePointerLock();
     else { goFullscreen(); keepAwake(); }
     showTouchUI(true);
     if (!animationStarted) { animationStarted = true; animate(); }

@@ -1,0 +1,142 @@
+[
+  {
+    "name": "desktop-high",
+    "stage": "after",
+    "sourceFingerprint": "c03542b9797bf67aafd3f404ee6f5046ea8154b6785c322c95a9db6af70f0b52",
+    "mapSha256": "8450e30bcfd21904980edd981025eb11816eed46b8acd299e1ac158694111c46",
+    "commit": "working-tree",
+    "viewport": {
+      "width": 800,
+      "height": 500
+    },
+    "quality": "high",
+    "adaptiveResolution": false,
+    "freshBrowserPerCase": true,
+    "serverSourcesVerified": true,
+    "uuidRngIsolated": true,
+    "pointerCaptureStubbed": true,
+    "minimumWarmupGameSeconds": 6,
+    "cameraSettledFrames": 12,
+    "mapReadyMs": 4771,
+    "playClickMs": 8980,
+    "frames": 31,
+    "durationMs": 30751.799999999814,
+    "averageFps": 1.0080710722624429,
+    "meanFrameMs": 991.9935483870908,
+    "p95FrameMs": 1046.0999999996275,
+    "drawCalls": 758.9032258064516,
+    "triangles": 519499.12903225806,
+    "graphics": {
+      "initialized": true,
+      "frames": 169,
+      "hdr": true,
+      "contextLost": false,
+      "width": 800,
+      "height": 500,
+      "calls": 758,
+      "triangles": 519391,
+      "textures": 87,
+      "geometries": 456,
+      "pixelRatio": 1,
+      "adaptiveResolution": false,
+      "frameTimeEma": 1027.5234128537254,
+      "batches": {
+        "instances": 371,
+        "batches": 80
+      }
+    },
+    "objects": 7171,
+    "meshes": 4587,
+    "uniqueGeometries": 2669,
+    "uniqueMaterials": 1652,
+    "geometryAttributeBytes": 80296652,
+    "uniqueGeometryBufferBytes": 64031348,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "jsHeapBytes": 218994450,
+    "shaderSubmissions": {
+      "programsCreated": 44,
+      "shaderSubmissions": 88,
+      "compileSubmissionMs": 0.39999999944120646
+    },
+    "errors": false,
+    "cdp": {
+      "Nodes": 778,
+      "ScriptDuration": 10.760187,
+      "TaskDuration": 189.023894,
+      "JSHeapUsedSize": 114255676,
+      "JSHeapTotalSize": 249024512
+    },
+    "pageErrors": [],
+    "browser": "155.0.8059.79"
+  },
+  {
+    "name": "mobile-medium",
+    "stage": "after",
+    "sourceFingerprint": "c03542b9797bf67aafd3f404ee6f5046ea8154b6785c322c95a9db6af70f0b52",
+    "mapSha256": "8450e30bcfd21904980edd981025eb11816eed46b8acd299e1ac158694111c46",
+    "commit": "working-tree",
+    "viewport": {
+      "width": 384,
+      "height": 832
+    },
+    "quality": "medium",
+    "adaptiveResolution": false,
+    "freshBrowserPerCase": true,
+    "serverSourcesVerified": true,
+    "uuidRngIsolated": true,
+    "pointerCaptureStubbed": true,
+    "minimumWarmupGameSeconds": 6,
+    "cameraSettledFrames": 12,
+    "mapReadyMs": 4982,
+    "playClickMs": 7240,
+    "frames": 32,
+    "durationMs": 30166.299999999814,
+    "averageFps": 1.06078637419903,
+    "meanFrameMs": 942.6968749999942,
+    "p95FrameMs": 1400.4000000003725,
+    "drawCalls": 371.5,
+    "triangles": 276482,
+    "graphics": {
+      "initialized": true,
+      "frames": 170,
+      "hdr": true,
+      "contextLost": false,
+      "width": 384,
+      "height": 832,
+      "calls": 371,
+      "triangles": 276398,
+      "textures": 41,
+      "geometries": 237,
+      "pixelRatio": 1,
+      "adaptiveResolution": false,
+      "frameTimeEma": 913.7144594342777,
+      "batches": {
+        "instances": 371,
+        "batches": 80
+      }
+    },
+    "objects": 7171,
+    "meshes": 4587,
+    "uniqueGeometries": 2669,
+    "uniqueMaterials": 1652,
+    "geometryAttributeBytes": 80296652,
+    "uniqueGeometryBufferBytes": 64031348,
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "jsHeapBytes": 239963787,
+    "shaderSubmissions": {
+      "programsCreated": 31,
+      "shaderSubmissions": 62,
+      "compileSubmissionMs": 0.09999999962747097
+    },
+    "errors": false,
+    "cdp": {
+      "Nodes": 1619,
+      "ScriptDuration": 9.154341,
+      "TaskDuration": 160.858393,
+      "JSHeapUsedSize": 140409780,
+      "JSHeapTotalSize": 319803392
+    },
+    "pageErrors": [],
+    "browser": "155.0.8059.79"
+  }
+]

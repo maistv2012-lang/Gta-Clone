@@ -1,4 +1,4 @@
-# Grand Theft Christchurch: real OSM map and resilient browser startup
+# Grand Theft Christchurch: real map, scalable visual demo and resilient startup
 
 The existing game now starts in central Christchurch using a bundled real
 OpenStreetMap extract. Cathedral Square, Colombo Street and both halves of
@@ -56,3 +56,9 @@ or every mission completion was tested.
 Base: `main`; head: `gta-christchurch`. No existing tracked file is deleted and no
 merge or replacement of `main` is performed. This document prepares the PR body;
 it is not evidence that a remote Pull Request has been created.
+
+## Incremental rendering and performance work
+
+Add deterministic facade geometry/finish variation and shared wheel spokes. Reuse character rig buffers, per-character vertex palettes, vehicle panels, glass, lamps and city materials. Spatially group compatible box meshes into live render proxies, retaining original transforms, visibility and gameplay references. Index immutable OSM bounds while retaining the original collision narrow phase and live moving colliders. Add bounded adaptive resolution and a smaller Medium shadow budget. Handle optional pointer-lock denial and preserve crowned gold materials across quality changes.
+
+Validation now includes 23 passing groups and 43 Node tests. Initial legacy timing failures are retained and explained; simulation-time waits keep the original gameplay assertions. Physical GPU/S24 performance remains unverified. Full controlled software measurements, screenshots, source inventory and limitations are in [the upgrade report](https://github.com/maistv2012-lang/Gta-Clone/blob/gta-christchurch/docs/PERFORMANCE-UPGRADE.md). No Pages deployment or main-branch merge is included.

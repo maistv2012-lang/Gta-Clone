@@ -1,0 +1,30 @@
+[
+  {
+    "name": "build",
+    "code": 0,
+    "durationSeconds": 4.604,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "units",
+    "code": 0,
+    "durationSeconds": 1.823,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "map-browser",
+    "code": 0,
+    "durationSeconds": 88.183,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "render-contracts",
+    "code": 0,
+    "durationSeconds": 38.327,
+    "failures": [],
+    "passed": true
+  }
+]

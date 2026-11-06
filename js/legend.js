@@ -52,11 +52,22 @@ function crownRegalia(world) {
   placeCrown(world);
   // gold suit: clone materials so the peds sharing them stay normal
   world.player.mesh.traverse((o) => {
-    if (o.isMesh && o.material?.color) {
-      o.material = o.material.clone();
-      o.material.color.setHex(0xffd24a);
-      if ('metalness' in o.material) { o.material.metalness = 0.75; o.material.roughness = 0.35; }
-    }
+    if (!o.isMesh) return;
+    const gild = material => {
+      if (!material?.color) return material;
+      const gold = material.clone();
+      gold.color.setHex(0xffd24a);
+      // A gold finish replaces the wardrobe palette instead of tinting it.
+      if (o.isSkinnedMesh) gold.vertexColors = false;
+      if ('metalness' in gold) { gold.metalness = 0.75; gold.roughness = 0.35; }
+      return gold;
+    };
+    if (o.userData.pbrPalette && o.userData.lowPalette) {
+      const low = o.material === o.userData.lowPalette;
+      o.userData.pbrPalette = o.userData.pbrPalette.map(gild);
+      o.userData.lowPalette = o.userData.lowPalette.map(gild);
+      o.material = low ? o.userData.lowPalette : o.userData.pbrPalette;
+    } else o.material = Array.isArray(o.material) ? o.material.map(gild) : gild(o.material);
   });
   // the statue: a gold likeness on a plinth near spawn
   const spot = world.city.spawn.clone().add(new THREE.Vector3(0, 0, 28));

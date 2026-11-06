@@ -1,3 +1,4 @@
+import { waitForGame } from './game-time.mjs';
 // Season 4 audit: spire gauntlet, swing races, firefighting, the museum
 // lift, pier fishing, the Neon Palace, the skateboard, and web gadgets.
 import { chromium } from 'playwright-core';
@@ -159,9 +160,9 @@ async function resetPlayer() {
   });
   await page.waitForTimeout(250);
   await page.keyboard.down('KeyF');
-  // fires take ~3s of hose GAME time — headless runs sub-realtime, so wait on the outcome
-  await page.waitForFunction((m0) => window.__debug.world.stats.firesOut >= 1 || window.__debug.world.money >= m0 + 400,
-    money0, { timeout: 25000 }).catch(() => {});
+  // A blaze needs three seconds of hose simulation time. Observe that clock
+  // instead of assuming the software renderer can simulate it in 25 wall seconds.
+  await waitForGame(page, 3500);
   await page.keyboard.up('KeyF');
   const r2 = await ev(() => ({ money: window.__debug.world.money, out: window.__debug.world.stats.firesOut }));
   check('Hose douses a blaze (+$400)', r2.money >= money0 + 400 && r2.out >= 1, `+$${r2.money - money0}`);
@@ -184,7 +185,7 @@ async function resetPlayer() {
   });
   await page.waitForTimeout(250);
   await page.keyboard.down('KeyE');
-  await page.waitForTimeout(2600);
+  await waitForGame(page, 2600);
   await page.keyboard.up('KeyE');
   const r1 = await ev(() => window.__debug.museum().carrying);
   check('Museum: golden canvas lifted', r1 === true);

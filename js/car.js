@@ -11,12 +11,16 @@ const wheelGeo = new THREE.CylinderGeometry(0.36, 0.36, 0.3, 12);
 wheelGeo.rotateZ(Math.PI / 2);
 const wheelMat = new THREE.MeshStandardMaterial({ color: 0x16161a, roughness: 0.9, metalness: 0.1 });
 
+const headlightGeometry=new THREE.BoxGeometry(.34,.16,.08);
+const headlightMaterial=new THREE.MeshStandardMaterial({color:'#fff7cc',emissive:0x887722,metalness:.7,roughness:.32});
+const taillightMaterial=new THREE.MeshStandardMaterial({color:'#aa1111',emissive:0x550000,metalness:.7,roughness:.32});
+const carGlass=new Map();
 // Builds a car mesh facing +z. Returns { group, wheels, lightbar }.
 export function createCarMesh(color, opts = {}) {
   const group = new THREE.Group();
   // metallic paint that picks up environment reflections
   const mat = (c, e) => new THREE.MeshStandardMaterial({ color: c, emissive: e || 0x000000, metalness: 0.7, roughness: 0.32 });
-  const glassMat = (c) => new THREE.MeshStandardMaterial({ color: c, metalness: 0.9, roughness: 0.12 });
+  const glassMat = c => {if(!carGlass.has(c))carGlass.set(c,new THREE.MeshStandardMaterial({color:c,metalness:.9,roughness:.12}));return carGlass.get(c);};
 
   const bodyColor = opts.police ? '#f2f2f2' : color;
   const body = new THREE.Mesh(carBodyGeometry, mat(bodyColor));
@@ -39,13 +43,13 @@ export function createCarMesh(color, opts = {}) {
   }
 
   // head + tail lights
-  const hl = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.16, 0.08), mat('#fff7cc', 0x887722));
+  const hl = new THREE.Mesh(headlightGeometry, headlightMaterial);
   hl.position.set(-0.6, 0.66, 2.21);
   group.add(hl);
   const hr = hl.clone();
   hr.position.x = 0.6;
   group.add(hr);
-  const tl = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.16, 0.08), mat('#aa1111', 0x550000));
+  const tl = new THREE.Mesh(headlightGeometry, taillightMaterial);
   tl.position.set(-0.6, 0.66, -2.21);
   group.add(tl);
   const tr = tl.clone();

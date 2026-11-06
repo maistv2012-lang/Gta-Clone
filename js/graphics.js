@@ -1,4 +1,7 @@
 import * as THREE from 'three';
+import { RenderBatches } from './render-batches.js';
+import { AdaptiveResolution } from './adaptive-resolution.js';
+import { targetFrameRate } from './visual-quality.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
@@ -41,11 +44,26 @@ export function createGraphics(scene, camera, pixelRatio) {
   } else {
     console.warn('Christchurch: float render targets unavailable; using direct WebGL rendering.');
   }
-  let frames = 0;
+  const batches = new RenderBatches(scene), adaptive = new AdaptiveResolution();
+  scene.matrixWorldAutoUpdate = false;
+  renderer.shadowMap.autoUpdate = false;
+  let frames = 0, lastFrame = 0, lastShadow = -Infinity, shadowInterval = 16;
+  const setRatio = ratio => { renderer.setPixelRatio(ratio);composer?.setPixelRatio(ratio); };
   const graphics = {
     renderer, composer, bloom,
+    configure(profile, settings, touch) {
+      const ratio=Math.min(devicePixelRatio||1,profile.pixelRatio);
+      adaptive.reset(ratio,settings.adaptiveResolution??touch,targetFrameRate(settings,touch));
+      shadowInterval=profile.name==='high'?16:125;
+      lastShadow=-Infinity;setRatio(ratio);
+    },
     render(lowGfx) {
       if (gl.isContextLost()) throw new Error('O contexto WebGL foi perdido antes de renderizar o cenário.');
+      const now=performance.now();
+      if(lastFrame&&adaptive.sample(now-lastFrame,now))setRatio(adaptive.ratio);
+      lastFrame=now;
+      batches.update(camera,now);
+      if(now-lastShadow>=shadowInterval){renderer.shadowMap.needsUpdate=true;lastShadow=now;}
       renderer.info.reset();
       if (hdr && !lowGfx) composer.render();
       else renderer.render(scene, camera);
@@ -69,7 +87,7 @@ export function createGraphics(scene, camera, pixelRatio) {
       }
       if (!visible || variation < 8 || gl.getError() !== gl.NO_ERROR) throw new Error('O WebGL produziu um frame preto ou sem cenário visível. O menu foi mantido; tente novamente ou verifique o suporte gráfico da Prévia.');
     },
-    diagnostics: () => ({ initialized: true, frames, hdr, contextLost: gl.isContextLost(), width: gl.drawingBufferWidth, height: gl.drawingBufferHeight, calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, textures: renderer.info.memory.textures }),
+    diagnostics: () => ({ initialized: true, frames, hdr, contextLost: gl.isContextLost(), width: gl.drawingBufferWidth, height: gl.drawingBufferHeight, calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, textures: renderer.info.memory.textures, geometries: renderer.info.memory.geometries, pixelRatio: renderer.getPixelRatio(), adaptiveResolution: adaptive.enabled, frameTimeEma: adaptive.average, batches: batches.stats }),
   };
   return graphics;
 }

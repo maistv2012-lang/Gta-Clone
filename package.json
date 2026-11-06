@@ -4,7 +4,7 @@
   "description": "Grand Theft Christchurch \u2014 browser-based 3D open world",
   "type": "module",
   "scripts": {
-    "start": "npx -y http-server@14.1.1 -p 8080 -c-1 -s .",
+    "start": "npx -y http-server@14.1.1 . -p 8080 -c-1 -s",
     "map:fetch": "bash scripts/fetch-christchurch.sh",
     "test:map": "node test/map-network.test.mjs",
     "test:map:browser": "node test/map-browser.mjs",
@@ -18,7 +18,14 @@
     "test:spawn:browser": "node test/spawn-browser.mjs",
     "test:visual:unit": "node --test test/visual-quality.test.mjs",
     "test:visual": "node test/visual-demo.mjs",
-    "test:visual:visibility": "node test/visual-visibility.mjs"
+    "test:visual:visibility": "node test/visual-visibility.mjs",
+    "check": "node scripts/check-build.mjs",
+    "test:performance:unit": "node test/render-performance.test.mjs",
+    "test:render:contracts": "node test/render-contracts.mjs",
+    "test:regression": "node test/run-regression.mjs",
+    "benchmark": "node test/performance-benchmark.mjs",
+    "test": "node test/run-regression.mjs",
+    "benchmark:collision": "node test/collision-benchmark.mjs"
   },
   "devDependencies": {
     "playwright-core": "^1.60.0"

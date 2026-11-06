@@ -1,5 +1,7 @@
 // Visual check: screenshots at noon, dusk and night.
 import { chromium } from 'playwright-core';
+import { mkdir } from 'node:fs/promises';
+const output=process.env.GTC_SHOT_OUTPUT||'docs/performance/day-night';await mkdir(output,{recursive:true});
 
 const PORT = process.env.PORT || 8081;
 let browser;
@@ -24,7 +26,7 @@ for (const [name, hour] of [['noon', 13], ['dusk', 18.8], ['night', 23]]) {
     window.__debug.setCamYaw(0.6);
   }, hour);
   await page.waitForTimeout(700);
-  await page.screenshot({ path: `D:/practice/game/test/shot-${name}.png` });
+  await page.screenshot({ path: `${output}/shot-${name}.png` });
   console.log(`saved shot-${name}.png`);
 }
 
@@ -32,3 +34,4 @@ const clockText = await page.evaluate(() => document.getElementById('clock').tex
 console.log('HUD clock shows:', clockText);
 console.log(`runtime errors: ${errors}`);
 await browser.close();
+if(errors)process.exitCode=1;

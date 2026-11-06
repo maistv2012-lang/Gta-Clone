@@ -1,7 +1,7 @@
 [
   {
     "kind": "response",
-    "url": "http://127.0.0.1:43973/",
+    "url": "http://127.0.0.1:41199/",
     "status": 200,
     "worker": false
   },
@@ -18,15 +18,15 @@
     "worker": false
   },
   {
-    "kind": "console",
-    "level": "warning",
-    "message": "Christchurch service worker unavailable in this preview: Failed to register a ServiceWorker for scope ('http://localhost:8080/') with script ('http://localhost:8080/sw.js'): The user denied permission to use Service Worker."
-  },
-  {
     "kind": "response",
     "url": "http://localhost:8080/js/main.js",
     "status": 200,
     "worker": false
+  },
+  {
+    "kind": "console",
+    "level": "warning",
+    "message": "Christchurch service worker unavailable in this preview: Failed to register a ServiceWorker for scope ('http://localhost:8080/') with script ('http://localhost:8080/sw.js'): The user denied permission to use Service Worker."
   },
   {
     "kind": "response",
@@ -37,12 +37,6 @@
   {
     "kind": "response",
     "url": "http://localhost:8080/js/input.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/police.js",
     "status": 200,
     "worker": false
   },
@@ -60,25 +54,25 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/npc.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
     "url": "http://localhost:8080/js/car.js",
     "status": 200,
     "worker": false
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/heli.js",
+    "url": "http://localhost:8080/js/police.js",
     "status": 200,
     "worker": false
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/effects.js",
+    "url": "http://localhost:8080/js/npc.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/heli.js",
     "status": 200,
     "worker": false
   },
@@ -97,6 +91,12 @@
   {
     "kind": "response",
     "url": "http://localhost:8080/js/daynight.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/effects.js",
     "status": 200,
     "worker": false
   },
@@ -132,13 +132,13 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/touch.js",
+    "url": "http://localhost:8080/js/device.js",
     "status": 200,
     "worker": false
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/device.js",
+    "url": "http://localhost:8080/js/menu.js",
     "status": 200,
     "worker": false
   },
@@ -156,19 +156,13 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/menu.js",
+    "url": "http://localhost:8080/js/touch.js",
     "status": 200,
     "worker": false
   },
   {
     "kind": "response",
     "url": "http://localhost:8080/js/ambient.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/ads.js",
     "status": 200,
     "worker": false
   },
@@ -186,13 +180,13 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/races.js",
+    "url": "http://localhost:8080/js/stunts.js",
     "status": 200,
     "worker": false
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/stunts.js",
+    "url": "http://localhost:8080/js/ads.js",
     "status": 200,
     "worker": false
   },
@@ -210,19 +204,7 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/heist.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
     "url": "http://localhost:8080/js/turfwar.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/vigilante.js",
     "status": 200,
     "worker": false
   },
@@ -234,7 +216,13 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/armored.js",
+    "url": "http://localhost:8080/js/races.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/vigilante.js",
     "status": 200,
     "worker": false
   },
@@ -246,43 +234,19 @@
   },
   {
     "kind": "response",
+    "url": "http://localhost:8080/js/heist.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/armored.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
     "url": "http://localhost:8080/js/roulette.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/jetpack.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/ambulance.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/export.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/bounty.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/basejump.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/hoops.js",
     "status": 200,
     "worker": false
   },
@@ -294,7 +258,61 @@
   },
   {
     "kind": "response",
+    "url": "http://localhost:8080/js/jetpack.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/export.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/hoops.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/basejump.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/vendor/three/three.module.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/ambulance.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/bounty.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/ufo.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
     "url": "http://localhost:8080/js/lottery.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/cheats.js",
     "status": 200,
     "worker": false
   },
@@ -318,30 +336,6 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/vendor/three/three.module.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/ufo.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/cheats.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/finale.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
     "url": "http://localhost:8080/js/nemesis.js",
     "status": 200,
     "worker": false
@@ -349,6 +343,12 @@
   {
     "kind": "response",
     "url": "http://localhost:8080/js/zombies.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/finale.js",
     "status": 200,
     "worker": false
   },
@@ -366,7 +366,7 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/myths.js",
+    "url": "http://localhost:8080/js/prison.js",
     "status": 200,
     "worker": false
   },
@@ -378,7 +378,7 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/casinoheist.js",
+    "url": "http://localhost:8080/js/myths.js",
     "status": 200,
     "worker": false
   },
@@ -390,13 +390,13 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/prison.js",
+    "url": "http://localhost:8080/js/plane.js",
     "status": 200,
     "worker": false
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/paparazzi.js",
+    "url": "http://localhost:8080/js/casinoheist.js",
     "status": 200,
     "worker": false
   },
@@ -408,7 +408,19 @@
   },
   {
     "kind": "response",
+    "url": "http://localhost:8080/js/paparazzi.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
     "url": "http://localhost:8080/js/mayor.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/diving.js",
     "status": 200,
     "worker": false
   },
@@ -438,12 +450,6 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/diving.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
     "url": "http://localhost:8080/js/museum.js",
     "status": 200,
     "worker": false
@@ -456,7 +462,13 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/plane.js",
+    "url": "http://localhost:8080/js/tournament.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/crew.js",
     "status": 200,
     "worker": false
   },
@@ -468,7 +480,25 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/tournament.js",
+    "url": "http://localhost:8080/js/syndicate.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/workbench.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/busking.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/stormchaser.js",
     "status": 200,
     "worker": false
   },
@@ -486,24 +516,6 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/busking.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/workbench.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/stormchaser.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
     "url": "http://localhost:8080/js/ferry.js",
     "status": 200,
     "worker": false
@@ -511,12 +523,6 @@
   {
     "kind": "response",
     "url": "http://localhost:8080/js/zipline.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/balloon.js",
     "status": 200,
     "worker": false
   },
@@ -534,12 +540,6 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/crew.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
     "url": "http://localhost:8080/js/carwash.js",
     "status": 200,
     "worker": false
@@ -552,7 +552,7 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/syndicate.js",
+    "url": "http://localhost:8080/js/balloon.js",
     "status": 200,
     "worker": false
   },
@@ -570,19 +570,7 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/druglab.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
     "url": "http://localhost:8080/js/vendors.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/pigeons.js",
     "status": 200,
     "worker": false
   },
@@ -594,7 +582,25 @@
   },
   {
     "kind": "response",
+    "url": "http://localhost:8080/js/druglab.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
     "url": "http://localhost:8080/js/payphone.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/pigeons.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/graffiti.js",
     "status": 200,
     "worker": false
   },
@@ -606,19 +612,25 @@
   },
   {
     "kind": "response",
+    "url": "http://localhost:8080/js/hydrants.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
     "url": "http://localhost:8080/js/meters.js",
     "status": 200,
     "worker": false
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/emotes.js",
+    "url": "http://localhost:8080/js/bodyguard.js",
     "status": 200,
     "worker": false
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/graffiti.js",
+    "url": "http://localhost:8080/js/emotes.js",
     "status": 200,
     "worker": false
   },
@@ -636,13 +648,31 @@
   },
   {
     "kind": "response",
+    "url": "http://localhost:8080/js/wildlife.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
     "url": "http://localhost:8080/js/gym.js",
     "status": 200,
     "worker": false
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/bodyguard.js",
+    "url": "http://localhost:8080/js/trainjack.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/webpull.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/dice.js",
     "status": 200,
     "worker": false
   },
@@ -660,37 +690,25 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/webpull.js",
+    "url": "http://localhost:8080/js/boatrace.js",
     "status": 200,
     "worker": false
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/hydrants.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/wildlife.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/dice.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/trainjack.js",
+    "url": "http://localhost:8080/js/trickpark.js",
     "status": 200,
     "worker": false
   },
   {
     "kind": "response",
     "url": "http://localhost:8080/js/elevators.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/icetruck.js",
     "status": 200,
     "worker": false
   },
@@ -708,25 +726,13 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/trickpark.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/boatrace.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/icetruck.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
     "url": "http://localhost:8080/js/newschopper.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/copcareer.js",
     "status": 200,
     "worker": false
   },
@@ -738,7 +744,7 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/copcareer.js",
+    "url": "http://localhost:8080/js/bribe.js",
     "status": 200,
     "worker": false
   },
@@ -780,12 +786,6 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/bribe.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
     "url": "http://localhost:8080/js/stocks.js",
     "status": 200,
     "worker": false
@@ -804,13 +804,13 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/arcade.js",
+    "url": "http://localhost:8080/js/pokertourney.js",
     "status": 200,
     "worker": false
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/chess.js",
+    "url": "http://localhost:8080/js/arcade.js",
     "status": 200,
     "worker": false
   },
@@ -828,6 +828,18 @@
   },
   {
     "kind": "response",
+    "url": "http://localhost:8080/js/chess.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/bossrush.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
     "url": "http://localhost:8080/js/perks.js",
     "status": 200,
     "worker": false
@@ -840,31 +852,7 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/js/pokertourney.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/armor.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/bossrush.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
     "url": "http://localhost:8080/js/fishing.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/nightclub.js",
     "status": 200,
     "worker": false
   },
@@ -876,7 +864,37 @@
   },
   {
     "kind": "response",
+    "url": "http://localhost:8080/js/nightclub.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/armor.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
     "url": "http://localhost:8080/js/graphics.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/visual-quality.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/collider-query.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/chase-camera.js",
     "status": 200,
     "worker": false
   },
@@ -900,7 +918,31 @@
   },
   {
     "kind": "response",
+    "url": "http://localhost:8080/vendor/three/addons/utils/BufferGeometryUtils.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
     "url": "http://localhost:8080/js/road-traffic.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/vehicle-detail.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/render-batches.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/adaptive-resolution.js",
     "status": 200,
     "worker": false
   },
@@ -912,25 +954,13 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/vendor/three/addons/postprocessing/EffectComposer.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/js/map-loader.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
-    "url": "http://localhost:8080/vendor/three/addons/postprocessing/UnrealBloomPass.js",
-    "status": 200,
-    "worker": false
-  },
-  {
-    "kind": "response",
     "url": "http://localhost:8080/vendor/three/addons/postprocessing/RenderPass.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/vendor/three/addons/postprocessing/EffectComposer.js",
     "status": 200,
     "worker": false
   },
@@ -942,19 +972,25 @@
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/vendor/three/addons/utils/BufferGeometryUtils.js",
+    "url": "http://localhost:8080/vendor/three/addons/postprocessing/UnrealBloomPass.js",
     "status": 200,
     "worker": false
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/vendor/three/addons/shaders/CopyShader.js",
+    "url": "http://localhost:8080/js/christchurch-spawn.js",
     "status": 200,
     "worker": false
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/vendor/three/addons/postprocessing/MaskPass.js",
+    "url": "http://localhost:8080/js/map-loader.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/city-detailing.js",
     "status": 200,
     "worker": false
   },
@@ -966,13 +1002,25 @@
   },
   {
     "kind": "response",
+    "url": "http://localhost:8080/vendor/three/addons/shaders/CopyShader.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/js/city-materials.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
     "url": "http://localhost:8080/vendor/three/addons/postprocessing/ShaderPass.js",
     "status": 200,
     "worker": false
   },
   {
     "kind": "response",
-    "url": "http://localhost:8080/vendor/three/addons/shaders/LuminosityHighPassShader.js",
+    "url": "http://localhost:8080/vendor/three/addons/postprocessing/MaskPass.js",
     "status": 200,
     "worker": false
   },
@@ -984,7 +1032,133 @@
   },
   {
     "kind": "response",
+    "url": "http://localhost:8080/js/facade-style.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/vendor/three/addons/shaders/LuminosityHighPassShader.js",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
     "url": "http://localhost:8080/data/christchurch.json",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/stone-color.jpg",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/stone-roughness.png",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/stone-normal.png",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/limestone-color.jpg",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/limestone-roughness.png",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/limestone-normal.png",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/paving-color.jpg",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/paving-normal.png",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/paving-roughness.png",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/asphalt-color.jpg",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/asphalt-normal.png",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/asphalt-roughness.png",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/roof-color.jpg",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/roof-normal.png",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/roof-roughness.png",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/brick-color.jpg",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/brick-normal.png",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/brick-roughness.png",
+    "status": 200,
+    "worker": false
+  },
+  {
+    "kind": "response",
+    "url": "http://localhost:8080/assets/christchurch/foliage-color.png",
     "status": 200,
     "worker": false
   },
@@ -992,6 +1166,11 @@
     "kind": "console",
     "level": "warning",
     "message": "Christchurch: float render targets unavailable; using direct WebGL rendering."
+  },
+  {
+    "kind": "console",
+    "level": "warning",
+    "message": "THREE.WebGLRenderer: EXT_color_buffer_float extension not supported."
   },
   {
     "kind": "console",

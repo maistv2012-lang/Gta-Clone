@@ -34,6 +34,16 @@ const rubber = new THREE.MeshStandardMaterial({ color: 0x22272b, roughness: 0.8 
 const white = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.6 });
 const rim = new THREE.TorusGeometry(0.235, 0.036, 4, 12);
 rim.rotateY(Math.PI / 2);
+const panelGeometry = new Map();
+const plateGeometry = new THREE.PlaneGeometry(.5,.13);
+const policeSignGeometry = new THREE.PlaneGeometry(1.15,.27);
+// One reusable wheel face: twin rims plus simple period-style spokes.
+const wheelParts=[];
+for(const x of [-.16,.16]) {
+  const ring=rim.clone();ring.translate(x,0,0);wheelParts.push(ring);
+  for(let i=0;i<3;i++) {const spoke=new THREE.BoxGeometry(.025,.43,.032);spoke.rotateX(i*Math.PI/3);spoke.translate(x,0,0);wheelParts.push(spoke);}
+}
+const wheelFaceGeometry=mergeGeometries(wheelParts,false);wheelParts.forEach(g=>g.dispose());
 let policeLabel, plate;
 function label(text, bg, fg) {
   const c = document.createElement('canvas');
@@ -58,6 +68,7 @@ export function enhanceCar(group, wheels, paint, police) {
   group.add(lod);
   const buckets = new Map();
   function box(m, x, y, z, w, h, d) {
+    if (panelGeometry.has(m===paint?'paint':m)) return;
     const geometry = new THREE.BoxGeometry(w, h, d);
     geometry.translate(x, y, z);
     if (!buckets.has(m)) buckets.set(m, []);
@@ -79,24 +90,23 @@ export function enhanceCar(group, wheels, paint, police) {
   for (const [material, geometries] of buckets) {
     const geometry = mergeGeometries(geometries, false);
     geometries.forEach((g) => g.dispose());
-    const mesh = new THREE.Mesh(geometry, material);
+    panelGeometry.set(material===paint?'paint':material,geometry);
+  }
+  for(const material of [paint,rubber,chrome]) {
+    const mesh = new THREE.Mesh(panelGeometry.get(material===paint?'paint':material), material);
     mesh.castShadow = true;
     near.add(mesh);
   }
   for (const wheel of wheels) {
     const detail = new THREE.LOD(),
       g = new THREE.Group();
-    for (const x of [-0.16, 0.16]) {
-      const ring = new THREE.Mesh(rim, chrome);
-      ring.position.x = x;
-      g.add(ring);
-    }
+    g.add(new THREE.Mesh(wheelFaceGeometry, chrome));
     detail.addLevel(g, 0);
     detail.addLevel(new THREE.Group(), 28);
     wheel.add(detail);
   }
   if (!plate) plate = label('GTC 024', '#e0e0d6', '#222a2b');
-  const number = new THREE.Mesh(new THREE.PlaneGeometry(0.5, 0.13), plate);
+  const number = new THREE.Mesh(plateGeometry, plate);
   number.position.set(0, 0.55, -2.185);
   number.rotation.y = Math.PI;
   near.add(number);
@@ -116,7 +126,7 @@ export function enhanceCar(group, wheels, paint, police) {
     group.add(checks);
     if (!policeLabel) policeLabel = label('POLICE', '#f1f1e9', '#183f72');
     for (const side of [-1, 1]) {
-      const sign = new THREE.Mesh(new THREE.PlaneGeometry(1.15, 0.27), policeLabel);
+      const sign = new THREE.Mesh(policeSignGeometry, policeLabel);
       sign.position.set(side * 1.115, 0.94, -0.3);
       sign.rotation.y = (side * Math.PI) / 2;
       near.add(sign);
