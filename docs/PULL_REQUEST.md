@@ -29,6 +29,13 @@ Overpass/CDN dependency.
 - Document Windows PowerShell startup and diagnosis. Clone/download this branch
   from GitHub after it has been pushed; internal chat file links are insufficient.
 
+- Add a first playable Cathedral Square art demonstration: 24 footprint-based
+  building LODs, authored PBR/foliage assets, geometric facade detail, a restoration
+  Cathedral approximation, skinned characters, detailed vehicles, NZ-inspired
+  police, streamed detail and Low/Medium/High with 30/60 FPS targets. Actual
+  captures and observed software performance are in `docs/VISUAL-DEMO.md`.
+  Reference-image realism and physical-device 30 FPS acceptance remain unfinished.
+
 ## Validation
 
 The initial full review results are recorded in `docs/pr-validation/VALIDATION.md`;

@@ -1,0 +1,34 @@
+[
+  {
+    "name": "desktop-fresh",
+    "player": [
+      21.797880771790318,
+      0,
+      -33.4716289972768
+    ],
+    "spawn": [
+      21.797880771790318,
+      0,
+      -33.4716289972768
+    ],
+    "area": "Cathedral Square",
+    "money": 0,
+    "passed": true
+  },
+  {
+    "name": "mobile-existing-save",
+    "player": [
+      21.797880771790318,
+      0,
+      -33.4716289972768
+    ],
+    "spawn": [
+      21.797880771790318,
+      0,
+      -33.4716289972768
+    ],
+    "area": "Cathedral Square",
+    "money": 4321,
+    "passed": true
+  }
+]

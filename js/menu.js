@@ -77,7 +77,14 @@ export function initMenu(h) {
   inv.onchange = () => { s.invertY = inv.checked; hooks.onSettings(); };
   const qual = document.createElement('input');
   qual.type = 'checkbox'; qual.checked = !!s.lowGfx;
-  qual.onchange = () => { s.lowGfx = qual.checked; hooks.onSettings(); };
+  const quality = document.createElement('select'); quality.id = 'graphics-quality';
+  for (const name of ['low', 'medium', 'high']) { const o = document.createElement('option');o.value=name;o.textContent=name.toUpperCase();quality.append(o); }
+  quality.value = s.lowGfx ? 'low' : (s.quality || 'medium');
+  quality.onchange = () => { s.quality=quality.value;s.lowGfx=quality.value==='low';qual.checked=s.lowGfx;hooks.onSettings(); };
+  const fps = document.createElement('select');fps.id='graphics-fps';
+  for(const value of [30,60]) { const o=document.createElement('option');o.value=String(value);o.textContent=value+' FPS target';fps.append(o); }
+  fps.value=String(s.fps || 30);fps.onchange=()=>{s.fps=Number(fps.value);hooks.onSettings();};
+  qual.onchange = () => { s.lowGfx = qual.checked;if(!qual.checked&&s.quality==='low')s.quality='medium';quality.value=qual.checked?'low':s.quality||'medium';hooks.onSettings(); };
 
   const box = document.createElement('div');
   box.style.cssText = 'margin-top:16px;padding:12px 20px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.15);border-radius:10px;';
@@ -85,6 +92,8 @@ export function initMenu(h) {
     row('VOLUME', vol),
     row('SENSITIVITY', sens),
     row('INVERT Y', inv),
+    row('QUALITY', quality),
+    row('FRAME RATE', fps),
     row('LOW GRAPHICS', qual),
   );
   menuEl.appendChild(box);

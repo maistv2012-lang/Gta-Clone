@@ -1,22 +1,25 @@
 import * as THREE from 'three';
 import { cathedralSpawn } from './christchurch-spawn.js';
+import { createCityDetailing } from './city-detailing.js';
+import { worldUV } from './city-materials.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { buildNetwork, nearestEdge, leftOffset, findRoute, polygonContact } from './road-network.js';
 
-function surface(scene, points, color, y, holes = []) {
+function surface(scene, points, color, y, holes = [], material = null) {
   if (points.length < 3) return;
   const shape = new THREE.Shape(points.map(([x, z]) => new THREE.Vector2(x, -z)));
   for (const ring of holes) shape.holes.push(new THREE.Path(ring.map(([x, z]) => new THREE.Vector2(x, -z))));
   const geometry = new THREE.ShapeGeometry(shape);
   geometry.rotateX(-Math.PI / 2);
-  const mesh = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color, side: THREE.DoubleSide }));
+  if (material) worldUV(geometry, material.userData.surfaceScale || 3);
+  const mesh = new THREE.Mesh(geometry, material || new THREE.MeshLambertMaterial({ color, side: THREE.DoubleSide }));
   mesh.position.y = y; mesh.receiveShadow = true; scene.add(mesh);
 }
 
-function strip(scene, a, b, width, color, y) {
+function strip(scene, a, b, width, color, y, material = null) {
   const offset = leftOffset(a, b, width / 2);
   surface(scene, [[a[0] + offset[0], a[1] + offset[1]], [b[0] + offset[0], b[1] + offset[1]],
-    [b[0] - offset[0], b[1] - offset[1]], [a[0] - offset[0], a[1] - offset[1]]], color, y);
+    [b[0] - offset[0], b[1] - offset[1]], [a[0] - offset[0], a[1] - offset[1]]], color, y, [], material);
 }
 
 export async function addChristchurch(targetScene, city, data) {
@@ -31,7 +34,7 @@ export async function addChristchurch(targetScene, city, data) {
     mesh.geometry.applyMatrix4(mesh.matrix);
     mesh.geometry.computeBoundingBox();
     const center = mesh.geometry.boundingBox.getCenter(new THREE.Vector3());
-    const key = `${Math.floor(center.x / 300)},${Math.floor(center.z / 300)},${mesh.material.color.getHex()},${!!mesh.geometry.index}`;
+    const key = `${Math.floor(center.x / 300)},${Math.floor(center.z / 300)},${mesh.material.type},${mesh.material.map?.uuid || mesh.material.color.getHex()},${!!mesh.geometry.index}`;
     if (!buckets.has(key)) buckets.set(key, { material: mesh.material, geometries: [], shadow: mesh.castShadow });
     const bucket = buckets.get(key);
     if (mesh.material !== bucket.material) mesh.material.dispose();
@@ -49,6 +52,7 @@ export async function addChristchurch(targetScene, city, data) {
   city.network = buildNetwork(data.roads);
   city.walkNetwork = buildNetwork(data.roads, { walking: true });
   city.realColliders = [];
+  city.detailing = await createCityDetailing(targetScene, city, data);
   for (const [index, area] of data.areas.entries()) {
     if (index % 128 === 0) await checkpoint(`Preparando edifícios e áreas: ${index}/${data.areas.length}…`);
     if (!area.tags.building) {
@@ -61,7 +65,10 @@ export async function addChristchurch(targetScene, city, data) {
     const geometry = new THREE.ExtrudeGeometry(shape, { depth: height, bevelEnabled: false });
     geometry.rotateX(-Math.PI / 2);
     const mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial({ color: 0x969384, roughness: 0.9 }));
-    mesh.castShadow = true; mesh.receiveShadow = true; scene.add(mesh);
+    mesh.castShadow = true; mesh.receiveShadow = true;
+    if (city.detailing.selected.has(area.id)) {
+      mesh.geometry.dispose(); mesh.material.dispose(); city.detailing.addBuilding(area);
+    } else scene.add(mesh);
     const xs = area.points.map(p => p[0]), zs = area.points.map(p => p[1]);
     const collider = { x0: Math.min(...xs), x1: Math.max(...xs), z0: Math.min(...zs), z1: Math.max(...zs), h: height + 0.3,
       polygon: area.points };
@@ -70,10 +77,20 @@ export async function addChristchurch(targetScene, city, data) {
   for (const [index, road] of data.roads.entries()) {
     if (index % 128 === 0) await checkpoint(`Preparando ruas: ${index}/${data.roads.length}…`);
     const pedestrian = ['footway', 'pedestrian', 'path', 'cycleway', 'steps'].includes(road.tags.highway);
+    if (road.tags.area === 'yes' && road.points.length > 3 && road.points.some(p=>Math.hypot(p[0]-24,p[1]+36)<240)) {
+      surface(scene, road.points, 0x969c96, .04, [], city.detailing.mats.paving);
+    }
+    // Rounded joins close the gaps between short OSM segments at intersections.
+    if (!pedestrian) for (const point of road.points) {
+      if (Math.hypot(point[0]-24,point[1]+36)>240) continue;
+      const circle=Array.from({length:12},(_,i)=>[point[0]+Math.cos(i*Math.PI/6)*road.width/2,point[1]+Math.sin(i*Math.PI/6)*road.width/2]);
+      surface(scene,circle,0x363e42,.081,[],city.detailing.mats.asphalt);
+    }
     for (let i = 1; i < road.points.length; i++) {
       const a = road.points[i - 1], b = road.points[i];
-      if (!pedestrian) strip(scene, a, b, road.width + 3, 0x969c96, 0.05);
-      strip(scene, a, b, road.width, pedestrian ? 0xb1a58e : 0x363e42, 0.08);
+      const detailed = Math.min(Math.hypot(a[0]-24,a[1]+36),Math.hypot(b[0]-24,b[1]+36)) < 240;
+      if (!pedestrian) strip(scene, a, b, road.width + 3, 0x969c96, 0.05, detailed ? city.detailing.mats.paving : null);
+      strip(scene, a, b, road.width, pedestrian ? 0xb1a58e : 0x363e42, 0.08, detailed ? city.detailing.mats[pedestrian ? 'paving' : 'asphalt'] : null);
     }
   }
   city.legacySpawn = city.spawn.clone();
@@ -160,6 +177,11 @@ export function drawRoads(context, city, transform, scale, view = null) {
   const canvas = document.createElement('canvas'); canvas.width = size; canvas.height = context.canvas.height;
   const layer = canvas.getContext('2d');
   layer.strokeStyle = context.strokeStyle;
+  for (const area of city.osm.areas) {
+    if (!['park','garden'].includes(area.tags.leisure) && area.tags.natural!=='water') continue;
+    layer.fillStyle=area.tags.natural==='water'?'#446976':'#384e3b';layer.beginPath();
+    area.points.forEach(([x,z],i)=>{const p=transform(x,z);if(i)layer.lineTo(...p);else layer.moveTo(...p);});layer.closePath();layer.fill();
+  }
   for (const road of city.osm.roads) {
     layer.lineWidth = Math.max(1, road.width * scale);
     layer.beginPath();

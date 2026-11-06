@@ -1,0 +1,37 @@
+{
+  "counts": [
+    {
+      "quality": "low",
+      "buildings": 24,
+      "source": "OSM footprints + original procedural geometry",
+      "props": 31,
+      "trees": 171,
+      "visibleTrunks": 171,
+      "leafCardsPerTree": 3
+    },
+    {
+      "quality": "medium",
+      "buildings": 24,
+      "source": "OSM footprints + original procedural geometry",
+      "props": 31,
+      "trees": 171,
+      "visibleTrunks": 171,
+      "leafCardsPerTree": 6
+    },
+    {
+      "quality": "high",
+      "buildings": 24,
+      "source": "OSM footprints + original procedural geometry",
+      "props": 31,
+      "trees": 171,
+      "visibleTrunks": 171,
+      "leafCardsPerTree": 9
+    }
+  ],
+  "clearance": {
+    "offset": 1.0950000286102295,
+    "bodyExtent": 1.0700000524520874,
+    "visible": true
+  },
+  "errors": []
+}

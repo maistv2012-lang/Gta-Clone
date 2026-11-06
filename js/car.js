@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { resolveCircle, HALF } from './city.js';
+import { carBodyGeometry, carCabinGeometry, enhanceCar } from './vehicle-detail.js';
 
 const CAR_COLORS = ['#6e1f1f', '#1f2f45', '#2a2a2e', '#3d3d42', '#5a5247', '#23402a', '#494544', '#6b6760', '#2e2330', '#14181d', '#b89b2e', '#742a14'];
 export function randomCarColor() {
@@ -18,12 +19,12 @@ export function createCarMesh(color, opts = {}) {
   const glassMat = (c) => new THREE.MeshStandardMaterial({ color: c, metalness: 0.9, roughness: 0.12 });
 
   const bodyColor = opts.police ? '#f2f2f2' : color;
-  const body = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.55, 4.4), mat(bodyColor));
-  body.position.y = 0.62;
+  const body = new THREE.Mesh(carBodyGeometry, mat(bodyColor));
+  body.position.y = 0.43;
   body.castShadow = true;
   group.add(body);
 
-  const cabin = new THREE.Mesh(new THREE.BoxGeometry(1.7, 0.5, 2.0), glassMat(opts.police ? '#10141c' : '#3c4c5c'));
+  const cabin = new THREE.Mesh(carCabinGeometry, glassMat(opts.police ? '#10141c' : '#3c4c5c'));
   cabin.position.set(0, 1.14, -0.25);
   cabin.castShadow = true;
   group.add(cabin);
@@ -74,6 +75,7 @@ export function createCarMesh(color, opts = {}) {
     lightbar.blue = blue;
   }
 
+  enhanceCar(group, wheels, body.material, !!opts.police);
   return { group, wheels, lightbar };
 }
 

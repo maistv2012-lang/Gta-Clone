@@ -2,7 +2,7 @@ import { initDistrictTravel } from './district-travel.js';
 import * as THREE from 'three';
 import { initInput, endFrame, pollGamepad, keys, pressed, mouse } from './input.js';
 import { buildCity, resolveCircle, pointBlocked, groundHeight, blockStart, BLOCK, HALF, N } from './city.js';
-import { createCharacter, animateWalk, animateIdle, animateLand, CHARACTERS } from './characters.js';
+import { createCharacter, animateWalk, animateIdle, animateLand, CHARACTERS, applySuit, setCharacterQuality } from './characters.js';
 import { physStep, separateCars, darkenCar } from './car.js';
 import { spawnPeds, updatePeds, killPed, spawnTraffic, updateTraffic, disableTraffic, spawnParked } from './npc.js';
 import { updatePolice, addCrime, copDie, clearCops } from './police.js';
@@ -140,6 +140,8 @@ import { initFishing, updateFishing } from './fishing.js';
 import { initNightclub, updateNightclub } from './nightclub.js';
 import { initSkateboard, updateSkateboard } from './skateboard.js';
 import { createGraphics } from './graphics.js';
+import { qualityProfile, targetFrameRate } from './visual-quality.js';
+import { createChaseCameraClip } from './chase-camera.js';
 
 // ---------- renderer / scene ----------
 
@@ -174,6 +176,7 @@ window.addEventListener('resize', () => {
 
 window.__gtcBoot?.progress('Preparando a cidade de Christchurch…');
 const city = await buildCity(scene);
+const clipChaseCamera = createChaseCameraClip(city);
 window.__gtcBoot?.progress('Inicializando personagens, veículos e missões…');
 await new Promise(resolve => setTimeout(resolve, 0));
 const sky = createSkyDome(scene);
@@ -264,7 +267,7 @@ const world = {
   ach: { ...(save.ach || {}) },
   suitSaved: save.suit || 'street',
   suitsOwnedSaved: save.suits || {},
-  settings: { volume: 1, sens: 1, invertY: false, lowGfx: false, ...(save.settings || {}) },
+  settings: { volume: 1, sens: 1, invertY: false, quality: isTouch ? 'medium' : 'high', fps: isTouch ? 30 : 60, lowGfx: false, ...(save.settings || {}) },
   perks: { style: 1, melee: 1, webDur: 6, decay: 24, busted: 1.6 },
   waypoint: null,
   barks: [],
@@ -478,11 +481,19 @@ const wpMarker = new THREE.Group();
   scene.add(wpMarker);
 }
 
+let activeQuality;
 function applySettings() {
   const st = world.settings;
   setMasterVolume(st.volume);
-  sun.castShadow = !st.lowGfx;
-  renderer?.setPixelRatio(st.lowGfx ? 1 : (isTouch ? 1 : Math.min(window.devicePixelRatio, 2)));
+  activeQuality = qualityProfile(st, isTouch);
+  sun.castShadow = activeQuality.shadowSize > 0;
+  if (activeQuality.shadowSize && sun.shadow.mapSize.x !== activeQuality.shadowSize) {
+    sun.shadow.mapSize.setScalar(activeQuality.shadowSize);sun.shadow.map?.dispose();sun.shadow.map=null;
+  }
+  city.detailing?.setQuality(activeQuality.name);
+  setCharacterQuality(activeQuality.name, scene);
+  renderer?.setPixelRatio(Math.min(devicePixelRatio || 1, activeQuality.pixelRatio));
+  if (renderer) renderer.shadowMap.enabled = activeQuality.shadowSize > 0;
   if (renderer && composer) composer.setPixelRatio(renderer.getPixelRatio());
   saveGame();
 }
@@ -867,6 +878,7 @@ function updateCamera(dt) {
     camPos.lerp(_camDesired, Math.min(1, 11 * dt));
     camera.position.copy(camPos);
     _camTarget.set(player.pos.x, player.pos.y + 1.55, player.pos.z);
+    if (city.osm && !web.attached) clipChaseCamera(camera, _camTarget);
     camera.lookAt(_camTarget);
   }
 
@@ -2624,14 +2636,8 @@ function applyCharacter(c) {
 
 // recolor the player rig to a character's palette (reuses the wardrobe path)
 function applySuitColors(colors) {
-  const g = player.ch;
-  const set = (mesh, col) => { if (col && mesh) mesh.material.color.set(col); };
-  set(g.group.children[0], colors.shirt);
-  set(g.group.children[1], colors.skin);
-  set(g.lArm.children[0], colors.skin);
-  set(g.rArm.children[0], colors.skin);
-  set(g.lLeg.children[0], colors.pants);
-  set(g.rLeg.children[0], colors.pants);
+  player.ch.setBuild?.(colors.build || 'regular');
+  applySuit(player.ch, colors);
 }
 
 let animationStarted = false;
@@ -2646,7 +2652,7 @@ document.getElementById('playbtn').addEventListener('click', () => {
     }
     applySettings();
     updateCamera(1);
-    graphics.render(world.settings.lowGfx);
+    graphics.render(!activeQuality.post);
     graphics.verifyFirstFrame();
     updateHUD(world); // Centre the minimap on the actual spawn before revealing play.
     if (!renderer.domElement.isConnected) document.body.prepend(renderer.domElement);
@@ -3052,12 +3058,16 @@ function update(dt) {
 }
 
 let introT = 0;
+let lastAnimationTick = 0;
 const _introFrom = new THREE.Vector3(HALF * 0.55, 130, HALF * 0.55);
 const _introTo = new THREE.Vector3();
 
 function animate() {
   if (window.__gtcBoot?.failed || !graphics) return;
   requestAnimationFrame(animate);
+  const now = performance.now(), interval = 1000 / targetFrameRate(world.settings, isTouch);
+  if (now - lastAnimationTick < interval - .5) return;
+  lastAnimationTick = now - ((now - lastAnimationTick) % interval);
   pollGamepad();
   let dt = Math.min(clock.getDelta(), 0.05);
 
@@ -3093,7 +3103,8 @@ function animate() {
     camera.rotation.z += Math.sin(t * 0.0021) * 0.09;
     camera.rotation.x += Math.sin(t * 0.0013) * 0.04;
   }
-  graphics.render(world.settings.lowGfx);
+  city.detailing?.update(camera);
+  graphics.render(!activeQuality.post);
   if (world.captureNext) {
     world.captureNext = false;
     grabCanvas(renderer.domElement).then((b) => saveOrShare(b, 'open-city-photo.png'));

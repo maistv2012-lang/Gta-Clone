@@ -1,0 +1,59 @@
+FAIL  Web swinging — airborne at 0.7m
+PASS  Release glide (hang-time)
+PASS  Zip-to-point (tap right click)
+PASS  Wall-run — climbed to 3.9m
+PASS  Style meter — +15 for mid-air catch
+PASS  Web attack (Q) pins peds
+PASS  Store robbery (hold E) — +$267, 2 stars
+PASS  WEB DEN upgrades — bought LONG WEBS at the den
+PASS  Gang territory (Vipers) — 10 members patrolling
+PASS  Territory takeover counter — kill raises the count
+PASS  Motorbike — found one parked and mounted it
+PASS  Car radio (R) — station 0 -> 1
+PASS  Army tank at 5 stars — 1 tank hunting
+PASS  Tank is stealable
+PASS  Missions: all eleven types — delivery, race, air, taxi, fire, hit, roofhit, escort, boss, rival, mech
+PASS  Pigeon flocks
+PASS  Day/night cycle + weather — clock set to 23:00, weather system live
+PASS  WASTED topple + respawn
+PASS  Autosave (upgrades/gang/radio persisted) — mapVersion,money,missions,mg,rpg,sg,sn,gren,upg,gang,radio,garage,xp,stats,ach,tokens,suit,suits,settings,char,props,rep,chaosBest,dailyDay,dailyDone,arenaBest,races,mods,dog,heistDay,vigBest,jet,hoops,crowned,lastStand,fable,lottoDay,expDay,expIdx,nemLvl,nemBeaten,mythsGraf,mythsDone,strangerStage,cheistDay,empire,scuba,pearls,chests,mayor,policy,salaryDay,prestige,swingBest,museumDay,club,deck,synd,tourneyRung,tourneyChamp,crew,contractRank,fame,gunMods,stormRank,hair,druglabDay,bank,karma,pigeons,graffiti,guard,phoneStreak,boatBest,trickBest,pizzaRuns,repoDone,icetruck,conesSold,newsShots,copRank,copArrests,jewelryDay,slipRank,slipCars,mwIdx,lawyer,stocks,stockPrices,casinoTakeDay,mallGiftDay,albert,sewerChest,tickets,golfBest,chessWins,bossrushDay,perks,blocksSeen,exploreRank,armor
+PASS  Point-launch (hold C) — launched to 6.9m
+PASS  Web parachute (Space while falling) — fall speed capped at -4.5
+PASS  Web trampoline (T)
+PASS  Casino bets — $2467 -> $2567
+PASS  Dealership supercar
+PASS  Garage pad stores your ride
+PASS  Attack drones (2+ stars) — 2 drones overhead
+PASS  SWAT van (4 stars)
+PASS  Viper drive-bys
+PASS  Bounty hunters after takeover
+PASS  Stunt ramps placed — 12 ramps
+PASS  Rampage skull pickup — 44s of mayhem
+PASS  News ticker element
+PASS  Melee punch (F)
+PASS  Dodge roll (double-tap W) — i-frames 0.40s
+PASS  XP levels + unlock — level 3
+PASS  Wardrobe suit + perk — classic
+PASS  Pause menu + settings
+PASS  Photo mode
+PASS  City map + waypoint
+PASS  NPC speech bubbles
+PASS  PWA (manifest + service worker + icon)
+PASS  Achievements unlock
+PASS  Hidden packages (20 rooftop tokens) — 1/20 collected
+PASS  Nitro boost (Shift in car) — 27.1 m/s, tank 0%
+PASS  AI street racers — 2 rivals, 5 checkpoints
+PASS  Rival web-swinger boss — he swings, he taunts, he is shootable
+PASS  Rival can be defeated
+PASS  Screenshot capture (G)
+PASS  Camera booth wiring
+PASS  Haptics guarded (no crash on desktop)
+PASS  Bigger map (10x10 grid) — 11 road lines/axis
+PASS  Landmarks (spire + stadium + park + waterfront)
+PASS  Selectable characters (3) — 3 characters, tank=150hp
+PASS  Monster truck (dealership)
+PASS  War-mech boss — spawns with 500 armour, shootable
+PASS  War-mech can be destroyed
+PASS  Landing-crouch animation
+---
+AUDIT: 56/57 features verified, runtime errors: 0

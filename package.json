@@ -15,7 +15,10 @@
     "test:startup": "node test/startup-browser.mjs",
     "test:preview": "node test/preview-render.mjs",
     "test:spawn": "node --test test/christchurch-spawn.test.mjs",
-    "test:spawn:browser": "node test/spawn-browser.mjs"
+    "test:spawn:browser": "node test/spawn-browser.mjs",
+    "test:visual:unit": "node --test test/visual-quality.test.mjs",
+    "test:visual": "node test/visual-demo.mjs",
+    "test:visual:visibility": "node test/visual-visibility.mjs"
   },
   "devDependencies": {
     "playwright-core": "^1.60.0"

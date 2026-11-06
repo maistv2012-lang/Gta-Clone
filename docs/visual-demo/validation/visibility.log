@@ -1,0 +1,5 @@
+
+> open-city@1.0.0 test:visual:visibility
+> node test/visual-visibility.mjs
+
+PASS all trees visible/collidable in every quality and NZ livery outside body {"offset":1.0950000286102295,"bodyExtent":1.0700000524520874,"visible":true}

@@ -10,6 +10,7 @@ import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 export function createGraphics(scene, camera, pixelRatio) {
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.domElement.id = 'game';
+  renderer.info.autoReset = false;
   renderer.setPixelRatio(pixelRatio);
   renderer.setSize(Math.max(1, innerWidth), Math.max(1, innerHeight));
   renderer.shadowMap.enabled = true;
@@ -45,6 +46,7 @@ export function createGraphics(scene, camera, pixelRatio) {
     renderer, composer, bloom,
     render(lowGfx) {
       if (gl.isContextLost()) throw new Error('O contexto WebGL foi perdido antes de renderizar o cenário.');
+      renderer.info.reset();
       if (hdr && !lowGfx) composer.render();
       else renderer.render(scene, camera);
       frames++;
@@ -67,7 +69,7 @@ export function createGraphics(scene, camera, pixelRatio) {
       }
       if (!visible || variation < 8 || gl.getError() !== gl.NO_ERROR) throw new Error('O WebGL produziu um frame preto ou sem cenário visível. O menu foi mantido; tente novamente ou verifique o suporte gráfico da Prévia.');
     },
-    diagnostics: () => ({ initialized: true, frames, hdr, contextLost: gl.isContextLost(), width: gl.drawingBufferWidth, height: gl.drawingBufferHeight }),
+    diagnostics: () => ({ initialized: true, frames, hdr, contextLost: gl.isContextLost(), width: gl.drawingBufferWidth, height: gl.drawingBufferHeight, calls: renderer.info.render.calls, triangles: renderer.info.render.triangles, textures: renderer.info.memory.textures }),
   };
   return graphics;
 }

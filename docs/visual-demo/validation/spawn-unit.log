@@ -1,0 +1,18 @@
+
+> open-city@1.0.0 test:spawn
+> node --test test/christchurch-spawn.test.mjs
+
+✔ real default spawn is inside Cathedral Square approach, clear of buildings (4.237232ms)
+✔ spawn lies on a rendered pedestrian surface or sidewalk (0.197805ms)
+✔ spawn walking graph connects to Colombo Street and Hagley Park (38.936914ms)
+✔ nearby legal driving graph reaches Colombo Street in both directions (30.834674ms)
+✔ blocked or absent Cathedral Square fails explicitly instead of spawning in Arcade (51.280159ms)
+✔ synthetic integration fixture retains a valid explicit Square spawn (0.370711ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1583.953538

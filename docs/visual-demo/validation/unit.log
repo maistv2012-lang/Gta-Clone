@@ -1,0 +1,19 @@
+
+> open-city@1.0.0 test:visual:unit
+> node --test test/visual-quality.test.mjs
+
+✔ quality defaults are conservative for touch and retain old lowGfx saves (0.712087ms)
+✔ 30 and 60 FPS are targets with validated fallback, independent of simulation (0.135933ms)
+✔ demonstration is bounded to actual OSM buildings and contains Cathedral/library (198.921244ms)
+✔ chase camera stops in front of a nearby wall, without changing player coordinates (1.045568ms)
+✔ unobstructed chase view remains unchanged (0.259881ms)
+✔ swing audit setup needs a wide facade to intercept all side rays (1.675304ms)
+✔ facade storeys use source levels when available rather than inventing extra floors (0.327822ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 671.396008

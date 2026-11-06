@@ -1,0 +1,22 @@
+
+> open-city@1.0.0 test:map
+> node test/map-network.test.mjs
+
+✔ projection uses metres, east X and south Z (1.365719ms)
+✔ left lane is consistent in all four headings (0.185433ms)
+✔ oneway yes, reverse and roundabouts retain legal directed edges (0.749776ms)
+✔ shared OSM nodes connect ways; geometric crossings do not invent junctions (0.218347ms)
+✔ pedestrian streets and parks are walkable but not ordinary traffic routes (0.196593ms)
+✔ polygon collisions do not fill the empty corners of a diagonal building AABB (0.298004ms)
+✔ traffic follows connected legal edges, turns and stays in its left lane (0.577997ms)
+✔ import refuses empty, failed and geographically incomplete extracts (0.80779ms)
+✔ landmarks must have connected walking routes (1.250666ms)
+✔ Overpass preparation preserves provenance and joins reversed multipolygon members (0.628644ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17.256886

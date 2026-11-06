@@ -1,0 +1,122 @@
+[
+  {
+    "name": "desktop",
+    "osm": true,
+    "area": "Cathedral Square",
+    "details": {
+      "buildings": 24,
+      "source": "OSM footprints + original procedural geometry",
+      "props": 31,
+      "trees": 171
+    },
+    "quality": "high",
+    "rig": true,
+    "bones": 10,
+    "profiles": [
+      {
+        "quality": "low",
+        "graphics": {
+          "initialized": true,
+          "frames": 91,
+          "hdr": true,
+          "contextLost": false,
+          "width": 880,
+          "height": 560,
+          "calls": 691,
+          "triangles": 269514,
+          "textures": 65
+        }
+      },
+      {
+        "quality": "medium",
+        "graphics": {
+          "initialized": true,
+          "frames": 116,
+          "hdr": true,
+          "contextLost": false,
+          "width": 1100,
+          "height": 700,
+          "calls": 833,
+          "triangles": 435635,
+          "textures": 65
+        }
+      },
+      {
+        "quality": "high",
+        "graphics": {
+          "initialized": true,
+          "frames": 141,
+          "hdr": true,
+          "contextLost": false,
+          "width": 1100,
+          "height": 700,
+          "calls": 856,
+          "triangles": 498977,
+          "textures": 78
+        }
+      }
+    ],
+    "observedSoftwareFps": 0.6097096257907172,
+    "physicalS24Verified": false
+  },
+  {
+    "name": "mobile",
+    "osm": true,
+    "area": "Cathedral Square",
+    "details": {
+      "buildings": 24,
+      "source": "OSM footprints + original procedural geometry",
+      "props": 31,
+      "trees": 171
+    },
+    "quality": "medium",
+    "rig": true,
+    "bones": 10,
+    "profiles": [
+      {
+        "quality": "low",
+        "graphics": {
+          "initialized": true,
+          "frames": 92,
+          "hdr": true,
+          "contextLost": false,
+          "width": 307,
+          "height": 665,
+          "calls": 329,
+          "triangles": 147583,
+          "textures": 46
+        }
+      },
+      {
+        "quality": "medium",
+        "graphics": {
+          "initialized": true,
+          "frames": 117,
+          "hdr": true,
+          "contextLost": false,
+          "width": 384,
+          "height": 832,
+          "calls": 471,
+          "triangles": 329354,
+          "textures": 46
+        }
+      },
+      {
+        "quality": "high",
+        "graphics": {
+          "initialized": true,
+          "frames": 142,
+          "hdr": true,
+          "contextLost": false,
+          "width": 384,
+          "height": 832,
+          "calls": 491,
+          "triangles": 385926,
+          "textures": 59
+        }
+      }
+    ],
+    "observedSoftwareFps": 1.0717457206723828,
+    "physicalS24Verified": false
+  }
+]

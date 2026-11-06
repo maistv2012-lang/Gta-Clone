@@ -1,0 +1,113 @@
+[
+  {
+    "name": "s24-preview",
+    "pixels": {
+      "luminanceStd": 63.19189012583197,
+      "colors": 401
+    },
+    "graphics": {
+      "initialized": true,
+      "frames": 9,
+      "hdr": true,
+      "contextLost": false,
+      "width": 384,
+      "height": 832,
+      "calls": 398,
+      "triangles": 189244,
+      "textures": 42
+    }
+  },
+  {
+    "name": "s24-worker-blocked",
+    "pixels": {
+      "luminanceStd": 38.64881937167992,
+      "colors": 410
+    },
+    "graphics": {
+      "initialized": true,
+      "frames": 9,
+      "hdr": true,
+      "contextLost": false,
+      "width": 384,
+      "height": 832,
+      "calls": 396,
+      "triangles": 191732,
+      "textures": 43
+    }
+  },
+  {
+    "name": "s24-warm-reload",
+    "pixels": {
+      "luminanceStd": 38.6622652272581,
+      "colors": 434
+    },
+    "graphics": {
+      "initialized": true,
+      "frames": 15,
+      "hdr": true,
+      "contextLost": false,
+      "width": 384,
+      "height": 832,
+      "calls": 380,
+      "triangles": 205594,
+      "textures": 39
+    }
+  },
+  {
+    "name": "s24-no-float",
+    "pixels": {
+      "luminanceStd": 48.14987186619077,
+      "colors": 289
+    },
+    "graphics": {
+      "initialized": true,
+      "frames": 9,
+      "hdr": false,
+      "contextLost": false,
+      "width": 384,
+      "height": 832,
+      "calls": 422,
+      "triangles": 187308,
+      "textures": 40
+    },
+    "oldBlackFrame": {
+      "luminanceStd": 5.566650263929276,
+      "colors": 44
+    }
+  },
+  {
+    "name": "s24-cache-recovery",
+    "pixels": {
+      "luminanceStd": 63.18110052552626,
+      "colors": 411
+    },
+    "graphics": {
+      "initialized": true,
+      "frames": 15,
+      "hdr": true,
+      "contextLost": false,
+      "width": 384,
+      "height": 832,
+      "calls": 389,
+      "triangles": 195862,
+      "textures": 33
+    }
+  },
+  {
+    "name": "s24-map-error",
+    "menuVisible": true,
+    "replacementWorld": false
+  },
+  {
+    "name": "s24-webgl-error",
+    "menuVisible": true
+  },
+  {
+    "name": "s24-late-js-error",
+    "menuVisible": true
+  },
+  {
+    "name": "s24-silent-black-frame",
+    "menuVisible": true
+  }
+]

@@ -99,7 +99,7 @@ function spawnSwatVan(world) {
 function unloadSwat(world, van) {
   van.unloaded = true;
   for (let i = 0; i < 4; i++) {
-    const ch = createCharacter({ shirt: '#20293d', pants: '#141a28', skin: '#c98e63' });
+    const ch = createCharacter({ shirt: '#44718a', pants: '#141e2c', skin: '#c98e63', police: true });
     world.scene.add(ch.group);
     const a = (i / 4) * Math.PI * 2;
     ch.group.position.set(van.pos.x + Math.sin(a) * 3, 0, van.pos.z + Math.cos(a) * 3);

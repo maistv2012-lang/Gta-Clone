@@ -47,7 +47,16 @@ async function resetPlayer() {
   await resetPlayer();
   const ok = await ev(() => {
     const d = window.__debug;
-    const c = d.world.city.colliders.find((c) => c.h >= 40);
+    // The web uses a fan of rays. A narrow random facade lets its side rays
+    // hit a distant tower, changing the rise after 0.8s without a physics change.
+    // Use a wide facade and a clear start so all rays hit the intended wall.
+    const c = d.world.city.colliders.find(c => {
+      if (c.h < 40 || c.x1 - c.x0 < 16) return false;
+      const x = (c.x0 + c.x1) / 2, z = c.z0 - 12;
+      return !d.world.city.colliders.some(o => x > o.x0 - .8 && x < o.x1 + .8 && z > o.z0 - .8 && z < o.z1 + .8) &&
+        [...d.world.traffic, ...d.world.parked].every(v => Math.hypot(v.pos.x - x, v.pos.z - z) > 6);
+    });
+    if (!c) throw new Error('No wide, clear facade for the swing audit');
     d.player.pos.set((c.x0 + c.x1) / 2, 0, c.z0 - 12);
     d.setCamYaw(0);
     return true;
@@ -56,7 +65,7 @@ async function resetPlayer() {
   await page.mouse.down({ button: 'right' });
   await ev(() => window.__debug.startSwing());
   await waitForGame(page, 800);
-  const s = await ev(() => ({ att: window.__debug.web.attached, y: window.__debug.player.pos.y }));
+  const s = await ev(() => ({ att: window.__debug.web.attached, y: window.__debug.player.pos.y, anchor: window.__debug.web.anchor.toArray() }));
   check('Web swinging', ok && s.att && s.y > 1, `airborne at ${s.y.toFixed(1)}m`);
   await page.mouse.up({ button: 'right' });
   await waitForGame(page, 200);

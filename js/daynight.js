@@ -39,6 +39,7 @@ function sample(hours) {
 
 export function createSkyDome(scene) {
   const uniforms = {
+    cloudTime: { value: 0 },
     topColor: { value: new THREE.Color(0x6fa0d4) },
     horizonColor: { value: new THREE.Color(0xb4c8da) },
     sunDir: { value: new THREE.Vector3(0, 1, 0) },
@@ -63,12 +64,19 @@ export function createSkyDome(scene) {
       uniform vec3 sunColor;
       uniform vec3 sunDir;
       uniform float sunHaze;
+      uniform float cloudTime;
+      float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+      float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);}
       void main() {
         vec3 d = normalize(vDir);
         float h = clamp(d.y, 0.0, 1.0);
         vec3 col = mix(horizonColor, topColor, pow(h, 0.55));
         float s = max(dot(d, sunDir), 0.0);
         col += sunColor * (pow(s, 1200.0) * 2.2 + pow(s, 10.0) * 0.18 * sunHaze);
+        vec2 p=d.xz/max(.18,d.y)*2.4+vec2(cloudTime*.012,0.0);
+        float cloud=noise(p)*.55+noise(p*2.1)*.3+noise(p*4.2)*.15;
+        float cover=smoothstep(.46,.69,cloud)*smoothstep(0.0,.22,d.y);
+        col=mix(col,mix(horizonColor,sunColor*.75,.6),cover*.8);
         gl_FragColor = vec4(col, 1.0);
       }`,
   });
@@ -123,6 +131,7 @@ export function applyDayNight(hours, ctx) {
   hemi.color.copy(s.top).lerp(_a.setHex(0xd5e4f2), 0.35);
   hemi.groundColor.setHex(0x4a463c).multiplyScalar(0.4 + (1 - s.glow) * 0.6);
 
+  sky.uniforms.cloudTime.value = hours * 12;
   sky.uniforms.topColor.value.copy(s.top);
   sky.uniforms.horizonColor.value.copy(s.hor);
   sky.uniforms.sunColor.value.copy(s.sun);

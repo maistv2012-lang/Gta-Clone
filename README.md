@@ -50,6 +50,21 @@ and police pursuits. The district and its harbor are game areas, not real locati
 Near-spawn services, procedural mission destinations, pedestrians, traffic,
 parked vehicles and police use the geographic map when it is loaded.
 
+## Cathedral Square visual demonstration
+
+The first art pass adds modelled facades, a footprint-based restoration-era
+Cathedral, original PBR textures, instanced vegetation, articulated characters,
+detailed vehicles and NZ-inspired police styling around the playable start.
+Pause → QUALITY selects Low/Medium/High; FRAME RATE selects a 30/60 FPS target.
+Mobile defaults to Medium/30. These targets are not certified device performance.
+See [docs/VISUAL-DEMO.md](docs/VISUAL-DEMO.md) for actual captures, licensing,
+software-renderer measurements and unfinished realism/performance work.
+
+```sh
+npm run test:visual:unit
+npm run test:visual
+```
+
 ## Validate
 
 ```sh

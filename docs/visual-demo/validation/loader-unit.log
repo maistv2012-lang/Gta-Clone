@@ -1,0 +1,19 @@
+
+> open-city@1.0.0 test:startup:unit
+> node test/map-loader.test.mjs
+
+✔ valid map loads with the requested URL and abort signal (30.208984ms)
+✔ HTTP 404 is an explicit error, never a legacy-map fallback (1.969793ms)
+✔ successful HTML fallback routes are rejected as non-JSON (1.17089ms)
+✔ truncated JSON and invalid geometry fail before engine initialization (1.039076ms)
+✔ network errors explain that the download failed (0.351832ms)
+✔ timeout covers a server that never sends response headers (20.285464ms)
+✔ timeout also covers a stalled JSON body after HTTP 200 (20.787468ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 87.442307

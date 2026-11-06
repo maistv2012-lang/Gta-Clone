@@ -585,6 +585,10 @@ function drawMinimap(world) {
     g.fillText('H', mx, mz);
   }
 
+  if (world.city.osm) {
+    g.fillStyle='#eef2ea';g.textAlign='center';g.font='bold 10px Arial';g.fillText('N',size/2,14);
+    g.fillRect(size*.35,size-17,size*.3,1);g.font='9px Arial';g.fillText('150 m',size/2,size-5);
+  }
   // player arrow
   const p = world.player.inCar || world.player.inHeli || world.player;
   const [mx, mz] = toMap(p.pos.x, p.pos.z);
