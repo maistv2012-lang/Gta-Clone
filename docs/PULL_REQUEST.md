@@ -10,6 +10,9 @@ Overpass/CDN dependency.
 - Add reproducible OSM fetch/conversion tooling, source/license metadata and a
   validated local extract; route traffic on connected directed edges with left
   lane offsets and place pedestrians, parked vehicles, police and activities.
+- Validate the default Cathedral Square sidewalk/pedestrian spawn, reserve its
+  clearance, retain it on respawn/reload and centre the initial minimap. Label
+  F8 as a travel action so its destination is not mistaken for the current area.
 - Preserve existing engine version, vehicles, characters, physics, combat,
   missions and police systems. Keep block-based activities in an explicitly
   fictional Arcade District, with travel to/from Christchurch.
@@ -28,7 +31,8 @@ Overpass/CDN dependency.
 
 ## Validation
 
-Current execution results are recorded in `docs/pr-validation/VALIDATION.md`.
+The initial full review results are recorded in `docs/pr-validation/VALIDATION.md`;
+latest spawn and navigation checks are in `docs/spawn-validation/`.
 The directory also contains captured mobile menu/scene images and console/network
 logs. Root server required: `npm start`.
 

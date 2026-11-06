@@ -21,6 +21,19 @@ try {
   await page.goto(`http://localhost:${process.env.PORT || 8080}`, { waitUntil: 'networkidle' });
   await page.waitForFunction(() => window.__debug, null, { timeout: 60000 });
   check('map loaded and named', await page.evaluate(() => !!window.__debug.world.city.osm && document.title === 'Grand Theft Christchurch'));
+  check('player starts at the real Cathedral Square spawn, outside Arcade', await page.evaluate(() => {
+    const d = window.__debug, c = d.world.city;
+    const reference = c.osm.landmarks?.find(p => p.name === 'Cathedral Square')?.point;
+    return c.spawnArea === 'Cathedral Square' && d.player.pos.distanceTo(c.spawn) < .1 &&
+      (!reference || Math.hypot(c.spawn.x - reference[0], c.spawn.z - reference[1]) < 60) &&
+      d.player.pos.distanceTo(c.legacySpawn) > 800;
+  }));
+  check('spawn has building clearance and no kiosk overlapping the player', await page.evaluate(async () => {
+    const { pointBlocked } = await import('./js/city.js');
+    const d = window.__debug;
+    const services = [d.shops.denPos, d.shops.wardrobePos, d.shops.casinoPos, d.shops.dealerPos, d.shops.garagePos];
+    return !pointBlocked(d.player.pos, d.world.city.colliders, 2) && services.every(p => d.player.pos.distanceTo(p) > 10);
+  }));
   check('roads and pedestrians have a connected network', await page.evaluate(() => {
     const c = window.__debug.world.city;
     return c.network.edges.length > 0 && c.walkNetwork.edges.length > c.network.edges.length;
@@ -137,7 +150,7 @@ try {
       element.dispatchEvent(new TouchEvent(type, { changedTouches: [touch], touches: type === 'touchend' ? [] : [touch], bubbles: true, cancelable: true }));
     };
     const d = window.__debug;
-    d.player.pos.copy(d.world.city.roadPoint(d.world.city.spawn, 40, 100));
+    // Exercise touch movement from the actual initial spawn, without teleporting.
     d.player.health = 1000; d.setCamYaw(0);
     window.__walkStart = d.player.pos.clone();
     window.__mapTouch('joypad', 'touchstart'); window.__mapTouch('joypad', 'touchmove', 0, -40);

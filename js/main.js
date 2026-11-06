@@ -2567,7 +2567,8 @@ function respawn() {
   player.mesh.rotation.x = 0;
   player.mesh.rotation.z = 0;
   player.mesh.visible = true;
-  player.pos.copy(city.spawn).add(new THREE.Vector3(3, 0, 3));
+  player.pos.copy(city.spawn);
+  if (!city.osm) player.pos.add(new THREE.Vector3(3, 0, 3));
   player.pos.y = 0;
   player.vel.set(0, 0, 0);
   player.vy = 0;
@@ -2647,6 +2648,7 @@ document.getElementById('playbtn').addEventListener('click', () => {
     updateCamera(1);
     graphics.render(world.settings.lowGfx);
     graphics.verifyFirstFrame();
+    updateHUD(world); // Centre the minimap on the actual spawn before revealing play.
     if (!renderer.domElement.isConnected) document.body.prepend(renderer.domElement);
     initSound();
     setMasterVolume(world.settings.volume);

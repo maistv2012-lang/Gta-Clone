@@ -13,7 +13,9 @@
     "vendor:three": "node scripts/vendor-three.mjs",
     "test:startup:unit": "node test/map-loader.test.mjs",
     "test:startup": "node test/startup-browser.mjs",
-    "test:preview": "node test/preview-render.mjs"
+    "test:preview": "node test/preview-render.mjs",
+    "test:spawn": "node --test test/christchurch-spawn.test.mjs",
+    "test:spawn:browser": "node test/spawn-browser.mjs"
   },
   "devDependencies": {
     "playwright-core": "^1.60.0"

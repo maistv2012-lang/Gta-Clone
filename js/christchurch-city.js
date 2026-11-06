@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { cathedralSpawn } from './christchurch-spawn.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { buildNetwork, nearestEdge, leftOffset, findRoute, polygonContact } from './road-network.js';
 
@@ -75,10 +76,10 @@ export async function addChristchurch(targetScene, city, data) {
       strip(scene, a, b, road.width, pedestrian ? 0xb1a58e : 0x363e42, 0.08);
     }
   }
-  const square = data.roads.find(r => r.tags.name === 'Cathedral Square');
-  const start = nearestEdge(city.walkNetwork, data.landmarks?.find(p => p.name === 'Cathedral Square')?.point || square?.points[0] || [0, 0]);
   city.legacySpawn = city.spawn.clone();
-  city.spawn.set(...[start.point[0], 0, start.point[1]]);
+  const start = cathedralSpawn(data, city.walkNetwork, city.colliders);
+  city.spawn.set(start.x, 0, start.z);
+  city.spawnArea = 'Cathedral Square';
   // Return safe points for cars and sidewalk activities without assuming a grid.
   city.roadPoint = (near = city.spawn, min = 0, max = Infinity) => {
     const candidates = city.network.edges.filter(e => {
@@ -90,7 +91,7 @@ export async function addChristchurch(targetScene, city, data) {
     return new THREE.Vector3((edge.a[0] + edge.b[0]) / 2 + off[0], 0, (edge.a[1] + edge.b[1]) / 2 + off[1]);
   };
   city.nearestRoad = (position) => nearestEdge(city.network, [position.x, position.z]);
-  const reserved = [];
+  const reserved = [{ x: city.spawn.x, z: city.spawn.z }];
   city.safePoint = (position, reserve = false) => {
     // Prefer a nearby walkable edge, rejecting building footprints and keeping
     // roadside kiosks outside the carriageway. Search several candidates so a
@@ -108,7 +109,6 @@ export async function addChristchurch(targetScene, city, data) {
     if (reserve && point) reserved.push(point);
     return point ? new THREE.Vector3(point.x, 0, point.z) : city.legacySpawn.clone();
   };
-  city.spawn.copy(city.safePoint(city.spawn));
   city.route = (from, to) => {
     const a = city.nearestRoad(from), b = city.nearestRoad(to);
     return findRoute(city.network, a.edge.to, b.edge.from);

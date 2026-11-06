@@ -1,0 +1,7 @@
+
+> open-city@1.0.0 test:spawn:browser
+> node test/spawn-browser.mjs
+
+PASS desktop-fresh
+PASS mobile-existing-save
+PASS Square spawn, saved progress/reload, centred minimap, walking to Colombo and driving on Colombo

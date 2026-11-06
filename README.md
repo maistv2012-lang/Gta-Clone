@@ -32,6 +32,12 @@ error and a retry action. PLAY stays disabled until the real map and all game
 systems are ready. The game never switches to the fictional map on failure;
 `?map=legacy` is an explicit regression/development choice.
 
+The default spawn and real-map respawn use a validated Cathedral Square sidewalk
+or pedestrian surface. The F8/touch travel button says **Ir para**: it names the
+destination, not the player's current district. The minimap centres on the player
+before the first visible game frame. `npm run test:spawn` and
+`npm run test:spawn:browser` check this start and access to Colombo Street.
+
 Cars use directed OSM road segments and left-side lane offsets; pedestrian areas
 are excluded from ordinary traffic. Geographic buildings use OSM footprints and
 polygon collisions. Missing heights are estimated, so this is not an architectural
