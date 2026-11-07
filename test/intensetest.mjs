@@ -78,7 +78,15 @@ async function resetPlayer() {
   await waitForGame(page, 300);
   check('Prison intake (fine + island cell)', r1.inside && r1.money === 500 && r1.x > 500,
     `money $${r1.money}, x=${Math.round(r1.x)}`);
-  await ev(() => { window.__debug.teleport(0, 0, 0); });
+  await ev(() => {
+    const d=window.__debug,cell=d.prison().cell;
+    // addCrime intentionally may ignore an unwitnessed offence from zero heat.
+    // Keep this assertion about a witnessed escape deterministic, without
+    // changing police rules or removing the wanted >= 2 requirement below.
+    const witness=d.world.peds.find(p=>p.pos&&Math.hypot(p.pos.x-cell.x,p.pos.z-cell.z)>100);
+    if(!witness)throw new Error('Jailbreak fixture requires a civilian witness');
+    d.teleport(witness.pos.x,0,witness.pos.z);
+  });
   await waitForGame(page, 400);
   const r2 = await ev(() => ({
     inside: window.__debug.prison().inside,

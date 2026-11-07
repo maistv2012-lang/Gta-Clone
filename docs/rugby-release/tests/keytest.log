@@ -1,0 +1,5 @@
+KeyW: dx=0.00 dz=0.94 (camYaw 0.00)
+KeyS: dx=0.00 dz=-0.93 (camYaw 0.00)
+KeyA: dx=0.98 dz=-0.01 (camYaw 0.00)
+KeyD: dx=-0.93 dz=0.00 (camYaw 0.00)
+Expected with camYaw=0: W => +z, S => -z, D => -x (screen right), A => +x (screen left)

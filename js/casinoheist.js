@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import { pointBlocked } from './city.js';
+import { clearInteractionPoint } from './interaction-placement.js';
 import { showToast, showNews, showMissionMsg } from './hud.js';
 import { sfxMissionPass, sfxMissionFail, sfxPickup } from './sound.js';
 import { addRep, addChaos } from './economy.js';
@@ -58,7 +60,15 @@ export function initCasinoHeist(scene, world, save) {
   // the Lucky 7 kiosk sits at spawn + (-16, 12); the vault hatch is out back,
   // far enough from the card table that E means "crime", not "blackjack"
   const casinoPos = world.city.spawn.clone().add(new THREE.Vector3(-16, 0, 12));
-  const vaultPos = casinoPos.clone().add(new THREE.Vector3(-7, 0, 5));
+  const preferred = casinoPos.clone().add(new THREE.Vector3(-7, 0, 5));
+  const table = world.propMarks?.find(mark=>mark.def.key==='casino')?.pos || casinoPos;
+  // Generated buildings can cover the old fixed hatch offset. Leave a clear
+  // player approach and keep E outside the blackjack table's interaction radius.
+  const query = new THREE.Vector3();
+  const point = clearInteractionPoint(preferred,table,p=>{
+    query.set(p.x,0,p.z);return pointBlocked(query,world.city.colliders,1.4);
+  });
+  const vaultPos = new THREE.Vector3(point.x,0,point.z);
   const hatch = new THREE.Mesh(
     new THREE.BoxGeometry(1.8, 0.3, 1.8),
     new THREE.MeshStandardMaterial({ color: 0x3a3222, metalness: 0.75, roughness: 0.35 })

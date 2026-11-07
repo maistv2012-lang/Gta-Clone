@@ -1,0 +1,54 @@
+SYNTHETIC FIXTURE: integration only, not geographic validation
+{
+  roads: 4,
+  areas: 2,
+  driveEdges: 7,
+  walkEdges: 16,
+  landmarksConnected: true,
+  landmarks: [
+    {
+      name: 'Cathedral Square',
+      osmId: 1,
+      point: [Array],
+      node: '1',
+      routeEdges: 0,
+      routeMeters: 0
+    },
+    {
+      name: 'Colombo Street',
+      osmId: 2,
+      point: [Array],
+      node: '2',
+      routeEdges: 1,
+      routeMeters: 40
+    },
+    {
+      name: 'Hagley Park',
+      osmId: 5,
+      point: [Array],
+      node: '7',
+      routeEdges: 2,
+      routeMeters: 160
+    }
+  ]
+}
+PASS map loaded and named
+PASS player starts at the real Cathedral Square spawn, outside Arcade
+PASS spawn has building clearance and no kiosk overlapping the player
+PASS roads and pedestrians have a connected network
+PASS traffic uses left lanes and only directed driving edges
+PASS service kiosks are separated
+PASS walking moves the player
+PASS polygon collision and existing vehicle physics
+PASS driving accelerates the existing vehicle
+PASS original activities remain accessible in the fictional district
+PASS district travel returns to Christchurch
+PASS police pursuit spawns live police near the player
+PASS wanted-star display matches police heat
+PASS missions still start in the new map
+PASS no desktop page errors
+PASS mobile map, joystick and buttons load
+PASS mobile joystick moves the player
+PASS mobile combat fires through the touch button
+PASS no mobile page errors
+19/19 checks passed (synthetic fixture)

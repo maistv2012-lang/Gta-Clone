@@ -434,10 +434,20 @@ async function goTo(src, dx = 1.5, dz = 0) {
 {
   await resetPlayer();
   const a = await ev(() => window.__debug.world.explorer.seen.size);
-  await ev(() => { window.__debug.teleport(-364, 0, 320); }); // far corner block, surely unvisited
-  await page.waitForTimeout(1800);
-  const b = await ev(() => window.__debug.world.explorer.seen.size);
-  check('Cartographer: crossing blocks logs them', b > a && a >= 1, `${a} -> ${b} blocks`);
+  const target = await ev(async () => {
+    const d=window.__debug,{blockStart,BLOCK,ROAD,N}=await import('./js/city.js');
+    // Earlier activities can already have visited a hard-coded corner. Select
+    // unseen ground on the real runtime grid, at a clear road intersection.
+    const key=Array.from({length:N*N},(_,i)=>i).find(i=>!d.world.explorer.seen.has(i));
+    if(key===undefined)throw new Error('Explorer fixture requires an unvisited block');
+    d.teleport(blockStart(Math.floor(key/N))+BLOCK+ROAD/2,0,blockStart(key%N)+BLOCK+ROAD/2);
+    return key;
+  });
+  // Explorer polls every 1.2 simulation seconds, independent of software FPS.
+  await waitForGame(page,1800);
+  const r = await ev(key => ({count:window.__debug.world.explorer.seen.size,visited:window.__debug.world.explorer.seen.has(key)}),target);
+  const b=r.count;
+  check('Cartographer: crossing blocks logs them', b > a && a >= 1 && r.visited, `${a} -> ${b} blocks; new block ${target}=${r.visited}`);
 }
 
 // ---- 22. body armor absorbs half ----

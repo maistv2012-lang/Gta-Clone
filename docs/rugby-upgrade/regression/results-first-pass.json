@@ -1,0 +1,174 @@
+[
+  {
+    "name": "build",
+    "code": 0,
+    "durationSeconds": 4.2,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "rugby-upgrade",
+    "code": 0,
+    "durationSeconds": 336.245,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "units",
+    "code": 0,
+    "durationSeconds": 2.014,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "real-map-data",
+    "code": 0,
+    "durationSeconds": 0.737,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "startup-browser",
+    "code": 0,
+    "durationSeconds": 121.893,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "map-browser",
+    "code": 0,
+    "durationSeconds": 71.947,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "spawn-browser",
+    "code": 0,
+    "durationSeconds": 193.563,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "preview-render",
+    "code": 0,
+    "durationSeconds": 131.79,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "visual-demo",
+    "code": 0,
+    "durationSeconds": 402.384,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "visual-visibility",
+    "code": 0,
+    "durationSeconds": 96.548,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "render-contracts",
+    "code": 0,
+    "durationSeconds": 29.56,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "map-synthetic",
+    "code": 0,
+    "durationSeconds": 49.765,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "featurecheck",
+    "code": 0,
+    "durationSeconds": 380.618,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "mobiletest",
+    "code": 0,
+    "durationSeconds": 33.413,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "fulltest",
+    "code": 0,
+    "durationSeconds": 175.3,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "newfeatures",
+    "code": 0,
+    "durationSeconds": 92.212,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "intensetest",
+    "code": 1,
+    "durationSeconds": 136.599,
+    "failures": [
+      "FAIL  Jailbreak (escape raises heat) — wanted 0"
+    ],
+    "passed": false
+  },
+  {
+    "name": "season3test",
+    "code": 0,
+    "durationSeconds": 183.595,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "season4test",
+    "code": 0,
+    "durationSeconds": 63.737,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "season8btest",
+    "code": 0,
+    "durationSeconds": 16.564,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "season9test",
+    "code": 0,
+    "durationSeconds": 52.508,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "season10test",
+    "code": 1,
+    "durationSeconds": 106.335,
+    "failures": [
+      "FAIL  Cartographer: crossing blocks logs them — 9 -> 9 blocks"
+    ],
+    "passed": false
+  },
+  {
+    "name": "keytest",
+    "code": 0,
+    "durationSeconds": 13.457,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "screenshots",
+    "code": 0,
+    "durationSeconds": 20.154,
+    "failures": [],
+    "passed": true
+  }
+]

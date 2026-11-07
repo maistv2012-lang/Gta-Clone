@@ -1,0 +1,200 @@
+[
+  {
+    "map": "legacy",
+    "osm": false,
+    "preferred": [
+      -23,
+      0,
+      17
+    ],
+    "hatch": [
+      -24.23395501962448,
+      0,
+      14.26552472866483
+    ],
+    "preferredClear": false,
+    "keptClearPreferred": true,
+    "afterCollisionDistance": 0.7071067811865476,
+    "approachShift": 0,
+    "tableDistance": 8.539942479981411,
+    "meshMatches": true,
+    "rendererInitialized": false,
+    "errors": []
+  },
+  {
+    "map": "legacy",
+    "osm": false,
+    "preferred": [
+      -23,
+      0,
+      17
+    ],
+    "hatch": [
+      -23.676775258697454,
+      0,
+      14.077334222115878
+    ],
+    "preferredClear": false,
+    "keptClearPreferred": true,
+    "afterCollisionDistance": 0.7071067811865476,
+    "approachShift": 0,
+    "tableDistance": 7.952873433100965,
+    "meshMatches": true,
+    "rendererInitialized": false,
+    "errors": []
+  },
+  {
+    "map": "legacy",
+    "osm": false,
+    "preferred": [
+      -23,
+      0,
+      17
+    ],
+    "hatch": [
+      -24.23395501962448,
+      0,
+      14.26552472866483
+    ],
+    "preferredClear": false,
+    "keptClearPreferred": true,
+    "afterCollisionDistance": 0.7071067811865476,
+    "approachShift": 0,
+    "tableDistance": 8.539942479981411,
+    "meshMatches": true,
+    "rendererInitialized": false,
+    "errors": []
+  },
+  {
+    "map": "legacy",
+    "osm": false,
+    "preferred": [
+      -23,
+      0,
+      17
+    ],
+    "hatch": [
+      -24.162476387438193,
+      0,
+      15.37253305758653
+    ],
+    "preferredClear": false,
+    "keptClearPreferred": true,
+    "afterCollisionDistance": 0.7071067811865476,
+    "approachShift": 0,
+    "tableDistance": 8.831760866327848,
+    "meshMatches": true,
+    "rendererInitialized": false,
+    "errors": []
+  },
+  {
+    "map": "legacy",
+    "osm": false,
+    "preferred": [
+      -23,
+      0,
+      17
+    ],
+    "hatch": [
+      -24.74371458115729,
+      0,
+      14.558799586379795
+    ],
+    "preferredClear": false,
+    "keptClearPreferred": true,
+    "afterCollisionDistance": 0.7071067811865476,
+    "approachShift": 0,
+    "tableDistance": 9.110433579144297,
+    "meshMatches": true,
+    "rendererInitialized": false,
+    "errors": []
+  },
+  {
+    "map": "legacy",
+    "osm": false,
+    "preferred": [
+      -23,
+      0,
+      17
+    ],
+    "hatch": [
+      -24.23395501962448,
+      0,
+      14.26552472866483
+    ],
+    "preferredClear": false,
+    "keptClearPreferred": true,
+    "afterCollisionDistance": 0.7071067811865476,
+    "approachShift": 0,
+    "tableDistance": 8.539942479981411,
+    "meshMatches": true,
+    "rendererInitialized": false,
+    "errors": []
+  },
+  {
+    "map": "legacy",
+    "osm": false,
+    "preferred": [
+      -23,
+      0,
+      17
+    ],
+    "hatch": [
+      -23.822636679749653,
+      0,
+      15.177016485776555
+    ],
+    "preferredClear": false,
+    "keptClearPreferred": true,
+    "afterCollisionDistance": 0.7071067811865476,
+    "approachShift": 0,
+    "tableDistance": 8.443167555737638,
+    "meshMatches": true,
+    "rendererInitialized": false,
+    "errors": []
+  },
+  {
+    "map": "legacy",
+    "osm": false,
+    "preferred": [
+      -23,
+      0,
+      17
+    ],
+    "hatch": [
+      -25.324952774876387,
+      0,
+      13.74506611517306
+    ],
+    "preferredClear": false,
+    "keptClearPreferred": true,
+    "afterCollisionDistance": 0.7071067811865476,
+    "approachShift": 0,
+    "tableDistance": 9.48683298050514,
+    "meshMatches": true,
+    "rendererInitialized": false,
+    "errors": []
+  },
+  {
+    "map": "real",
+    "osm": true,
+    "preferred": [
+      -1.202119228209682,
+      0,
+      -16.471628997276802
+    ],
+    "hatch": [
+      -1.202119228209682,
+      0,
+      -16.471628997276802
+    ],
+    "preferredClear": true,
+    "keptClearPreferred": true,
+    "afterCollisionDistance": 0.7071067811865476,
+    "approachShift": 0,
+    "tableDistance": 8.602325267042627,
+    "meshMatches": true,
+    "rendererInitialized": false,
+    "errors": []
+  }
+]

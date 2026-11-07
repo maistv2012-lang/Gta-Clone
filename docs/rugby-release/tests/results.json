@@ -1,0 +1,187 @@
+[
+  {
+    "name": "build",
+    "code": 0,
+    "durationSeconds": 3.854,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "rugby-upgrade",
+    "code": 0,
+    "durationSeconds": 344.788,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "units",
+    "code": 0,
+    "durationSeconds": 2.161,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "real-map-data",
+    "code": 0,
+    "durationSeconds": 0.762,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "startup-browser",
+    "code": 0,
+    "durationSeconds": 117.611,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "map-browser",
+    "code": 0,
+    "durationSeconds": 64.135,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "spawn-browser",
+    "code": 0,
+    "durationSeconds": 188.558,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "preview-render",
+    "code": 0,
+    "durationSeconds": 126.607,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "visual-demo",
+    "code": 0,
+    "durationSeconds": 394.715,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "visual-visibility",
+    "code": 0,
+    "durationSeconds": 86.154,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "render-contracts",
+    "code": 0,
+    "durationSeconds": 26.936,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "map-synthetic",
+    "code": 0,
+    "durationSeconds": 48.04,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "featurecheck",
+    "code": 0,
+    "durationSeconds": 384.464,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "fulltest",
+    "code": 0,
+    "durationSeconds": 195.269,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "newfeatures",
+    "code": 0,
+    "durationSeconds": 94.925,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "intensetest",
+    "code": 0,
+    "durationSeconds": 132.288,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "season4test",
+    "code": 0,
+    "durationSeconds": 64.739,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "season8btest",
+    "code": 0,
+    "durationSeconds": 16.962,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "season9test",
+    "code": 0,
+    "durationSeconds": 54.501,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "season10test",
+    "code": 0,
+    "durationSeconds": 118.151,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "keytest",
+    "code": 0,
+    "durationSeconds": 12.253,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "screenshots",
+    "code": 0,
+    "durationSeconds": 22.645,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "mobile-rugby",
+    "code": 0,
+    "durationSeconds": 34.692,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "crime-witness",
+    "code": 0,
+    "durationSeconds": 1.24,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "mobiletest",
+    "code": 0,
+    "durationSeconds": 35.869,
+    "failures": [],
+    "passed": true
+  },
+  {
+    "name": "season3test",
+    "code": 1,
+    "durationSeconds": 194.933,
+    "failures": [
+      "FAIL  Heist: vault cracked, city furious — wanted 0",
+      "FAIL  Heist: heat lost, $15k banked, once per day — +$0"
+    ],
+    "passed": false
+  }
+]

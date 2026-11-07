@@ -1,0 +1,306 @@
+[
+  {
+    "hatch": [
+      -23,
+      0,
+      17
+    ],
+    "initial": [
+      -22.5,
+      0,
+      17.5
+    ],
+    "resolved": [
+      -22.5,
+      0,
+      15.513258920506853
+    ],
+    "distanceAfterCollision": 1.5685659174712572,
+    "validCrackApproach": true,
+    "bestDistance": 1.4967410794931464,
+    "safePoints": 203,
+    "sampleSafePoint": [
+      -23,
+      0,
+      15.503258920506854
+    ],
+    "rendererInitialized": false
+  },
+  {
+    "hatch": [
+      -23,
+      0,
+      17
+    ],
+    "initial": [
+      -22.5,
+      0,
+      17.5
+    ],
+    "resolved": [
+      -22.5,
+      0,
+      16.124163829632938
+    ],
+    "distanceAfterCollision": 1.0085083030512152,
+    "validCrackApproach": true,
+    "bestDistance": 0.8858361703670639,
+    "safePoints": 220,
+    "sampleSafePoint": [
+      -23,
+      0,
+      16.114163829632936
+    ],
+    "rendererInitialized": false
+  },
+  {
+    "hatch": [
+      -23,
+      0,
+      17
+    ],
+    "initial": [
+      -22.5,
+      0,
+      17.5
+    ],
+    "resolved": [
+      -22.5,
+      0,
+      15.641083574614328
+    ],
+    "distanceAfterCollision": 1.4479826833159897,
+    "validCrackApproach": true,
+    "bestDistance": 1.368916425385672,
+    "safePoints": 205,
+    "sampleSafePoint": [
+      -23,
+      0,
+      15.631083574614328
+    ],
+    "rendererInitialized": false
+  },
+  {
+    "hatch": [
+      -23,
+      0,
+      17
+    ],
+    "initial": [
+      -22.5,
+      0,
+      17.5
+    ],
+    "resolved": [
+      -22.5,
+      0,
+      15.540153437882388
+    ],
+    "distanceAfterCollision": 1.5430981773453725,
+    "validCrackApproach": true,
+    "bestDistance": 1.4698465621176116,
+    "safePoints": 203,
+    "sampleSafePoint": [
+      -23,
+      0,
+      15.530153437882388
+    ],
+    "rendererInitialized": false
+  },
+  {
+    "hatch": [
+      -23,
+      0,
+      17
+    ],
+    "initial": [
+      -22.5,
+      0,
+      17.5
+    ],
+    "resolved": [
+      -22.5,
+      0,
+      16.040667947264872
+    ],
+    "distanceAfterCollision": 1.0818123623831422,
+    "validCrackApproach": true,
+    "bestDistance": 0.9693320527351297,
+    "safePoints": 217,
+    "sampleSafePoint": [
+      -23,
+      0,
+      16.03066794726487
+    ],
+    "rendererInitialized": false
+  },
+  {
+    "hatch": [
+      -23,
+      0,
+      17
+    ],
+    "initial": [
+      -22.5,
+      0,
+      17.5
+    ],
+    "resolved": [
+      -22.5,
+      0,
+      14.098588645357955
+    ],
+    "distanceAfterCollision": 2.9441786373869685,
+    "validCrackApproach": false,
+    "bestDistance": 2.911411354642045,
+    "safePoints": 0,
+    "rendererInitialized": false
+  },
+  {
+    "hatch": [
+      -23,
+      0,
+      17
+    ],
+    "initial": [
+      -22.5,
+      0,
+      17.5
+    ],
+    "resolved": [
+      -22.5,
+      0,
+      14.553574908841721
+    ],
+    "distanceAfterCollision": 2.4969973421389122,
+    "validCrackApproach": true,
+    "bestDistance": 2.4564250911582786,
+    "safePoints": 88,
+    "sampleSafePoint": [
+      -23,
+      0,
+      14.543574908841721
+    ],
+    "rendererInitialized": false
+  },
+  {
+    "hatch": [
+      -23,
+      0,
+      17
+    ],
+    "initial": [
+      -22.5,
+      0,
+      17.5
+    ],
+    "resolved": [
+      -22.5,
+      0,
+      15.314232931847977
+    ],
+    "distanceAfterCollision": 1.7583545171739023,
+    "validCrackApproach": true,
+    "bestDistance": 1.6957670681520227,
+    "safePoints": 189,
+    "sampleSafePoint": [
+      -23,
+      0,
+      15.304232931847977
+    ],
+    "rendererInitialized": false
+  },
+  {
+    "hatch": [
+      -23,
+      0,
+      17
+    ],
+    "initial": [
+      -22.5,
+      0,
+      17.5
+    ],
+    "resolved": [
+      -22.5,
+      0,
+      14.49779384958602
+    ],
+    "distanceAfterCollision": 2.551673101941067,
+    "validCrackApproach": true,
+    "bestDistance": 2.512206150413979,
+    "safePoints": 0,
+    "rendererInitialized": false
+  },
+  {
+    "hatch": [
+      -23,
+      0,
+      17
+    ],
+    "initial": [
+      -22.5,
+      0,
+      17.5
+    ],
+    "resolved": [
+      -22.5,
+      0,
+      13.70851516136997
+    ],
+    "distanceAfterCollision": 3.329245025967803,
+    "validCrackApproach": false,
+    "bestDistance": 3.3014848386300297,
+    "safePoints": 0,
+    "rendererInitialized": false
+  },
+  {
+    "hatch": [
+      -23,
+      0,
+      17
+    ],
+    "initial": [
+      -22.5,
+      0,
+      17.5
+    ],
+    "resolved": [
+      -22.5,
+      0,
+      15.08724528853294
+    ],
+    "distanceAfterCollision": 1.97702569185113,
+    "validCrackApproach": true,
+    "bestDistance": 1.9227547114670607,
+    "safePoints": 177,
+    "sampleSafePoint": [
+      -23,
+      0,
+      15.07724528853294
+    ],
+    "rendererInitialized": false
+  },
+  {
+    "hatch": [
+      -23,
+      0,
+      17
+    ],
+    "initial": [
+      -22.5,
+      0,
+      17.5
+    ],
+    "resolved": [
+      -22.5,
+      0,
+      13.629141678173017
+    ],
+    "distanceAfterCollision": 3.4077391076533754,
+    "validCrackApproach": false,
+    "bestDistance": 3.3808583218269828,
+    "safePoints": 0,
+    "rendererInitialized": false
+  }
+]

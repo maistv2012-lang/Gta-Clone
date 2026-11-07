@@ -1,0 +1,16 @@
+
+> open-city@1.0.0 test
+> node test/run-regression.mjs
+
+START build
+{"name":"build","code":0,"durationSeconds":4.476,"failures":[],"passed":true}
+START rugby-upgrade
+{"name":"rugby-upgrade","code":0,"durationSeconds":331.056,"failures":[],"passed":true}
+START intensetest
+{"name":"intensetest","code":0,"durationSeconds":122.233,"failures":[],"passed":true}
+START season10test
+{"name":"season10test","code":0,"durationSeconds":114.452,"failures":[],"passed":true}
+START mobile-rugby
+{"name":"mobile-rugby","code":0,"durationSeconds":34.042,"failures":[],"passed":true}
+START crime-witness
+{"name":"crime-witness","code":0,"durationSeconds":1.17,"failures":[],"passed":true}

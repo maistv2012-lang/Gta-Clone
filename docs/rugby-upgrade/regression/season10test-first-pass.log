@@ -1,0 +1,27 @@
+PASS  All 31 Season-10 systems initialized — all up
+PASS  Wingsuit deploys mid-fall (U)
+PASS  Elevator rides to the roof — y 149.7 vs h 150.0
+PASS  Pizza run: 4 drops, tips paid — {"money":100896,"runs":1,"on":false}
+PASS  Repo run: car delivered to the impound — {"done":1,"money":100400,"inCar":false}
+PASS  Undercover shift: 3 collars + bonus, badge returned — {"on":false,"duty":false,"arrests":3,"money":100800}
+PASS  Corner store robbed: till + heat (or no witnesses) — {"done":true,"money":100523,"wanted":2,"dodged":0}
+PASS  Jewelry: 6 cases smashed, loot banked — {"active":false,"got":6,"money":104524,"doneDay":true}
+PASS  Pink slip won: rival car parked at the strip — {"rank":1,"cars":1,"parked":40}
+PASS  Most Wanted #1 crossed off (+$1500) — {"idx":1,"money":101500}
+PASS  Bribe (Y): $500 clears one star — {"wanted":0,"money":99500,"paid":1}
+PASS  Saul Bettercall retained ($1000) — {"retained":true,"money":99000}
+PASS  Ticker: buy 1 OCB then sell it back — bought 1, {"held":0,"money":100000}
+PASS  Galleria: teleports in, daily gift claimed — inside true, gift true
+PASS  Sewer: Albert down, hoard looted (+$3000) — {"dead":true,"looted":true,"money":103000}
+PASS  Arcade: HI-STRIKER plays and resolves — {"game":null,"money":99980}
+PASS  Golf: meter → strike → splash — swing true, flight true, landed true
+PASS  Chess: game starts, three picks resolve it — on true, done true
+PASS  Backroom Classic: $2000 buy-in seats you — {"on":true,"money":98000}
+PASS  Boss rush: all 4 shades down, obelisk pays — {"on":false,"done":true,"money":108000}
+FAIL  Cartographer: crossing blocks logs them — 9 -> 9 blocks
+PASS  Armor: 50 plate bought, absorbs half a 20-hit — plate 50->40
+PASS  Jet ski circuit: 6 gates, best time set — {"on":false,"best":1.1500000000000004,"money":101977}
+PASS  Season-10 progress persists in the save — {"pizza":1,"repo":1,"cop":3,"slip":1,"mw":1,"lawyer":true,"albert":true,"boat":1.1500000000000004,"blocks":9,"armor":40,"rush":0}
+PASS  No page errors during the run — 0 errors
+
+24/25 checks passed

@@ -233,6 +233,14 @@ function facade(area, mats, detailed, onlyEdge = null) {
         b.box(frame, x + nx * 0.12, y, z + nz * 0.12, width + 0.28, wh + 0.28, 0.2, angle);
         b.box(mats.glass, x + nx * 0.24, y, z + nz * 0.24, width, wh, 0.065, angle);
         if (detailed) {
+          // Ground-floor transoms and flanking reveals add actual facade depth.
+          if (floor === 0) {
+            b.box(frame,x+nx*.3,y+.65,z+nz*.3,width,.075,.085,angle);
+            for (const side of [-1,1]) {
+              const along = side*(width/2+.2);
+              b.box(mats.limestone,x+nx*.11+dx/length*along,y,z+nz*.11+dz/length*along,.12,wh+.5,.34,angle);
+            }
+          }
           // Sills and lintels establish depth without individual draw calls.
           if (style.recessed) b.box(mats.limestone, x + nx * .16, y + wh / 2 + .2, z + nz * .16, width + .65, .2, .4, angle);
           b.box(frame, x + nx * 0.3, y, z + nz * 0.3, 0.07, wh, 0.075, angle);
@@ -262,6 +270,12 @@ function facade(area, mats, detailed, onlyEdge = null) {
         0.4,
         angle
       );
+    if (detailed) {
+      // Stepped cornice remains below source roof height and uses existing batches.
+      const x=(a[0]+c[0])/2,z=(a[1]+c[1])/2;
+      b.box(frame,x+nx*.16,height-.55,z+nz*.16,length,.15,.56,angle);
+      b.box(mats.limestone,x+nx*.14,height-.08,z+nz*.14,length,.12,.62,angle);
+    }
     if (detailed && modern)
       for (let j = 0; j < count * 2; j++) {
         const t = (j + 0.5) / (count * 2);

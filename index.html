@@ -150,7 +150,7 @@
 
   #charpick { pointer-events: auto; margin-bottom: 4px; }
   #charpick .chartitle { color: #9fb2c8; font: 700 12px Arial; letter-spacing: 3px; margin-bottom: 8px; }
-  #charrow { display: flex; gap: 10px; justify-content: center; }
+  #charrow { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
   .charcard {
     cursor: pointer; width: 128px; padding: 12px 8px; border-radius: 10px;
     background: rgba(0,0,0,.5); border: 2px solid rgba(255,255,255,.14); transition: all .15s;
@@ -162,7 +162,9 @@
   .charcard .swatch { height: 28px; border-radius: 5px; margin-bottom: 6px; }
   .charcard .stat { font: 600 9px Arial; color: #cfd8e3; line-height: 1.5; }
   @media (max-width: 700px), (max-height: 620px) {
-    .charcard { width: 96px; padding: 8px 5px; }
+    #charrow { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    .charcard { width: 124px; padding: 6px 5px; }
+    .charcard .swatch { height: 16px; }
     .charcard .cname { font-size: 13px; }
   }
 

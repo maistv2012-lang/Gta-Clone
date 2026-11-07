@@ -97,6 +97,22 @@ export async function addChristchurch(targetScene, city, data) {
       const detailed = Math.min(Math.hypot(a[0]-24,a[1]+36),Math.hypot(b[0]-24,b[1]+36)) < 240;
       if (!pedestrian) strip(scene, a, b, road.width + 3, 0x969c96, 0.05, detailed ? city.detailing.mats.paving : null);
       strip(scene, a, b, road.width, pedestrian ? 0xb1a58e : 0x363e42, 0.08, detailed ? city.detailing.mats[pedestrian ? 'paving' : 'asphalt'] : null);
+      // Low kerbs remain decorative: no changes to the OSM graph or collision shapes.
+      // Setbacks at both segment ends leave intersections and pedestrian access open.
+      const length = Math.hypot(b[0]-a[0], b[1]-a[1]);
+      if (detailed && !pedestrian && road.tags.area !== 'yes' && length > 18 &&
+          Math.max(Math.hypot(a[0]-24,a[1]+36),Math.hypot(b[0]-24,b[1]+36)) < 260) {
+        const offset = leftOffset(a,b,road.width/2+.12);
+        for (const side of [-1,1]) {
+          const geometry = new THREE.BoxGeometry(length-10,.12,.2);
+          worldUV(geometry,2);
+          const kerb = new THREE.Mesh(geometry,city.detailing.mats.limestone);
+          kerb.position.set((a[0]+b[0])/2+offset[0]*side,.12,(a[1]+b[1])/2+offset[1]*side);
+          kerb.rotation.y = -Math.atan2(b[1]-a[1],b[0]-a[0]);
+          kerb.receiveShadow = true;
+          scene.add(kerb); // Existing spatial/material batching combines these meshes.
+        }
+      }
     }
   }
   city.legacySpawn = city.spawn.clone();

@@ -101,8 +101,8 @@ async function resetPlayer() {
   await page.keyboard.down('KeyE');
   await waitForGame(page, 4600);
   await page.keyboard.up('KeyE');
-  const r3 = await ev(() => ({ stage: window.__debug.cheist().stage, wanted: window.__debug.world.wanted }));
-  check('Heist: vault cracked, city furious', r3.stage === 3 && r3.wanted >= 4, `wanted ${r3.wanted}`);
+  const r3 = await ev(() => {const d=window.__debug,h=d.cheist();return {stage:h.stage,wanted:d.world.wanted,crack:h.crackT,health:d.player.health,inCar:!!d.player.inCar,distance:Math.hypot(d.player.pos.x-h.vaultPos.x,d.player.pos.z-h.vaultPos.z),state:d.getState()};});
+  check('Heist: vault cracked, city furious', r3.stage === 3 && r3.wanted >= 4, JSON.stringify(r3));
 
   const money0 = await ev(() => window.__debug.world.money);
   await ev(() => { window.__debug.world.wanted = 0; window.__debug.world.wantedTimer = 0; });
@@ -187,6 +187,10 @@ async function resetPlayer() {
   await resetPlayer();
   await ev(() => {
     const d = window.__debug;
+    // Earlier night-time heist setup can randomly start an outbreak. Empire
+    // raids deliberately pause during outbreaks. Stage this independent
+    // free-roam audit in daylight and let the normal game end that event.
+    d.setClock(12);
     const z = d.empire().zones[0];
     d.teleport(z.flag.x + 1, 0, z.flag.z + 1);
   });
@@ -204,10 +208,15 @@ async function resetPlayer() {
   const r2 = await ev(() => ({ owned: window.__debug.empire().zones[0].owned, hint: window.__debug.world.stats.districts }));
   check('Empire: district taken', r2.owned === true, `districts: ${r2.hint}`);
 
-  const money1 = await ev(() => { window.__debug.empire().raidT = 0.01; return window.__debug.world.money; });
+  const money1 = await ev(() => {
+    const d=window.__debug,w=d.world;
+    const busy=!!(w.mission?.active||w.finale?.active||w.prison?.inside||w.zombies?.active);
+    if(busy)throw new Error('Empire raid fixture must be in free roam: '+JSON.stringify({mission:!!w.mission?.active,finale:!!w.finale?.active,prison:!!w.prison?.inside,zombies:!!w.zombies?.active,clock:w.clock}));
+    d.empire().raidT=0.01;return w.money;
+  });
   await waitForGame(page, 500);
-  const r3 = await ev(() => !!window.__debug.empire().raid);
-  check('Empire: rival raid arrives', r3 === true);
+  const r3 = await ev(() => ({raid:!!window.__debug.empire().raid,timer:window.__debug.empire().raidT,clock:window.__debug.world.clock}));
+  check('Empire: rival raid arrives', r3.raid === true,JSON.stringify(r3));
   await ev(() => {
     const d = window.__debug;
     for (const f of d.empire().raid.thugs) { f.target.hit(d.world); f.target.hit(d.world); }

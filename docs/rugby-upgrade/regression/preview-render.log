@@ -1,0 +1,10 @@
+PASS s24-preview {"pixels":{"luminanceStd":38.05864395556843,"colors":427},"graphics":{"initialized":true,"frames":9,"hdr":true,"contextLost":false,"width":384,"height":832,"calls":268,"triangles":172458,"textures":39,"geometries":211,"pixelRatio":1,"adaptiveResolution":true,"frameTimeEma":470.91409507997616,"batches":{"instances":365,"batches":83}}}
+PASS s24-worker-blocked {"pixels":{"luminanceStd":63.101313822597106,"colors":419},"graphics":{"initialized":true,"frames":9,"hdr":true,"contextLost":false,"width":384,"height":832,"calls":338,"triangles":221118,"textures":46,"geometries":222,"pixelRatio":1,"adaptiveResolution":true,"frameTimeEma":476.2350562499878,"batches":{"instances":372,"batches":89}}}
+PASS s24-warm-reload {"pixels":{"luminanceStd":63.10322369841466,"colors":417},"graphics":{"initialized":true,"frames":15,"hdr":true,"contextLost":false,"width":345,"height":748,"calls":324,"triangles":214122,"textures":42,"geometries":222,"pixelRatio":0.9,"adaptiveResolution":true,"frameTimeEma":664.3898822033295,"batches":{"instances":361,"batches":82}}}
+PASS s24-no-float {"pixels":{"luminanceStd":19.48774755100146,"colors":260},"graphics":{"initialized":true,"frames":9,"hdr":false,"contextLost":false,"width":384,"height":832,"calls":264,"triangles":157258,"textures":33,"geometries":204,"pixelRatio":1,"adaptiveResolution":true,"frameTimeEma":437.1754703030248,"batches":{"instances":353,"batches":84}},"oldBlackFrame":{"luminanceStd":5.566650263929276,"colors":44}}
+PASS s24-cache-recovery {"pixels":{"luminanceStd":63.11190588775344,"colors":425},"graphics":{"initialized":true,"frames":15,"hdr":true,"contextLost":false,"width":345,"height":748,"calls":308,"triangles":211634,"textures":43,"geometries":219,"pixelRatio":0.9,"adaptiveResolution":true,"frameTimeEma":629.151917229048,"batches":{"instances":356,"batches":85}}}
+PASS s24-map-error {"menuVisible":true,"replacementWorld":false}
+PASS s24-webgl-error {"menuVisible":true}
+PASS s24-late-js-error {"menuVisible":true}
+PASS s24-silent-black-frame {"menuVisible":true}
+9/9 visual preview scenarios passed

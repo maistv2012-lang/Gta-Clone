@@ -12,6 +12,16 @@ Current visual/performance changes, measured results and the complete file inven
 [the upgrade report](docs/PERFORMANCE-UPGRADE.md). For an external browser test, follow
 [the GitHub Pages instructions](docs/GITHUB-PAGES.md). `npm test` runs the complete validation runner.
 
+## RUGBY character release
+
+Choose **RUGBY** on the start screen, then **PLAY** to explore the real Cathedral
+Square start. Weaver, Bolt and Brick remain available. The original articulated
+rugby fighter uses shared procedural geometry/textures and the existing animation,
+wardrobe, controls and collision interfaces. Central-area kerbs and facade details
+are included. See [the Rugby art report](docs/rugby-upgrade/README.md) and
+[release validation](docs/rugby-release/README.md). The visual remains stylized;
+physical Galaxy S24 Ultra performance is unverified.
+
 ## Prepare and play Christchurch
 
 Requires Node.js 18+ (validated with Node 24), npm, and HTTPS access to

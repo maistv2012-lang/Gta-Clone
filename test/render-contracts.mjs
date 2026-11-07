@@ -44,11 +44,16 @@ try {
   assert.equal(rig.groups,1);assert.equal(rig.shared,true);assert.equal(rig.individual,true);assert.equal(rig.preserved,true);assert.equal(rig.bones,10);assert.equal(rig.color,0x00ff00);assert.ok(rig.heavy>1);
   console.log('PASS single-draw shared rig retains independent wardrobe, skeleton and Brick proportions');
   const gold=await page.evaluate(async()=>{
-   const THREE=await import('three');const {createCharacter,setCharacterQuality}=await import('./js/characters.js');const {initLegend}=await import('./js/legend.js');
+   const THREE=await import('three');const {createCharacter,setCharacterQuality,setCharacterModel,CHARACTERS}=await import('./js/characters.js');const {initLegend}=await import('./js/legend.js');
    const a=createCharacter(),b=createCharacter({shirt:'#0000ff'}),scene=new THREE.Scene();scene.add(a.group,b.group);
    const original=b.skin.material[0],world={player:{mesh:a.group},scene,city:{spawn:new THREE.Vector3(20000,0,20000),colliders:[]},parked:[]};
    initLegend({},world,{crowned:true});const results=[];
-   for(const quality of ['low','medium','high']){setCharacterQuality(quality,scene);results.push(a.skin.material[0].color.getHex()===0xffd24a&&!a.skin.material[0].vertexColors&&b.skin.material[0].vertexColors);}
+   for(const quality of ['low','medium','high']){
+    setCharacterModel(a,CHARACTERS.find(c=>c.key==='rugby').colors);setCharacterQuality(quality,scene);
+    const rugbyGold=a.skin.material[0].color.getHex()===0xffd24a&&!a.skin.material[0].vertexColors;
+    setCharacterModel(a,{});setCharacterQuality(quality,scene);
+    results.push(rugbyGold&&a.skin.material[0].color.getHex()===0xffd24a&&!a.skin.material[0].vertexColors&&b.skin.material[0].vertexColors);
+   }
    return {profiles:results,npcUnchanged:original.color.getHex()===0xffffff,crown:!!world._crownMesh,car:world.parked.length===1};
   });
   assert.deepEqual(gold,{profiles:[true,true,true],npcUnchanged:true,crown:true,car:true});

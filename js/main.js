@@ -2,7 +2,7 @@ import { initDistrictTravel } from './district-travel.js';
 import * as THREE from 'three';
 import { initInput, endFrame, pollGamepad, keys, pressed, mouse } from './input.js';
 import { buildCity, resolveCircle, pointBlocked, groundHeight, blockStart, BLOCK, HALF, N } from './city.js';
-import { createCharacter, animateWalk, animateIdle, animateLand, CHARACTERS, applySuit, setCharacterQuality } from './characters.js';
+import { createCharacter, animateWalk, animateIdle, animateLand, CHARACTERS, setCharacterModel, applySuit, setCharacterQuality } from './characters.js';
 import { physStep, separateCars, darkenCar } from './car.js';
 import { spawnPeds, updatePeds, killPed, spawnTraffic, updateTraffic, disableTraffic, spawnParked } from './npc.js';
 import { updatePolice, addCrime, copDie, clearCops } from './police.js';
@@ -2647,6 +2647,7 @@ function applyCharacter(c) {
 
 // recolor the player rig to a character's palette (reuses the wardrobe path)
 function applySuitColors(colors) {
+  setCharacterModel(player.ch, colors);
   player.ch.setBuild?.(colors.build || 'regular');
   applySuit(player.ch, colors);
 }

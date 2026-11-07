@@ -1,0 +1,5 @@
+
+> open-city@1.0.0 check
+> node scripts/check-build.mjs
+
+PASS 159 source modules parse; 689 local imports resolve; JSON and static Pages entry present

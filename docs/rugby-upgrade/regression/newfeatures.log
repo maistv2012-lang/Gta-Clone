@@ -1,0 +1,20 @@
+PASS  Economy systems initialized — 3 properties, rep + daily challenge live
+PASS  Buy property (B under the beam) — casino bought, rep 500
+PASS  Property passive income — +$400/hr
+PASS  Reputation tiers — now FAMOUS
+PASS  Daily challenge completes + pays — +$700
+PASS  Arena wave survival starts (H) — wave 1, 3 foes
+PASS  Arena wave 2 spawns after clear — now wave 2
+PASS  Arena ends when you leave, best saved
+PASS  Rewarded ad (casino, key 4) — overlay shown, +$500
+PASS  Race starts in the ring — countdown 2.6s
+PASS  Race gates + timer + map blip — gate 1 cleared at 1.0s
+PASS  Race finish: medal, cash, best time — best 1.7s, +$1500
+PASS  Garage tuning: engine + nitro + respray — $1500 spent
+PASS  Harbor built (3 moored craft plus retained prison launch)
+PASS  Swimming in the harbor — bobbing at y=-0.63
+PASS  Speedboat drives — 14.8 m/s
+PASS  Hop off into a swim
+PASS  Save file: new fields persisted — props,rep,dailyDay,arenaBest,races,mods
+---
+NEW FEATURES: 18/18 verified, runtime errors: 0

@@ -1,0 +1,10 @@
+touch UI present: PASS
+joystick move: 4.23m PASS
+jump button: vy=3.1 PASS
+web button swings: airborne 3.2m PASS — {"att":true,"y":3.2115172920211847,"anchor":[-355.1675634344453,18.413686505654397,-364.5323488245269],"rope":15.213686505654398,"target":15.213686505654398}
+fire button shoots: PASS
+kiosk digit buttons: PASS
+FIGHT button (arena): shown=true started=true PASS
+BUY button (property): shown=true bought=true PASS
+boat via joystick: 14.9 m/s PASS
+mobile runtime errors: 0 PASS

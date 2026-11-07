@@ -25,7 +25,8 @@
     "test:regression": "node test/run-regression.mjs",
     "benchmark": "node test/performance-benchmark.mjs",
     "test": "node test/run-regression.mjs",
-    "benchmark:collision": "node test/collision-benchmark.mjs"
+    "benchmark:collision": "node test/collision-benchmark.mjs",
+    "test:rugby": "node test/rugby-upgrade.mjs"
   },
   "devDependencies": {
     "playwright-core": "^1.60.0"

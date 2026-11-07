@@ -1,0 +1,58 @@
+
+> open-city@1.0.0 test
+> node test/run-regression.mjs
+
+START build
+{"name":"build","code":0,"durationSeconds":4.267,"failures":[],"passed":true}
+START casino-placement
+{"name":"casino-placement","code":0,"durationSeconds":12.039,"failures":[],"passed":true}
+START rugby-upgrade
+{"name":"rugby-upgrade","code":0,"durationSeconds":348.496,"failures":[],"passed":true}
+START units
+{"name":"units","code":0,"durationSeconds":2.155,"failures":[],"passed":true}
+START real-map-data
+{"name":"real-map-data","code":0,"durationSeconds":0.828,"failures":[],"passed":true}
+START startup-browser
+{"name":"startup-browser","code":0,"durationSeconds":120.555,"failures":[],"passed":true}
+START map-browser
+{"name":"map-browser","code":0,"durationSeconds":67.24,"failures":[],"passed":true}
+START spawn-browser
+{"name":"spawn-browser","code":0,"durationSeconds":192.49,"failures":[],"passed":true}
+START preview-render
+{"name":"preview-render","code":0,"durationSeconds":130.977,"failures":[],"passed":true}
+START visual-demo
+{"name":"visual-demo","code":0,"durationSeconds":406.487,"failures":[],"passed":true}
+START visual-visibility
+{"name":"visual-visibility","code":0,"durationSeconds":87.864,"failures":[],"passed":true}
+START render-contracts
+{"name":"render-contracts","code":0,"durationSeconds":29.292,"failures":[],"passed":true}
+START map-synthetic
+{"name":"map-synthetic","code":0,"durationSeconds":44.794,"failures":[],"passed":true}
+START featurecheck
+{"name":"featurecheck","code":0,"durationSeconds":401.73,"failures":[],"passed":true}
+START mobiletest
+{"name":"mobiletest","code":0,"durationSeconds":33.748,"failures":[],"passed":true}
+START fulltest
+{"name":"fulltest","code":0,"durationSeconds":214.871,"failures":[],"passed":true}
+START newfeatures
+{"name":"newfeatures","code":0,"durationSeconds":87.895,"failures":[],"passed":true}
+START intensetest
+{"name":"intensetest","code":0,"durationSeconds":125.183,"failures":[],"passed":true}
+START season3test
+{"name":"season3test","code":0,"durationSeconds":192.693,"failures":[],"passed":true}
+START season4test
+{"name":"season4test","code":0,"durationSeconds":69.76,"failures":[],"passed":true}
+START season8btest
+{"name":"season8btest","code":0,"durationSeconds":16.68,"failures":[],"passed":true}
+START season9test
+{"name":"season9test","code":0,"durationSeconds":54.172,"failures":[],"passed":true}
+START season10test
+{"name":"season10test","code":0,"durationSeconds":120.284,"failures":[],"passed":true}
+START keytest
+{"name":"keytest","code":0,"durationSeconds":13.61,"failures":[],"passed":true}
+START screenshots
+{"name":"screenshots","code":0,"durationSeconds":20.401,"failures":[],"passed":true}
+START mobile-rugby
+{"name":"mobile-rugby","code":0,"durationSeconds":35.233,"failures":[],"passed":true}
+START crime-witness
+{"name":"crime-witness","code":0,"durationSeconds":1.221,"failures":[],"passed":true}

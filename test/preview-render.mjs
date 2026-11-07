@@ -120,7 +120,7 @@ try {
     await menu(frame); await frame.waitForFunction(() => navigator.serviceWorker.controller);
     await frame.goto(root); await menu(frame);
     await frame.evaluate(async () => {
-      const name = (await caches.keys()).find(k => k.endsWith('render-v4'));
+      const name = (await caches.keys()).find(k => k.endsWith('rugby-v5'));
       if (!name) throw new Error('new scoped service worker cache not active');
       const cache = await caches.open(name);
       await cache.put(location.href, new Response('', { headers: { 'content-type': 'text/html' } }));

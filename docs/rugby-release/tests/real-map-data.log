@@ -1,0 +1,7 @@
+PASS real OSM provenance, named places, 27473 legal directed left-lane edges
+PASS Cathedral Square: OSM 116345266, 0 connected edges from Cathedral Square (0m along the graph)
+PASS Colombo Street: OSM 206789267, 7 connected edges from Cathedral Square (31m along the graph)
+PASS Hagley Park South: OSM 41654585, 112 connected edges from Cathedral Square (2113m along the graph)
+PASS Hagley Park: OSM relation/19140268/0, 112 connected edges from Cathedral Square (2113m along the graph)
+PASS Hagley Park: OSM relation/19140268/1, 77 connected edges from Cathedral Square (1377m along the graph)
+PASS Hagley Park North: OSM 27167078, 77 connected edges from Cathedral Square (1377m along the graph)

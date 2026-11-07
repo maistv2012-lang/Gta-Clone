@@ -5,12 +5,16 @@ import {mkdir,writeFile,readFile} from 'node:fs/promises';
 const output=process.env.GTC_TEST_OUTPUT||'docs/performance/regression';await mkdir(output,{recursive:true});
 const groups=[
  ['build',['scripts/check-build.mjs']],
- ['units',['--test','test/christchurch-spawn.test.mjs','test/map-network.test.mjs','test/map-loader.test.mjs','test/visual-quality.test.mjs','test/render-performance.test.mjs']],
+ ['casino-placement',['test/casino-placement.mjs']],
+ ['rugby-upgrade',['test/rugby-upgrade.mjs']],
+ ['units',['--test','test/christchurch-spawn.test.mjs','test/map-network.test.mjs','test/map-loader.test.mjs','test/visual-quality.test.mjs','test/render-performance.test.mjs','test/interaction-placement.test.mjs']],
  ['real-map-data',['test/real-map-data.mjs']],
  ...['startup-browser','map-browser','spawn-browser','preview-render','visual-demo','visual-visibility','render-contracts'].map(name=>[name,[`test/${name}.mjs`],name==='map-browser'?{GTC_REAL_MAP:'1'}:{}]),
  ['map-synthetic',['test/map-browser.mjs'],{}],
  ...['featurecheck','mobiletest','fulltest','newfeatures','intensetest','season3test','season4test','season8btest','season9test','season10test','keytest','screenshots'].map(name=>[name,['--import','./test/browser-setup.mjs',`test/${name}.mjs`],{GTC_TEST_MAP:'legacy',GTC_LOW_GFX:'1'}]),
 ];
+groups.push(['mobile-rugby',['--import','./test/browser-setup.mjs','test/mobiletest.mjs'],{GTC_TEST_MAP:'legacy',GTC_LOW_GFX:'1',GTC_TEST_CHARACTER:'rugby'}]);
+groups.push(['crime-witness',['test/crime-witness.mjs']]);
 let results=[];
 if(process.env.GTC_TEST_RESUME==='1'){try{results=JSON.parse(await readFile(`${output}/results.json`,'utf8'));}catch{}}
 for(const[name,args,env={}]of groups.filter(([name])=>(!process.env.GTC_TEST_FILTER||new RegExp(process.env.GTC_TEST_FILTER).test(name))&&!(process.env.GTC_TEST_RESUME==='1'&&results.some(r=>r.name===name&&r.passed)))){

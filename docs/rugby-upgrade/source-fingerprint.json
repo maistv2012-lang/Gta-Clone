@@ -1,0 +1,58 @@
+{
+  "branch": "gta-christchurch",
+  "baseCommit": "104e3e683da8a5c847fecc2988c8120e0b467280",
+  "uncommittedDraft": true,
+  "server": "http://localhost:8080/",
+  "files": {
+    "index.html": {
+      "sha256": "137fb03966b9a20c0af0fcbe8c1788936b09e0de5bc644a5cfae65e747c848ad",
+      "httpStatus": 200,
+      "servedBytesMatch": true
+    },
+    "js/main.js": {
+      "sha256": "1fc30a880faef6d2769742f98fff1bae17122ce7420913561f233070cf858d85",
+      "httpStatus": 200,
+      "servedBytesMatch": true
+    },
+    "js/characters.js": {
+      "sha256": "976ae35ce44cb47203b5fa5620835f9d7addec31daac0bfd8bce82c6600b019f",
+      "httpStatus": 200,
+      "servedBytesMatch": true
+    },
+    "js/rugby-materials.js": {
+      "sha256": "43b4e93bf6fcd340fa9af516d87eeae7647c0f3e43d38c549c335abdf519ec7d",
+      "httpStatus": 200,
+      "servedBytesMatch": true
+    },
+    "js/christchurch-city.js": {
+      "sha256": "a71c495807e1d2d2a3f0c729154088c2cd60ad1e3e5849f1a44ecdcbac6c57b4",
+      "httpStatus": 200,
+      "servedBytesMatch": true
+    },
+    "js/city-detailing.js": {
+      "sha256": "06c76d9f5d896c6ae7dfc87d3f4398662fab94c03f85633e6964895f13aae230",
+      "httpStatus": 200,
+      "servedBytesMatch": true
+    },
+    "sw.js": {
+      "sha256": "8cec6b81f97dbd7af4718a18e050a144829d9d6925a31d4a50352c76e96a0d52",
+      "httpStatus": 200,
+      "servedBytesMatch": true
+    },
+    "data/christchurch.json": {
+      "sha256": "8450e30bcfd21904980edd981025eb11816eed46b8acd299e1ac158694111c46",
+      "httpStatus": 200,
+      "servedBytesMatch": true
+    }
+  },
+  "unchangedSystems": {
+    "js/graphics.js": true,
+    "js/city.js": true,
+    "js/car.js": true,
+    "js/police.js": true,
+    "js/prison.js": true,
+    "js/explorer.js": true,
+    "js/road-network.js": true,
+    "data/christchurch.json": true
+  }
+}

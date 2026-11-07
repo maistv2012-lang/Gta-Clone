@@ -1,0 +1,174 @@
+[
+  {
+    "name": "desktop",
+    "osm": true,
+    "area": "Cathedral Square",
+    "details": {
+      "buildings": 24,
+      "source": "OSM footprints + original procedural geometry",
+      "props": 31,
+      "trees": 171,
+      "visibleTrunks": 171,
+      "leafCardsPerTree": 9
+    },
+    "quality": "high",
+    "rig": true,
+    "bones": 10,
+    "profiles": [
+      {
+        "quality": "low",
+        "graphics": {
+          "initialized": true,
+          "frames": 94,
+          "hdr": true,
+          "contextLost": false,
+          "width": 880,
+          "height": 560,
+          "calls": 510,
+          "triangles": 275230,
+          "textures": 68,
+          "geometries": 453,
+          "pixelRatio": 0.8,
+          "adaptiveResolution": false,
+          "frameTimeEma": 883.7716364114424,
+          "batches": {
+            "instances": 399,
+            "batches": 89
+          }
+        }
+      },
+      {
+        "quality": "medium",
+        "graphics": {
+          "initialized": true,
+          "frames": 119,
+          "hdr": true,
+          "contextLost": false,
+          "width": 1100,
+          "height": 700,
+          "calls": 601,
+          "triangles": 422187,
+          "textures": 68,
+          "geometries": 475,
+          "pixelRatio": 1,
+          "adaptiveResolution": false,
+          "frameTimeEma": 1434.4221422091582,
+          "batches": {
+            "instances": 399,
+            "batches": 89
+          }
+        }
+      },
+      {
+        "quality": "high",
+        "graphics": {
+          "initialized": true,
+          "frames": 144,
+          "hdr": true,
+          "contextLost": false,
+          "width": 1100,
+          "height": 700,
+          "calls": 637,
+          "triangles": 526745,
+          "textures": 81,
+          "geometries": 475,
+          "pixelRatio": 1,
+          "adaptiveResolution": false,
+          "frameTimeEma": 1136.3229830595626,
+          "batches": {
+            "instances": 399,
+            "batches": 89
+          }
+        }
+      }
+    ],
+    "observedSoftwareFps": 0.723589001447178,
+    "physicalS24Verified": false
+  },
+  {
+    "name": "mobile",
+    "osm": true,
+    "area": "Cathedral Square",
+    "details": {
+      "buildings": 24,
+      "source": "OSM footprints + original procedural geometry",
+      "props": 31,
+      "trees": 171,
+      "visibleTrunks": 171,
+      "leafCardsPerTree": 6
+    },
+    "quality": "medium",
+    "rig": true,
+    "bones": 10,
+    "profiles": [
+      {
+        "quality": "low",
+        "graphics": {
+          "initialized": true,
+          "frames": 97,
+          "hdr": true,
+          "contextLost": false,
+          "width": 268,
+          "height": 582,
+          "calls": 213,
+          "triangles": 131791,
+          "textures": 46,
+          "geometries": 249,
+          "pixelRatio": 0.7000000000000001,
+          "adaptiveResolution": true,
+          "frameTimeEma": 315.55979991664447,
+          "batches": {
+            "instances": 376,
+            "batches": 87
+          }
+        }
+      },
+      {
+        "quality": "medium",
+        "graphics": {
+          "initialized": true,
+          "frames": 122,
+          "hdr": true,
+          "contextLost": false,
+          "width": 345,
+          "height": 748,
+          "calls": 309,
+          "triangles": 290102,
+          "textures": 46,
+          "geometries": 249,
+          "pixelRatio": 0.9,
+          "adaptiveResolution": true,
+          "frameTimeEma": 557.1868144122561,
+          "batches": {
+            "instances": 376,
+            "batches": 87
+          }
+        }
+      },
+      {
+        "quality": "high",
+        "graphics": {
+          "initialized": true,
+          "frames": 147,
+          "hdr": true,
+          "contextLost": false,
+          "width": 345,
+          "height": 748,
+          "calls": 340,
+          "triangles": 381326,
+          "textures": 59,
+          "geometries": 286,
+          "pixelRatio": 0.9,
+          "adaptiveResolution": true,
+          "frameTimeEma": 534.6760610131845,
+          "batches": {
+            "instances": 376,
+            "batches": 87
+          }
+        }
+      }
+    ],
+    "observedSoftwareFps": 1.5890924692908115,
+    "physicalS24Verified": false
+  }
+]

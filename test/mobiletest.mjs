@@ -16,6 +16,12 @@ page.on('pageerror', (e) => { errors++; console.log('PAGE ERROR:', e.message); }
 
 await page.goto(`http://localhost:${process.env.PORT || 8080}`, { waitUntil: 'networkidle' });
 await page.waitForFunction(() => window.__debug, null, { timeout: 20000 });
+if (process.env.GTC_TEST_CHARACTER) {
+  await page.locator('.charcard').filter({hasText:process.env.GTC_TEST_CHARACTER.toUpperCase()}).tap();
+  const selected=await page.evaluate(()=>__debug.player.charDef.key);
+  if(selected!==process.env.GTC_TEST_CHARACTER)throw new Error('Requested mobile character was not selected');
+  console.log(`PASS mobile roster selects ${selected}`);
+}
 await page.tap('#playbtn');
 await waitForGame(page, 700);
 
@@ -76,7 +82,16 @@ await ev(() => {
 {
   await ev(() => {
     const d = window.__debug;
-    const c = d.world.city.colliders.find((c) => c.h >= 40);
+    // The swing ray fan needs a wide facade and a clear approach. The first
+    // random tall collider can be narrow/obstructed, selecting a distant rope
+    // that legitimately has not lifted the player at the 700ms assertion.
+    const c = d.world.city.colliders.find(c => {
+      if(c.h<40||c.x1-c.x0<16)return false;
+      const x=(c.x0+c.x1)/2,z=c.z0-12;
+      return !d.world.city.colliders.some(o=>x>o.x0-.8&&x<o.x1+.8&&z>o.z0-.8&&z<o.z1+.8)&&
+        [...d.world.traffic,...d.world.parked].every(v=>Math.hypot(v.pos.x-x,v.pos.z-z)>6);
+    });
+    if(!c)throw new Error('No wide, clear facade for the mobile WEB button audit');
     d.player.pos.set((c.x0 + c.x1) / 2, 0, c.z0 - 12);
     d.player.vel.set(0, 0, 0);
     d.player.vy = 0;
@@ -85,9 +100,9 @@ await ev(() => {
   await waitForGame(page, 400);
   await ev(() => window.__touch('btn-web', 'touchstart'));
   await waitForGame(page, 700);
-  const s = await ev(() => ({ att: window.__debug.web.attached, y: window.__debug.player.pos.y }));
+  const s = await ev(() => ({ att: window.__debug.web.attached, y: window.__debug.player.pos.y, anchor:window.__debug.web.anchor.toArray(), rope:window.__debug.web.len, target:window.__debug.web.targetLen }));
   await ev(() => window.__touch('btn-web', 'touchend'));
-  console.log(`web button swings: airborne ${s.y.toFixed(1)}m ${s.att && s.y > 0.3 ? 'PASS' : 'FAIL'}`);
+  console.log(`web button swings: airborne ${s.y.toFixed(1)}m ${s.att && s.y > 0.3 ? 'PASS' : 'FAIL'} — ${JSON.stringify(s)}`);
   await waitForGame(page, 1500);
 }
 

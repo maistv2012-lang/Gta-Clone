@@ -839,7 +839,7 @@ async function resetPlayer() {
     d.setCharacter('tank');
     return d.player.charDef.key === 'tank' && d.player.charDef.health === 150;
   });
-  check('Selectable characters (3)', chars === 3 && applied, `${chars} characters, tank=150hp`);
+  check('Selectable characters (4)', chars === 4 && applied && await ev(() => ['web','dash','tank','rugby'].every(key => __debug.characters.some(c => c.key === key))), `${chars} characters, tank=150hp`);
   await ev(() => window.__debug.setCharacter('web'));
 }
 

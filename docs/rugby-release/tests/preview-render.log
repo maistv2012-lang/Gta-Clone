@@ -1,0 +1,10 @@
+PASS s24-preview {"pixels":{"luminanceStd":63.11113119692106,"colors":410},"graphics":{"initialized":true,"frames":9,"hdr":true,"contextLost":false,"width":384,"height":832,"calls":318,"triangles":172018,"textures":38,"geometries":210,"pixelRatio":1,"adaptiveResolution":true,"frameTimeEma":455.62629013999987,"batches":{"instances":369,"batches":87}}}
+PASS s24-worker-blocked {"pixels":{"luminanceStd":63.11980859757307,"colors":430},"graphics":{"initialized":true,"frames":9,"hdr":true,"contextLost":false,"width":384,"height":832,"calls":292,"triangles":179760,"textures":41,"geometries":213,"pixelRatio":1,"adaptiveResolution":true,"frameTimeEma":438.0192080599958,"batches":{"instances":343,"batches":81}}}
+PASS s24-warm-reload {"pixels":{"luminanceStd":38.05218625147297,"colors":434},"graphics":{"initialized":true,"frames":15,"hdr":true,"contextLost":false,"width":345,"height":748,"calls":320,"triangles":210250,"textures":42,"geometries":222,"pixelRatio":0.9,"adaptiveResolution":true,"frameTimeEma":549.3442615044823,"batches":{"instances":363,"batches":85}}}
+PASS s24-no-float {"pixels":{"luminanceStd":19.486112724767324,"colors":260},"graphics":{"initialized":true,"frames":9,"hdr":false,"contextLost":false,"width":384,"height":832,"calls":314,"triangles":198854,"textures":46,"geometries":219,"pixelRatio":1,"adaptiveResolution":true,"frameTimeEma":433.41585617199854,"batches":{"instances":386,"batches":91}},"oldBlackFrame":{"luminanceStd":5.566650263929276,"colors":44}}
+PASS s24-cache-recovery {"pixels":{"luminanceStd":63.114588785273554,"colors":418},"graphics":{"initialized":true,"frames":15,"hdr":true,"contextLost":false,"width":345,"height":748,"calls":310,"triangles":201078,"textures":39,"geometries":218,"pixelRatio":0.9,"adaptiveResolution":true,"frameTimeEma":566.9398015624221,"batches":{"instances":384,"batches":89}}}
+PASS s24-map-error {"menuVisible":true,"replacementWorld":false}
+PASS s24-webgl-error {"menuVisible":true}
+PASS s24-late-js-error {"menuVisible":true}
+PASS s24-silent-black-frame {"menuVisible":true}
+9/9 visual preview scenarios passed

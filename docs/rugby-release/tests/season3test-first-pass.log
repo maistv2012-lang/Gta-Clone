@@ -1,0 +1,25 @@
+PASS  All 8 Season-3 systems initialized — {"cheist":true,"derby":true,"plane":true,"smuggle":true,"empire":true,"diving":true,"pap":true,"mayor":true,"prestige":true}
+PASS  Heist: cased the Lucky 7 (cameras up) — stage 1
+PASS  Heist: cameras blinded -> vault stage
+PASS  Heist: vault cracked, city furious — wanted 4
+PASS  Heist: heat lost, $15k banked, once per day — +$15000
+PASS  Derby: entered ($500), 7 rivals staged
+PASS  Derby: last one rolling wins the purse — +$3000
+PASS  Seaplane: throttle up on the water — 19.8 u/s
+PASS  Seaplane: package dropped through the smoke
+PASS  Seaplane: delivery pays at the dock — +$2000
+PASS  Empire: takeover starts (3 defenders)
+PASS  Empire: district taken — districts: 1
+FAIL  Empire: rival raid arrives
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.evaluate: TypeError: Cannot read properties of null (reading 'thugs')
+    at eval (eval at evaluate (:302:30), <anonymous>:3:36)
+    at UtilityScript.evaluate (<anonymous>:304:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at ev (/workspace/Gta-Clone/test/season3test.mjs:23:30)
+    at /workspace/Gta-Clone/test/season3test.mjs:211:9
+
+Node.js v24.22.1

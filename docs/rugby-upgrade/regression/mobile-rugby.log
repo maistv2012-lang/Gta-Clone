@@ -1,0 +1,11 @@
+PASS mobile roster selects rugby
+touch UI present: PASS
+joystick move: 4.02m PASS
+jump button: vy=3.1 PASS
+web button swings: airborne 2.8m PASS
+fire button shoots: PASS
+kiosk digit buttons: PASS
+FIGHT button (arena): shown=true started=true PASS
+BUY button (property): shown=true bought=true PASS
+boat via joystick: 14.9 m/s PASS
+mobile runtime errors: 0 PASS

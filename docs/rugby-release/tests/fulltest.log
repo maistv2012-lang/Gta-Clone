@@ -1,0 +1,22 @@
+KeyW: moved 2.93m PASS
+KeyS: moved 3.21m PASS
+KeyA: moved 3.21m PASS
+KeyD: moved 3.21m PASS
+non-QWERTY 'd': moved 3.20m PASS
+weapon switch: MACHINE GUN · 60 PASS
+web attach: PASS
+web swing: height 12.6m speed 0.2 m/s PASS
+web release + land: y 0.0 PASS
+web traversal: covered 132m in 3 chained swings PASS
+enter car: PASS
+drive: speed 12.0 m/s PASS
+steer D: heading change -1.57 rad PASS (turns right)
+enter heli: PASS
+heli takeoff: altitude 17.5m PASS
+police heli at 3 stars: 1 PASS
+web attack (Q): PASS
+rob store: +$289 PASS
+gang territory: PASS
+motorbike: found true, speed 17.5 m/s PASS
+army tank at 5 stars: 1 PASS
+runtime errors: 0 PASS

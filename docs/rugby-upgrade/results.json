@@ -1,0 +1,125 @@
+{
+  "mapSHA256": "8450e30bcfd21904980edd981025eb11816eed46b8acd299e1ac158694111c46",
+  "reports": [
+    {
+      "name": "desktop",
+      "rig": {
+        "independent": true,
+        "shared": true,
+        "stableGroup": true,
+        "reusedSkin": true,
+        "pool": 2,
+        "bones": 10,
+        "groups": 1,
+        "triangles": 9352,
+        "regularTriangles": 3056,
+        "bounds": {
+          "min": [
+            -0.4129999876022339,
+            -2.9802322831784522e-9,
+            -0.25849997997283936
+          ],
+          "max": [
+            0.4129999876022339,
+            1.9210000038146973,
+            0.2849999964237213
+          ]
+        },
+        "horizontalRadius": 0.4129999876022339,
+        "atlasValid": true,
+        "fitsCollision": true,
+        "atlas": 512,
+        "quality": [
+          true,
+          true,
+          true
+        ],
+        "animated": true
+      },
+      "metrics": {
+        "initialized": true,
+        "frames": 133,
+        "hdr": true,
+        "contextLost": false,
+        "width": 1100,
+        "height": 700,
+        "calls": 610,
+        "triangles": 420259,
+        "textures": 98,
+        "geometries": 511,
+        "pixelRatio": 1,
+        "adaptiveResolution": false,
+        "frameTimeEma": 1584.816197826073,
+        "batches": {
+          "instances": 372,
+          "batches": 88
+        },
+        "averageFPS": 0.6353912951392566,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "heapBytes": 233349006,
+        "glError": 0
+      },
+      "errors": []
+    },
+    {
+      "name": "mobile",
+      "rig": {
+        "independent": true,
+        "shared": true,
+        "stableGroup": true,
+        "reusedSkin": true,
+        "pool": 2,
+        "bones": 10,
+        "groups": 1,
+        "triangles": 9352,
+        "regularTriangles": 3056,
+        "bounds": {
+          "min": [
+            -0.4129999876022339,
+            -2.9802322831784522e-9,
+            -0.25849997997283936
+          ],
+          "max": [
+            0.4129999876022339,
+            1.9210000038146973,
+            0.2849999964237213
+          ]
+        },
+        "horizontalRadius": 0.4129999876022339,
+        "atlasValid": true,
+        "fitsCollision": true,
+        "atlas": 512,
+        "quality": [
+          true,
+          true,
+          true
+        ],
+        "animated": true
+      },
+      "metrics": {
+        "initialized": true,
+        "frames": 131,
+        "hdr": true,
+        "contextLost": false,
+        "width": 384,
+        "height": 832,
+        "calls": 341,
+        "triangles": 281429,
+        "textures": 71,
+        "geometries": 363,
+        "pixelRatio": 1,
+        "adaptiveResolution": false,
+        "frameTimeEma": 587.1401996862062,
+        "batches": {
+          "instances": 389,
+          "batches": 93
+        },
+        "averageFPS": 1.765199099748435,
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+        "heapBytes": 239465619,
+        "glError": 0
+      },
+      "errors": []
+    }
+  ]
+}
