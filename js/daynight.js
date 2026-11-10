@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 // One in-game day = 24 real minutes (1 real minute = 1 game hour), GTA-style.
-export const DAY_START = 10; // spawn at 10:00
+export const DAY_START = 18.2; // spawn into the evening rain
 
 // Keyframes across the 24h cycle. glow = how "night" it is (drives lit windows, lamps).
 const KEYS = [
@@ -105,7 +105,7 @@ const _sunDir = new THREE.Vector3();
 
 // Apply time-of-day to the whole scene. Returns the glow factor (1 = full night).
 export function applyDayNight(hours, ctx) {
-  const { scene, sun, hemi, sky, camera, city } = ctx;
+  const { scene, sun, hemi, sky, camera, city, overcast = 0 } = ctx;
   const s = sample(hours);
 
   // sun travels east -> west between 06:00 and 18:00; otherwise a dim "moon"
@@ -137,10 +137,11 @@ export function applyDayNight(hours, ctx) {
   scene.fog.far = 520 - s.glow * 140;
   if ('environmentIntensity' in scene) scene.environmentIntensity = 0.25 + (1 - s.glow) * 0.75;
 
-  // city lights up at night
-  for (const m of city.windowMats) m.emissiveIntensity = 0.06 + s.glow * 1.15;
-  city.lampGlowMat.opacity = s.glow * 0.5;
-  city.bulbMat.emissiveIntensity = 0.25 + s.glow * 1.3;
+  // city lights up at night — and early under heavy cloud
+  const lights = Math.max(s.glow, overcast * 0.85);
+  for (const m of city.windowMats) m.emissiveIntensity = 0.06 + lights * 1.15;
+  city.lampGlowMat.opacity = lights * 0.5;
+  city.bulbMat.emissiveIntensity = 0.25 + lights * 1.3;
 
-  return { glow: s.glow, sunDir: _sunDir };
+  return { glow: s.glow, lights, sunDir: _sunDir };
 }

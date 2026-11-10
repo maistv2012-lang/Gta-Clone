@@ -143,6 +143,9 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { createWetRoad } from './wetroad.js';
+import { buildNeon } from './neon.js';
 
 // ---------- renderer / scene ----------
 
@@ -173,6 +176,23 @@ const bloom = new UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight), 0.28, 0.55, 0.82
 );
 composer.addPass(bloom);
+// film grade: vignette always; under cloud the image cools and desaturates
+const grade = new ShaderPass({
+  uniforms: { tDiffuse: { value: null }, uMood: { value: 0 } },
+  vertexShader: 'varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+  fragmentShader: `
+    uniform sampler2D tDiffuse; uniform float uMood; varying vec2 vUv;
+    void main() {
+      vec4 c = texture2D(tDiffuse, vUv);
+      float l = dot(c.rgb, vec3(0.2126, 0.7152, 0.0722));
+      vec3 cool = mix(vec3(l), c.rgb, 0.82) * vec3(0.94, 1.0, 1.08);
+      c.rgb = mix(c.rgb, cool, uMood);
+      vec2 d = vUv - 0.5;
+      c.rgb *= 1.0 - dot(d, d) * (0.55 + uMood * 0.35);
+      gl_FragColor = c;
+    }`,
+});
+composer.addPass(grade);
 composer.addPass(new OutputPass());
 
 const hemi = new THREE.HemisphereLight(0xd5e4f2, 0x4a463c, 0.9);
@@ -193,11 +213,19 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
   composer.setSize(window.innerWidth, window.innerHeight);
+  const buf = renderer.getDrawingBufferSize(new THREE.Vector2());
+  wetRoad.setSize(buf.x, buf.y);
 });
 
 // ---------- world ----------
 
 const city = buildCity(scene);
+// rain-slick streets mirror the city; phones render the mirror smaller
+const wetRoad = createWetRoad(renderer, {
+  scale: ('ontouchstart' in window || navigator.maxTouchPoints > 0) ? 0.35 : 0.5,
+});
+for (const m of city.roadMeshes) wetRoad.addMesh(m);
+const neon = buildNeon(scene, city);
 const sky = createSkyDome(scene);
 const weather = initWeather(scene);
 const landmarks = buildLandmarks(scene, city);
@@ -2699,22 +2727,30 @@ function update(dt) {
 
   // day/night cycle: 1 real minute = 1 game hour
   world.clock = (world.clock + dt / 60) % 24;
-  const dn = applyDayNight(world.clock, { scene, sun, hemi, sky, camera, city });
+  const wx = updateWeather(weather, dt, camera);
+  const dn = applyDayNight(world.clock, { scene, sun, hemi, sky, camera, city, overcast: wx.intensity });
   world.sunDir.copy(dn.sunDir);
 
-  // weather: rain dims the sky and thickens the fog; lightning washes the scene
-  const wx = updateWeather(weather, dt, camera);
+  // weather: rain pulls a slate-blue cloud deck over the city — flat cool
+  // light, no sunset glow, mist closing in down the avenues
   if (wx.intensity > 0.01) {
     const r = wx.intensity;
-    scene.fog.near *= 1 - r * 0.45;
-    scene.fog.far *= 1 - r * 0.5;
-    sun.intensity *= 1 - r * 0.6;
-    hemi.intensity *= 1 - r * 0.25;
-    sky.uniforms.topColor.value.multiplyScalar(1 - r * 0.4);
-    sky.uniforms.horizonColor.value.multiplyScalar(1 - r * 0.35);
-    sky.uniforms.sunHaze.value *= 1 - r * 0.7;
+    const day = 0.3 + (1 - dn.glow) * 0.7; // cloud brightness follows the hour
+    sky.uniforms.topColor.value.lerp(_overTop.setHex(0x4c5a6e).multiplyScalar(day), r);
+    sky.uniforms.horizonColor.value.lerp(_overHor.setHex(0x8b98a9).multiplyScalar(day), r);
+    scene.fog.color.copy(sky.uniforms.horizonColor.value);
+    scene.fog.near += (45 - scene.fog.near) * r;
+    scene.fog.far += (330 - scene.fog.far) * r;
+    sun.intensity *= 1 - r * 0.7;
+    sun.color.lerp(_overSun.setHex(0xa9b8cc), r);
+    hemi.color.lerp(_overSun, r * 0.6);
+    hemi.intensity *= 1 - r * 0.32;
+    sky.uniforms.sunHaze.value *= 1 - r;
     sky.stars.material.opacity *= 1 - r;
   }
+  wetRoad.uniforms.uWet.value = wx.wet;
+  grade.uniforms.uMood.value = wx.intensity * 0.9;
+  neon.update(dn.lights);
   if (wx.flash > 0.01) {
     hemi.intensity += wx.flash * 1.8;
     sun.intensity += wx.flash * 0.8;
@@ -2739,7 +2775,7 @@ function update(dt) {
   }
 
   // bloom breathes with the night: stronger glow when the city lights are on
-  bloom.strength = world.settings.lowGfx ? 0 : 0.22 + dn.glow * 0.33;
+  bloom.strength = world.settings.lowGfx ? 0 : 0.22 + dn.lights * 0.3;
 
   // headlights when driving after dark
   const pcar = player.inCar;
@@ -3053,11 +3089,29 @@ function update(dt) {
 }
 
 let introT = 0;
+let frameNo = 0;
+let fpsT = performance.now();
+let fpsN = 0;
+let slowRuns = 0;
+const _overTop = new THREE.Color();
+const _overHor = new THREE.Color();
+const _overSun = new THREE.Color();
 const _introFrom = new THREE.Vector3(HALF * 0.55, 130, HALF * 0.55);
 const _introTo = new THREE.Vector3();
 
 function animate() {
   requestAnimationFrame(animate);
+  // slow devices drop the street mirror on their own: three bad 2s windows in a row
+  fpsN++;
+  const fpsNow = performance.now();
+  if (fpsNow - fpsT > 2000) {
+    const fps = (fpsN * 1000) / (fpsNow - fpsT);
+    fpsT = fpsNow; fpsN = 0;
+    if (gameState === 'play' && wetRoad.uniforms.uWetRefl.value > 0.5) {
+      slowRuns = fps < 24 ? slowRuns + 1 : 0;
+      if (slowRuns >= 3) { world.wetReflOff = true; slowRuns = 0; }
+    }
+  }
   pollGamepad();
   let dt = Math.min(clock.getDelta(), 0.05);
 
@@ -3093,6 +3147,8 @@ function animate() {
     camera.rotation.z += Math.sin(t * 0.0021) * 0.09;
     camera.rotation.x += Math.sin(t * 0.0013) * 0.04;
   }
+  // mirror pass for the wet streets (skipped when dry or on LOW GRAPHICS)
+  wetRoad.render(scene, camera, frameNo++ > 3 && !world.settings.lowGfx && !world.wetReflOff);
   composer.render();
   if (world.captureNext) {
     world.captureNext = false;

@@ -158,6 +158,8 @@ export function buildCity(scene) {
   const roadZs = [];
   const helipads = [];
   const windowMats = []; // facade materials, dimmed/lit by the day/night cycle
+  const lots = [];       // every building footprint, for storefronts and neon signs
+  const roadMeshes = []; // asphalt, patched by the wet-road reflection
 
   // scrubland beyond the city
   const ground = new THREE.Mesh(
@@ -191,20 +193,22 @@ export function buildCity(scene) {
     tv.needsUpdate = true;
     tv.wrapT = THREE.RepeatWrapping;
     tv.repeat.set(1, CITY / ROAD);
-    const v = new THREE.Mesh(roadGeo, new THREE.MeshLambertMaterial({ map: tv }));
+    const v = new THREE.Mesh(roadGeo, new THREE.MeshStandardMaterial({ map: tv, roughness: 0.95, metalness: 0 }));
     v.position.set(cx, 0.04, 0);
     v.receiveShadow = true;
     scene.add(v);
+    roadMeshes.push(v);
 
     const th = roadTex.clone();
     th.needsUpdate = true;
     th.wrapT = THREE.RepeatWrapping;
     th.repeat.set(1, CITY / ROAD);
-    const h = new THREE.Mesh(roadGeo, new THREE.MeshLambertMaterial({ map: th }));
+    const h = new THREE.Mesh(roadGeo, new THREE.MeshStandardMaterial({ map: th, roughness: 0.95, metalness: 0 }));
     h.position.set(0, 0.08, cx);
     h.rotation.y = Math.PI / 2;
     h.receiveShadow = true;
     scene.add(h);
+    roadMeshes.push(h);
   }
 
   // gritty desaturated building palette, windows glow at dusk
@@ -301,6 +305,7 @@ export function buildCity(scene) {
           b.receiveShadow = true;
           scene.add(b);
           colliders.push({ x0: lotX - w / 2, z0: lotZ - d / 2, x1: lotX + w / 2, z1: lotZ + d / 2, h: hgt + 0.5 });
+          lots.push({ x: lotX, z: lotZ, w, d, h: hgt, sx: li ? 1 : -1, sz: lj ? 1 : -1 }); // sx/sz: which sides face a street
 
           // rooftop clutter: AC units + antennas
           const top = hgt + 0.2;
@@ -362,7 +367,7 @@ export function buildCity(scene) {
   const mid = Math.floor(N / 2);
   const spawn = new THREE.Vector3(roadCenter(mid), 0, roadCenter(mid));
 
-  return { colliders, pedRects, roadXs, roadZs, spawn, helipads, windowMats, lampGlowMat: glowMat, bulbMat };
+  return { colliders, pedRects, roadXs, roadZs, spawn, helipads, windowMats, lampGlowMat: glowMat, bulbMat, lots, roadMeshes };
 }
 
 // Push a circle (pos, r) out of every AABB collider it overlaps.

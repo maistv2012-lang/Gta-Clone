@@ -67,6 +67,16 @@ Plug one in and play: left stick moves, right stick looks, **A** jump/up,
 
 ## Features
 
+### Rainy-dusk look
+- The city opens on a wet evening: slate overcast sky, mist down the avenues,
+  cool film grade and vignette.
+- **Wet streets mirror the city** — a planar reflection blended into the
+  asphalt (puddles sharp, damp tarmac blurred). It only runs while the road
+  is wet, is skipped on LOW GRAPHICS, and switches itself off on devices
+  that can't hold ~24 fps.
+- Lit storefronts on every street-facing facade and vertical neon blade
+  signs, all instanced; they brighten at night and under heavy cloud.
+
 ### Spider-Man traversal
 - **Web swinging** — physical pendulum on buildings; anchors picked high and
   ahead so swinging down a street just works. Swing pump builds speed, the
