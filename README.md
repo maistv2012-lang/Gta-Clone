@@ -67,6 +67,16 @@ Plug one in and play: left stick moves, right stick looks, **A** jump/up,
 
 ## Features
 
+### 3D model city (New Zealand flavour)
+- Buildings and cars are real 3D models (Kenney's CC0 City Kit Commercial
+  and Car Kit, in `assets/models/`). Each lot holds a cluster of buildings at
+  human scale, stretched onto the lot's collision box so gameplay is
+  unchanged; windows light up pane by pane at night.
+- Distant districts swap to a cheaper version of each building, and every
+  model is instanced. If the models fail to load, the procedural box city and
+  box cars are used instead.
+- Kiwi street life: dairies, fish & chips, chemists, hot pies, op shops.
+
 ### Rainy-dusk look
 - The city opens on a wet evening: slate overcast sky, mist down the avenues,
   cool film grade and vignette.

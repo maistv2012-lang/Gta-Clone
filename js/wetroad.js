@@ -56,7 +56,7 @@ export function createWetRoad(renderer, { scale = 0.5 } = {}) {
             float puddle = smoothstep(0.3, 0.75, pool + (uWet - 0.6) * 0.5);
             float film = uWet * mix(0.78, 1.0, puddle);
             vec3 wetV = normalize(cameraPosition - vWetPos);
-            float fres = 0.05 + 0.95 * pow(1.0 - max(wetV.y, 0.0), 4.0);
+            float fres = 0.04 + 0.96 * pow(1.0 - max(wetV.y, 0.0), 5.0);
             outgoingLight *= 1.0 - 0.55 * film; // wet asphalt goes dark
             if (uWetRefl > 0.5) {
               // tiny ripples bend the mirror; damp areas read a blurrier mip

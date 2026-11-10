@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { models } from './models.js';
 
 // City layout: N x N blocks separated by roads, surrounded by a perimeter road.
 export const BLOCK = 60;
@@ -159,6 +160,8 @@ export function buildCity(scene) {
   const helipads = [];
   const windowMats = []; // facade materials, dimmed/lit by the day/night cycle
   const lots = [];       // every building footprint, for storefronts and neon signs
+  const modelLots = new Map(); // "model|chunk" -> instance matrices
+  const districts = new Map(); // chunk -> { x, z, near: [meshes], far: [meshes] }
   const roadMeshes = []; // asphalt, patched by the wet-road reflection
 
   // scrubland beyond the city
@@ -288,6 +291,13 @@ export function buildCity(scene) {
           const w = 17 + Math.random() * 6;
           const d = 17 + Math.random() * 6;
           const hgt = 12 + Math.floor(Math.random() * 9) * 6;
+          colliders.push({ x0: lotX - w / 2, z0: lotZ - d / 2, x1: lotX + w / 2, z1: lotZ + d / 2, h: hgt + 0.5 });
+          lots.push({ x: lotX, z: lotZ, w, d, h: hgt, sx: li ? 1 : -1, sz: lj ? 1 : -1 }); // sx/sz: which sides face a street
+          if (models.ready) {
+            // 3D model building, stretched onto this lot's collision box
+            placeModelBuilding(modelLots, lots[lots.length - 1]);
+            continue;
+          }
           const set = winSets[(Math.random() * winSets.length) | 0];
           const sideMat = new THREE.MeshStandardMaterial({
             map: set.map,
@@ -304,8 +314,6 @@ export function buildCity(scene) {
           b.castShadow = true;
           b.receiveShadow = true;
           scene.add(b);
-          colliders.push({ x0: lotX - w / 2, z0: lotZ - d / 2, x1: lotX + w / 2, z1: lotZ + d / 2, h: hgt + 0.5 });
-          lots.push({ x: lotX, z: lotZ, w, d, h: hgt, sx: li ? 1 : -1, sz: lj ? 1 : -1 }); // sx/sz: which sides face a street
 
           // rooftop clutter: AC units + antennas
           const top = hgt + 0.2;
@@ -367,7 +375,51 @@ export function buildCity(scene) {
   const mid = Math.floor(N / 2);
   const spawn = new THREE.Vector3(roadCenter(mid), 0, roadCenter(mid));
 
-  return { colliders, pedRects, roadXs, roadZs, spawn, helipads, windowMats, lampGlowMat: glowMat, bulbMat, lots, roadMeshes };
+  // one instanced mesh per model per city district, so off-screen districts cull
+  // each district also has a cheap far version, swapped in by distance
+  for (const [key, list] of modelLots) {
+    const [mi, chunk] = key.split('|');
+    const model = models.buildings[+mi]; // undefined for 'box'
+    const make = (geo, shadows) => {
+      const mesh = new THREE.InstancedMesh(geo, models.buildingMat, list.length);
+      list.forEach((mx, i) => {
+        mesh.setMatrixAt(i, mx);
+        // stone, concrete and brick tints so the towers aren't all one white;
+        // seeded by position so near and far versions agree
+        const seed = Math.abs(Math.sin(mx.elements[12] * 12.9898 + mx.elements[14] * 78.233) * 43758.5453);
+        mesh.setColorAt(i, _tint.setHex(FACADE_TINTS[Math.floor(seed) % FACADE_TINTS.length]));
+      });
+      mesh.instanceMatrix.needsUpdate = true;
+      mesh.instanceColor.needsUpdate = true;
+      mesh.computeBoundingSphere();
+      mesh.castShadow = shadows;
+      mesh.receiveShadow = true;
+      scene.add(mesh);
+      return mesh;
+    };
+    if (!districts.has(chunk)) {
+      const [ci, cj] = chunk.split(',').map(Number);
+      districts.set(chunk, { x: (ci + 0.5) * DISTRICT - HALF, z: (cj + 0.5) * DISTRICT - HALF, near: [], far: [] });
+    }
+    const dist = districts.get(chunk);
+    if (!model) { make(models.boxGeo, true); continue; } // blocks look the same at any range
+    dist.near.push(make(model.geo, true));
+    const far = make(model.far, false);
+    far.visible = false;
+    dist.far.push(far);
+  }
+  // show full-detail buildings only around the camera
+  const updateBuildingLOD = (cam) => {
+    for (const d of districts.values()) {
+      const near = Math.hypot(cam.x - d.x, cam.z - d.z) < 230;
+      if (d.isNear === near) continue;
+      d.isNear = near;
+      for (const m of d.near) m.visible = near;
+      for (const m of d.far) m.visible = !near;
+    }
+  };
+
+  return { colliders, pedRects, roadXs, roadZs, spawn, helipads, windowMats, lampGlowMat: glowMat, bulbMat, lots, roadMeshes, modelBuildings: models.ready, updateBuildingLOD };
 }
 
 // Push a circle (pos, r) out of every AABB collider it overlaps.
@@ -427,4 +479,42 @@ export function pointBlocked(pos, colliders, pad = 0.3) {
     if (pos.x > c.x0 - pad && pos.x < c.x1 + pad && pos.z > c.z0 - pad && pos.z < c.z1 + pad) return true;
   }
   return false;
+}
+
+// Pick the library building whose proportions best match the lot, turn its
+// front door toward a street and stretch it to the lot's exact box so
+// collisions, rooftops and web anchors stay where the game expects them.
+const DISTRICT = 152; // two city blocks
+const FACADE_TINTS = [0xffffff, 0xece4d6, 0xd9dee6, 0xcdbba8, 0xbcc5cf, 0xe8d6c2, 0xb9a898, 0xf2efe8];
+const _tint = new THREE.Color();
+const _bm = new THREE.Matrix4();
+const _bq = new THREE.Quaternion();
+const _bp = new THREE.Vector3();
+const _bs = new THREE.Vector3();
+const _by = new THREE.Vector3(0, 1, 0);
+function placeModelBuilding(modelLots, lot) {
+  // The kit's buildings are town-sized (a door is ~1/4 unit tall), so each lot
+  // holds a 2x2 cluster of them at human scale rather than one giant model.
+  const chunk = `${Math.floor((lot.x + HALF) / DISTRICT)},${Math.floor((lot.z + HALF) / DISTRICT)}`;
+  const w = lot.w / 2, d = lot.d / 2;
+  const aspect = lot.h / ((w + d) / 2);
+  const ranked = models.buildings
+    .map((m, i) => [Math.abs(Math.log(m.aspect / aspect)), i])
+    .sort((p, q) => p[0] - q[0]);
+  for (const ix of [-1, 1]) {
+    for (const iz of [-1, 1]) {
+      // doors face the street this corner of the lot looks onto
+      const onStreetX = ix === lot.sx, onStreetZ = iz === lot.sz;
+      // the corner buried inside the block is never seen up close: plain block
+      const pick = onStreetX || onStreetZ ? ranked[(Math.random() * 4) | 0][1] : 'box';
+      const faceX = onStreetX && (!onStreetZ || Math.random() < 0.5);
+      const ry = faceX ? lot.sx * Math.PI / 2 : (lot.sz > 0 ? 0 : Math.PI);
+      _bq.setFromAxisAngle(_by, ry);
+      _bs.set(faceX ? d : w, lot.h, faceX ? w : d);
+      _bm.compose(_bp.set(lot.x + ix * w / 2, 0.2, lot.z + iz * d / 2), _bq, _bs);
+      const key = `${pick}|${chunk}`;
+      if (!modelLots.has(key)) modelLots.set(key, []);
+      modelLots.get(key).push(_bm.clone());
+    }
+  }
 }

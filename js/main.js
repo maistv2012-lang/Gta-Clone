@@ -146,6 +146,7 @@ import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { createWetRoad } from './wetroad.js';
 import { buildNeon } from './neon.js';
+import { models, loadModels } from './models.js';
 
 // ---------- renderer / scene ----------
 
@@ -219,6 +220,11 @@ window.addEventListener('resize', () => {
 
 // ---------- world ----------
 
+// 3D building and car models; the procedural boxes stand in if they fail to load
+await Promise.race([
+  loadModels(),
+  new Promise((resolve) => setTimeout(resolve, 15000)),
+]).catch((e) => console.warn('models unavailable, using procedural city', e));
 const city = buildCity(scene);
 // rain-slick streets mirror the city; phones render the mirror smaller
 const wetRoad = createWetRoad(renderer, {
@@ -2751,6 +2757,8 @@ function update(dt) {
   wetRoad.uniforms.uWet.value = wx.wet;
   grade.uniforms.uMood.value = wx.intensity * 0.9;
   neon.update(dn.lights);
+  models.glow.value = dn.lights;
+  city.updateBuildingLOD(camera.position);
   if (wx.flash > 0.01) {
     hemi.intensity += wx.flash * 1.8;
     sun.intensity += wx.flash * 0.8;

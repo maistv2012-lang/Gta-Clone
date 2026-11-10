@@ -1,0 +1,4 @@
+Building and car models in this folder are from Kenney (www.kenney.nl):
+- City Kit (Commercial) 2.1
+- Car Kit 3.1
+License: Creative Commons Zero (CC0) - http://creativecommons.org/publicdomain/zero/1.0/

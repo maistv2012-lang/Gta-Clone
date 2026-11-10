@@ -5,8 +5,8 @@ import * as THREE from 'three';
 // instanced (one draw call per texture variant) and brightens with the
 // night / overcast glow so rainy dusk streets light up.
 
-const SHOP_NAMES = ['MARKET', 'NOODLES', 'PHARMACY', 'ARCADE', 'BOOKS', 'CAFE 24H', 'BAKERY', 'PAWN', 'RECORDS', 'LAUNDRY', 'TATTOO', 'DINER'];
-const SIGN_WORDS = ['HOTEL', 'BAR', 'RAMEN', 'KARAOKE', 'OPEN', 'CLUB', 'MOTEL', 'SUSHI', 'PIZZA', 'CINEMA', 'TAXI', 'POOL'];
+const SHOP_NAMES = ['DAIRY', 'FISH & CHIPS', 'CHEMIST', 'TAKEAWAYS', 'BOOKS', 'FLAT WHITE CAFE', 'HOT PIES', 'OP SHOP', 'SUPERETTE', 'LAUNDROMAT', 'BOTTLE STORE', 'BAKERY'];
+const SIGN_WORDS = ['HOTEL', 'BAR', 'DAIRY', 'PIES', 'OPEN', 'KEBAB', 'CAFE', 'SUSHI', 'CHEMIST', 'CINEMA', 'TAXI', 'BACKPACKERS'];
 const SIGN_STYLES = [
   { bg: '#1a0f04', ink: '#ffb347', edge: '#ff8a1e' }, // amber
   { bg: '#c81e1e', ink: '#fff2e0', edge: '#ff5a4a' }, // red box, pale letters

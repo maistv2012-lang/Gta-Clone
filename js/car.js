@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { resolveCircle, HALF } from './city.js';
+import { models, createCarModel } from './models.js';
 
 const CAR_COLORS = ['#6e1f1f', '#1f2f45', '#2a2a2e', '#3d3d42', '#5a5247', '#23402a', '#494544', '#6b6760', '#2e2330', '#14181d', '#b89b2e', '#742a14'];
 export function randomCarColor() {
@@ -12,6 +13,7 @@ const wheelMat = new THREE.MeshStandardMaterial({ color: 0x16161a, roughness: 0.
 
 // Builds a car mesh facing +z. Returns { group, wheels, lightbar }.
 export function createCarMesh(color, opts = {}) {
+  if (models.ready && !opts.tank) return createCarModel(color, opts);
   const group = new THREE.Group();
   // metallic paint that picks up environment reflections
   const mat = (c, e) => new THREE.MeshStandardMaterial({ color: c, emissive: e || 0x000000, metalness: 0.7, roughness: 0.32 });
@@ -240,7 +242,9 @@ export function separateCars(a, b, bStatic = false) {
 // Recolor a vehicle's main body panel (garage respray).
 export function resprayVehicle(v, color) {
   const body = v.mesh.children[0];
-  if (body && body.material && body.material.color) body.material.color.set(color);
+  if (!body || !body.material) return;
+  if (Array.isArray(body.material)) body.material[0].color.set(color); // model car: paint panels only
+  else if (v.mesh.userData.paint !== false && body.material.color) body.material.color.set(color);
 }
 
 export function darkenCar(v) {
