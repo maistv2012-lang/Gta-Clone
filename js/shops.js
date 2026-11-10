@@ -196,7 +196,9 @@ export function wearSuit(world, key, quiet = false) {
   const suit = SUITS.find((x) => x.key === key) || SUITS[0];
   world.suit = suit.key;
   world.perks = { style: 1, melee: 1, webDur: 6, decay: 24, busted: 1.6, ...suit.perks };
-  applySuit(world.player.ch, suit.colors);
+  // the free street clothes are each character's own look
+  const own = suit.key === 'street' && world.player.charDef?.build ? world.player.charDef.colors : suit.colors;
+  applySuit(world.player.ch, own);
   if (!quiet) showToast(`SUIT: ${suit.name}`);
 }
 

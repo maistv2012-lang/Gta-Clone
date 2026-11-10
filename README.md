@@ -77,6 +77,12 @@ Plug one in and play: left stick moves, right stick looks, **A** jump/up,
   box cars are used instead.
 - Kiwi street life: dairies, fish & chips, chemists, hot pies, op shops.
 
+### RUCK
+- New default playable character: a heavyweight in a sleeveless hoodie and
+  rugby shorts with tattoo sleeves, strapped wrists and boots (160 HP,
+  1.8x melee). Built from shaped parts rather than the classic blocks; the
+  classic roster is still selectable.
+
 ### Rainy-dusk look
 - The city opens on a wet evening: slate overcast sky, mist down the avenues,
   cool film grade and vignette.

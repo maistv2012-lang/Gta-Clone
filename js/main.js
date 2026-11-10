@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { initInput, endFrame, pollGamepad, keys, pressed, mouse } from './input.js';
 import { buildCity, resolveCircle, pointBlocked, groundHeight, blockStart, BLOCK, HALF, N } from './city.js';
-import { createCharacter, animateWalk, animateIdle, animateLand, CHARACTERS } from './characters.js';
+import { createCharacter, rebuildCharacter, applyRoleColors, animateWalk, animateIdle, animateLand, CHARACTERS } from './characters.js';
 import { physStep, separateCars, darkenCar } from './car.js';
 import { spawnPeds, updatePeds, killPed, spawnTraffic, updateTraffic, disableTraffic, spawnParked } from './npc.js';
 import { updatePolice, addCrime, copDie, clearCops } from './police.js';
@@ -256,7 +256,7 @@ try { save = JSON.parse(localStorage.getItem(SAVE_KEY) || '{}') || {}; } catch {
 
 // chosen playable character (saved between sessions)
 const charDef = CHARACTERS.find((c) => c.key === save.char) || CHARACTERS[0];
-const playerChar = createCharacter(charDef.colors);
+const playerChar = createCharacter({ ...charDef.colors, build: charDef.build });
 scene.add(playerChar.group);
 
 const player = {
@@ -2670,6 +2670,7 @@ function applyCharacter(c) {
   world.charKey = c.key;
   world.maxHealth = c.health;
   player.health = c.health;
+  if ((c.build || null) !== player.ch.group.userData.build) rebuildCharacter(player.ch, { ...c.colors, build: c.build });
   applySuitColors(c.colors);
   saveGame();
 }
@@ -2684,6 +2685,7 @@ function applySuitColors(colors) {
   set(g.rArm.children[0], colors.skin);
   set(g.lLeg.children[0], colors.pants);
   set(g.rLeg.children[0], colors.pants);
+  applyRoleColors(g, { shirt: colors.shirt, pants: colors.pants, skin: colors.skin });
 }
 
 document.getElementById('playbtn').addEventListener('click', () => {
