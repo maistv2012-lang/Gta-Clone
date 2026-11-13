@@ -8,15 +8,15 @@
       17
     ],
     "hatch": [
-      -24.23395501962448,
+      -24.64527335949931,
       0,
-      14.26552472866483
+      13.354032971553108
     ],
     "preferredClear": false,
     "keptClearPreferred": true,
     "afterCollisionDistance": 0.7071067811865476,
     "approachShift": 0,
-    "tableDistance": 8.539942479981411,
+    "tableDistance": 8.750666074563778,
     "meshMatches": true,
     "rendererInitialized": false,
     "errors": []
@@ -30,15 +30,15 @@
       17
     ],
     "hatch": [
-      -23.676775258697454,
+      -25.186464169222624,
       0,
-      14.077334222115878
+      14.94588840694922
     ],
     "preferredClear": false,
     "keptClearPreferred": true,
     "afterCollisionDistance": 0.7071067811865476,
     "approachShift": 0,
-    "tableDistance": 7.952873433100965,
+    "tableDistance": 9.647247402166535,
     "meshMatches": true,
     "rendererInitialized": false,
     "errors": []
@@ -52,15 +52,15 @@
       17
     ],
     "hatch": [
-      -24.23395501962448,
+      -25.324952774876387,
       0,
-      14.26552472866483
+      13.74506611517306
     ],
     "preferredClear": false,
     "keptClearPreferred": true,
     "afterCollisionDistance": 0.7071067811865476,
     "approachShift": 0,
-    "tableDistance": 8.539942479981411,
+    "tableDistance": 9.48683298050514,
     "meshMatches": true,
     "rendererInitialized": false,
     "errors": []
@@ -74,15 +74,37 @@
       17
     ],
     "hatch": [
-      -24.162476387438193,
+      -25.056591699374138,
       0,
-      15.37253305758653
+      12.442541214441386
     ],
     "preferredClear": false,
     "keptClearPreferred": true,
     "afterCollisionDistance": 0.7071067811865476,
     "approachShift": 0,
-    "tableDistance": 8.831760866327848,
+    "tableDistance": 9.067397417983386,
+    "meshMatches": true,
+    "rendererInitialized": false,
+    "errors": []
+  },
+  {
+    "map": "legacy",
+    "osm": false,
+    "preferred": [
+      -23,
+      0,
+      17
+    ],
+    "hatch": [
+      -23.4511835057983,
+      0,
+      15.051556148077253
+    ],
+    "preferredClear": false,
+    "keptClearPreferred": true,
+    "afterCollisionDistance": 0.7071067811865476,
+    "approachShift": 0,
+    "tableDistance": 8.051840197243656,
     "meshMatches": true,
     "rendererInitialized": false,
     "errors": []
@@ -118,28 +140,6 @@
       17
     ],
     "hatch": [
-      -24.23395501962448,
-      0,
-      14.26552472866483
-    ],
-    "preferredClear": false,
-    "keptClearPreferred": true,
-    "afterCollisionDistance": 0.7071067811865476,
-    "approachShift": 0,
-    "tableDistance": 8.539942479981411,
-    "meshMatches": true,
-    "rendererInitialized": false,
-    "errors": []
-  },
-  {
-    "map": "legacy",
-    "osm": false,
-    "preferred": [
-      -23,
-      0,
-      17
-    ],
-    "hatch": [
       -23.822636679749653,
       0,
       15.177016485776555
@@ -162,15 +162,15 @@
       17
     ],
     "hatch": [
-      -25.324952774876387,
+      -24.74371458115729,
       0,
-      13.74506611517306
+      14.558799586379795
     ],
     "preferredClear": false,
     "keptClearPreferred": true,
     "afterCollisionDistance": 0.7071067811865476,
     "approachShift": 0,
-    "tableDistance": 9.48683298050514,
+    "tableDistance": 9.110433579144297,
     "meshMatches": true,
     "rendererInitialized": false,
     "errors": []

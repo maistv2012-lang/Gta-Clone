@@ -3,6 +3,7 @@ import { nearbyColliders } from './collider-query.js';
 import { christchurch, MAP_HALF, LEGACY_CITY, LEGACY_OFFSET } from './map-config.js';
 import { addChristchurch } from './christchurch-city.js';
 import { polygonContact } from './road-network.js';
+import { patchWetMaterial } from './wetroad.js';
 
 // City layout: N x N blocks separated by roads, surrounded by a perimeter road.
 export const BLOCK = 60;
@@ -157,6 +158,7 @@ function helipadTexture() {
 
 export async function buildCity(scene) {
   const colliders = [];   // {x0,z0,x1,z1,h}
+  const lots = [];        // building footprints, for the neon signs
   const pedRects = [];
   const roadXs = [];
   const roadZs = [];
@@ -197,6 +199,7 @@ export async function buildCity(scene) {
     tv.wrapT = THREE.RepeatWrapping;
     tv.repeat.set(1, LEGACY_CITY / ROAD);
     const v = new THREE.Mesh(roadGeo, new THREE.MeshLambertMaterial({ map: tv }));
+    patchWetMaterial(v.material);
     v.position.set(cx, 0.04, LEGACY_OFFSET);
     v.receiveShadow = true;
     scene.add(v);
@@ -206,6 +209,7 @@ export async function buildCity(scene) {
     th.wrapT = THREE.RepeatWrapping;
     th.repeat.set(1, LEGACY_CITY / ROAD);
     const h = new THREE.Mesh(roadGeo, new THREE.MeshLambertMaterial({ map: th }));
+    patchWetMaterial(h.material);
     h.position.set(LEGACY_OFFSET, 0.08, cx);
     h.rotation.y = Math.PI / 2;
     h.receiveShadow = true;
@@ -306,6 +310,7 @@ export async function buildCity(scene) {
           b.receiveShadow = true;
           scene.add(b);
           colliders.push({ x0: lotX - w / 2, z0: lotZ - d / 2, x1: lotX + w / 2, z1: lotZ + d / 2, h: hgt + 0.5 });
+          lots.push({ x: lotX, z: lotZ, w, d, h: hgt, sx: li ? 1 : -1, sz: lj ? 1 : -1 }); // sx/sz: sides facing a street
 
           // rooftop clutter: AC units + antennas
           const top = hgt + 0.2;
@@ -367,7 +372,7 @@ export async function buildCity(scene) {
   const mid = Math.floor(N / 2);
   const spawn = new THREE.Vector3(roadCenter(mid), 0, roadCenter(mid));
 
-  const city = { legacyBounds: { min: LEGACY_OFFSET - LEGACY_CITY / 2, max: LEGACY_OFFSET + LEGACY_CITY / 2 }, colliders, pedRects, roadXs, roadZs, spawn, helipads, windowMats, lampGlowMat: glowMat, bulbMat };
+  const city = { lots, legacyBounds: { min: LEGACY_OFFSET - LEGACY_CITY / 2, max: LEGACY_OFFSET + LEGACY_CITY / 2 }, colliders, pedRects, roadXs, roadZs, spawn, helipads, windowMats, lampGlowMat: glowMat, bulbMat };
   if (christchurch) await addChristchurch(scene, city, christchurch);
   return city;
 }

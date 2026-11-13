@@ -38,25 +38,25 @@
       },
       "metrics": {
         "initialized": true,
-        "frames": 133,
+        "frames": 131,
         "hdr": true,
         "contextLost": false,
         "width": 1100,
         "height": 700,
-        "calls": 610,
-        "triangles": 420259,
-        "textures": 98,
-        "geometries": 511,
+        "calls": 574,
+        "triangles": 409493,
+        "textures": 102,
+        "geometries": 506,
         "pixelRatio": 1,
         "adaptiveResolution": false,
-        "frameTimeEma": 1584.816197826073,
+        "frameTimeEma": 2798.3017613172315,
         "batches": {
-          "instances": 372,
-          "batches": 88
+          "instances": 364,
+          "batches": 83
         },
-        "averageFPS": 0.6353912951392566,
+        "averageFPS": 0.3395960504979318,
         "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
-        "heapBytes": 233349006,
+        "heapBytes": 266910367,
         "glError": 0
       },
       "errors": []
@@ -98,25 +98,25 @@
       },
       "metrics": {
         "initialized": true,
-        "frames": 131,
+        "frames": 130,
         "hdr": true,
         "contextLost": false,
         "width": 384,
         "height": 832,
-        "calls": 341,
-        "triangles": 281429,
-        "textures": 71,
-        "geometries": 363,
+        "calls": 353,
+        "triangles": 284949,
+        "textures": 74,
+        "geometries": 357,
         "pixelRatio": 1,
         "adaptiveResolution": false,
-        "frameTimeEma": 587.1401996862062,
+        "frameTimeEma": 1000.5942390520672,
         "batches": {
-          "instances": 389,
-          "batches": 93
+          "instances": 397,
+          "batches": 86
         },
-        "averageFPS": 1.765199099748435,
+        "averageFPS": 1.0178807722322165,
         "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
-        "heapBytes": 239465619,
+        "heapBytes": 429071285,
         "glError": 0
       },
       "errors": []

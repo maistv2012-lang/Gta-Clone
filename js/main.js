@@ -13,6 +13,8 @@ import { initSound, sfxShot, sfxCrash, sfxPickup, sfxWeb, sfxMissionPass, engine
 import { createSkyDome, applyDayNight, DAY_START } from './daynight.js';
 import { initMissions, updateMissions, failMission, mission } from './missions.js';
 import { initWeather, updateWeather } from './weather.js';
+import { wetUniforms } from './wetroad.js';
+import { buildNeon } from './neon.js';
 import { buildLandmarks, updateLandmarks } from './landmarks.js';
 import { initWeb, fireWeb, releaseWeb, swingStep, updateWebVisual, poseSwing, poseFall } from './web.js';
 import { initShops, updateShops, ensureGarageVehicle, garageCheck } from './shops.js';
@@ -176,6 +178,8 @@ window.addEventListener('resize', () => {
 
 window.__gtcBoot?.progress('Preparando a cidade de Christchurch…');
 const city = await buildCity(scene);
+const neon = buildNeon(scene, city);
+const _overTop = new THREE.Color(), _overHor = new THREE.Color(), _overSun = new THREE.Color();
 const clipChaseCamera = createChaseCameraClip(city);
 window.__gtcBoot?.progress('Inicializando personagens, veículos e missões…');
 await new Promise(resolve => setTimeout(resolve, 0));
@@ -2716,22 +2720,31 @@ function update(dt) {
 
   // day/night cycle: 1 real minute = 1 game hour
   world.clock = (world.clock + dt / 60) % 24;
-  const dn = applyDayNight(world.clock, { scene, sun, hemi, sky, camera, city });
+  const wx = updateWeather(weather, dt, camera);
+  const dn = applyDayNight(world.clock, { scene, sun, hemi, sky, camera, city, overcast: wx.intensity });
   world.sunDir.copy(dn.sunDir);
 
-  // weather: rain dims the sky and thickens the fog; lightning washes the scene
-  const wx = updateWeather(weather, dt, camera);
+  // weather: rain pulls a slate-blue cloud deck over the city — flat cool
+  // light, no sunset glow, mist closing in down the streets
   if (wx.intensity > 0.01) {
     const r = wx.intensity;
+    const day = 0.3 + (1 - dn.glow) * 0.7; // cloud brightness follows the hour
+    sky.uniforms.topColor.value.lerp(_overTop.setHex(0x4c5a6e).multiplyScalar(day), r);
+    sky.uniforms.horizonColor.value.lerp(_overHor.setHex(0x8b98a9).multiplyScalar(day), r);
+    scene.fog.color.copy(sky.uniforms.horizonColor.value);
     scene.fog.near *= 1 - r * 0.45;
-    scene.fog.far *= 1 - r * 0.5;
-    sun.intensity *= 1 - r * 0.6;
-    hemi.intensity *= 1 - r * 0.25;
-    sky.uniforms.topColor.value.multiplyScalar(1 - r * 0.4);
-    sky.uniforms.horizonColor.value.multiplyScalar(1 - r * 0.35);
-    sky.uniforms.sunHaze.value *= 1 - r * 0.7;
+    scene.fog.far *= 1 - r * 0.35;
+    sun.intensity *= 1 - r * 0.7;
+    sun.color.lerp(_overSun.setHex(0xa9b8cc), r);
+    hemi.color.lerp(_overSun, r * 0.6);
+    hemi.intensity *= 1 - r * 0.3;
+    sky.uniforms.sunHaze.value *= 1 - r;
+    sky.uniforms.sunColor.value.lerp(sky.uniforms.horizonColor.value, r * 0.9); // grey cloud, no sunset pink
     sky.stars.material.opacity *= 1 - r;
   }
+  wetUniforms.uWet.value = wx.wet;
+  graphics?.setMood(wx.intensity * 0.9);
+  neon.update(dn.lights);
   if (wx.flash > 0.01) {
     hemi.intensity += wx.flash * 1.8;
     sun.intensity += wx.flash * 0.8;
@@ -2756,7 +2769,7 @@ function update(dt) {
   }
 
   // bloom breathes with the night: stronger glow when the city lights are on
-  if (bloom) bloom.strength = world.settings.lowGfx ? 0 : 0.22 + dn.glow * 0.33;
+  if (bloom) bloom.strength = world.settings.lowGfx ? 0 : 0.22 + dn.lights * 0.3;
 
   // headlights when driving after dark
   const pcar = player.inCar;

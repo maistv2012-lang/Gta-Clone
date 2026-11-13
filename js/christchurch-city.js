@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { cathedralSpawn } from './christchurch-spawn.js';
+import { patchWetMaterial } from './wetroad.js';
 import { createCityDetailing } from './city-detailing.js';
 import { worldUV } from './city-materials.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
@@ -55,9 +56,11 @@ export async function addChristchurch(targetScene, city, data) {
   } };
   city.osm = data;
   city.network = buildNetwork(data.roads);
+  patchWetMaterial(surfaceMaterial(0x363e42)); // carriageways go dark and glossy in the rain
   city.walkNetwork = buildNetwork(data.roads, { walking: true });
   city.realColliders = [];
   city.detailing = await createCityDetailing(targetScene, city, data);
+  patchWetMaterial(city.detailing.mats.asphalt);
   const buildingMaterial = new THREE.MeshStandardMaterial({ color: 0x969384, roughness: 0.9 });
   for (const [index, area] of data.areas.entries()) {
     if (index % 128 === 0) await checkpoint(`Preparando edifícios e áreas: ${index}/${data.areas.length}…`);

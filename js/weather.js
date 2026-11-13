@@ -30,11 +30,12 @@ export function initWeather(scene) {
 
   return {
     lines, mat, drops,
-    state: 'clear',
-    intensity: 0,
-    target: 0,
-    switchT: 40 + Math.random() * 50, // first storm arrives fairly soon
-    thunderT: 0,
+    state: 'rain', // the city opens on a wet evening
+    intensity: 0.85,
+    target: 0.85,
+    switchT: 150 + Math.random() * 60,
+    thunderT: 20 + Math.random() * 10,
+    wet: 1, // how soaked the streets are; dries slowly after the rain stops
     flash: 0,
   };
 }
@@ -45,12 +46,12 @@ export function updateWeather(w, dt, camera) {
     if (w.state === 'clear') {
       w.state = 'rain';
       w.target = 0.6 + Math.random() * 0.4;
-      w.switchT = 50 + Math.random() * 50;
+      w.switchT = 110 + Math.random() * 90; // rain is the city's signature mood
       w.thunderT = 4 + Math.random() * 6;
     } else {
       w.state = 'clear';
       w.target = 0;
-      w.switchT = 80 + Math.random() * 90;
+      w.switchT = 60 + Math.random() * 60;
     }
   }
 
@@ -69,13 +70,17 @@ export function updateWeather(w, dt, camera) {
     }
   }
 
+  // streets soak fast and stay wet well after the clouds pass
+  const wetTarget = Math.min(1, w.intensity * 1.6);
+  w.wet += (wetTarget - w.wet) * Math.min(1, (wetTarget > w.wet ? 0.5 : 0.02) * dt);
+
   setRain(w.intensity);
 
   const visible = w.intensity > 0.02;
   w.lines.visible = visible;
   if (!visible) return w;
 
-  w.mat.opacity = 0.38 * w.intensity;
+  w.mat.opacity = 0.45 * w.intensity;
   const arr = w.lines.geometry.attributes.position.array;
   const cx = camera.position.x;
   const cy = Math.max(0, camera.position.y - 12);
@@ -94,8 +99,8 @@ export function updateWeather(w, dt, camera) {
     arr[i * 6] = x;
     arr[i * 6 + 1] = y;
     arr[i * 6 + 2] = z;
-    arr[i * 6 + 3] = x + 0.06;
-    arr[i * 6 + 4] = y + 0.9;
+    arr[i * 6 + 3] = x + 0.12;
+    arr[i * 6 + 4] = y + 1.3;
     arr[i * 6 + 5] = z;
   }
   w.lines.geometry.attributes.position.needsUpdate = true;

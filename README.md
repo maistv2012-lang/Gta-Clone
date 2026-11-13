@@ -12,6 +12,24 @@ Current visual/performance changes, measured results and the complete file inven
 [the upgrade report](docs/PERFORMANCE-UPGRADE.md). For an external browser test, follow
 [the GitHub Pages instructions](docs/GITHUB-PAGES.md). `npm test` runs the complete validation runner.
 
+## Rainy-evening look
+
+The game opens at 18:12 in the rain. While it rains a slate cloud deck covers
+the sky, mist closes in, and the city lights come on early; rain is more
+frequent and the streets stay wet after it stops.
+
+- **Wet streets** (`js/wetroad.js`): carriageways darken and take a sheen on
+  every quality level. On **high** quality a planar reflection of the city is
+  blended into the asphalt; the mirror pass runs only while the road is wet
+  and the frame rate has headroom (on above ~40 fps, off below ~28 fps).
+  Low and medium (the phone default) skip it.
+- **Neon blade signs** (`js/neon.js`): instanced signs on street-facing walls
+  of commercial buildings within 650 m of the spawn and in the Arcade
+  District. Churches, heritage and civic buildings are left alone.
+- **Film grade** (high quality): vignette, cooler and less saturated in rain.
+
+Physical-phone performance of these additions is unverified.
+
 ## RUGBY character release
 
 Choose **RUGBY** on the start screen, then **PLAY** to explore the real Cathedral
